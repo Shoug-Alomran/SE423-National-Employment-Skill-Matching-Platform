@@ -4,32 +4,32 @@
 
 export const members = [
   {
-    name: 'Ahmed Al-Farsi',
+    name: 'Hatoon Abdullah',
     role: 'Project Manager',
     responsibilities: ['Overall project coordination', 'Stakeholder communication', 'Final deliverables review'],
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
+    github: '',
+    linkedin: '',
   },
   {
-    name: 'Sarah Al-Qahtani',
+    name: 'Yara Faris Faihan Albugami',
     role: 'Planning Lead',
     responsibilities: ['WBS & Schedule creation', 'Resource allocation', 'Metric tracking (EVM)'],
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
+    github: '',
+    linkedin: '',
   },
   {
-    name: 'Omar Mahmoud',
+    name: 'Rose Saeed Rakan Al Rakan',
     role: 'Risk & Methodology',
     responsibilities: ['Risk registry management', 'Agile methodology tailoring', 'Mitigation planning'],
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
+    github: '',
+    linkedin: '',
   },
   {
-    name: 'Faisal Al-Dosari',
+    name: 'Shoug Fawaz Abdullah Alomran',
     role: 'Docs & Quality',
     responsibilities: ['Artifact standardization', 'Quality assurance', 'Version control management'],
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
+    github: 'https://github.com/Shoug-Alomran',
+    linkedin: '',
   },
 ];
 
