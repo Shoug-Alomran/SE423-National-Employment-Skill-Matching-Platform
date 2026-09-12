@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the sticky navbar. */
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    @apply bg-offwhite font-sans text-charcoal antialiased;
+  }
+  ::selection {
+    @apply bg-saudi-200 text-saudi-950;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-saudi ring-offset-2;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .card {
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-saudi px-6 py-3 font-medium text-white shadow-sm transition-colors hover:bg-saudi-800;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-6 py-3 font-medium text-charcoal shadow-sm transition-colors hover:border-saudi hover:text-saudi;
+  }
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-wider text-slate-500;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+/* Risk matrix severity colours */
+.matrix-cell-low { background-color: #dcfce7; border: 1px solid #bbf7d0; }
+.matrix-cell-med { background-color: #fef3c7; border: 1px solid #fde68a; }
+.matrix-cell-high { background-color: #ffedd5; border: 1px solid #fed7aa; }
+.matrix-cell-extreme { background-color: #ffe4e6; border: 1px solid #fecdd3; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
