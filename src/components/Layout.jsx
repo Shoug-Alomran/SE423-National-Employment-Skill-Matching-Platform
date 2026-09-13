@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
@@ -21,15 +21,22 @@ function useScrollManagement() {
     document.title = page && pathname !== '/' ? `${page} · NESMP` : page ?? 'Page Not Found · NESMP';
   }, [pathname]);
 
+  const previousPath = useRef(null);
+
   useEffect(() => {
-    if (hash) {
-      const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+    // Jump instantly when arriving on a new page; scroll smoothly within the same page.
+    const samePage = previousPath.current === pathname;
+    previousPath.current = pathname;
+
+    const frame = requestAnimationFrame(() => {
+      const el = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        return;
+        el.scrollIntoView({ behavior: samePage ? 'smooth' : 'instant', block: 'start' });
+      } else if (!samePage) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       }
-    }
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    });
+    return () => cancelAnimationFrame(frame);
   }, [pathname, hash]);
 }
 

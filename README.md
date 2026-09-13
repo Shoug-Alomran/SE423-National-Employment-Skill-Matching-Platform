@@ -51,7 +51,8 @@ npm run build
 The production site is written to `dist/`. The build also:
 
 - serves assets and routes from `/`, the root of the custom domain
-- copies `index.html` to `404.html`, so deep links and page refreshes (for example `/planning`) still load the app on GitHub Pages
+- writes an HTML file for each page (`project.html`, `planning.html`, …), so URLs such as `/planning` return HTTP 200 on GitHub Pages and can be indexed by search engines. When you add a route, add it to `ROUTES` in [scripts/spa-fallback.js](scripts/spa-fallback.js) and to `sitemap.xml`.
+- copies `index.html` to `404.html`, so unknown URLs still load the app and show the "Page not found" view
 - adds `.nojekyll`
 - copies `public/CNAME`, `public/robots.txt` and `public/sitemap.xml` to the site root
 
@@ -123,6 +124,19 @@ Page content is kept in data files, separate from the layout:
 
 Home and Project page text lives directly in [src/pages/Home.jsx](src/pages/Home.jsx) and [src/pages/Project.jsx](src/pages/Project.jsx).
 
+## Dark mode
+
+The sun/moon button in the navbar switches themes. The site follows the visitor's system setting until they choose a theme; the choice is saved in `localStorage`.
+
+- [index.html](index.html) contains a small inline script that applies the theme before the page paints, so there is no flash of the wrong theme.
+- [src/dark.css](src/dark.css) maps the light colour utilities used on the site to dark equivalents while `<html>` has the `dark` class. If you use a new colour class, for example `bg-teal-50`, add its dark mapping there. Tailwind `dark:` variants also work (`darkMode: 'class'`).
+
+## Search
+
+Open search with the navbar button, <kbd>⌘K</kbd> / <kbd>Ctrl K</kbd>, or <kbd>/</kbd>. Results link to the matching page and section.
+
+The index is built in [src/data/searchIndex.js](src/data/searchIndex.js) from the data files, so risks, stakeholders, metrics, milestones and team members stay searchable when you edit them. When you add a new page or section, add an entry to that file. Sections are linked by their `id` attribute.
+
 ## Project structure
 
 ```
@@ -130,8 +144,9 @@ Home and Project page text lives directly in [src/pages/Home.jsx](src/pages/Home
 public/                        Static files copied as-is (favicon, CNAME, robots.txt, sitemap.xml)
 scripts/spa-fallback.js        Creates 404.html for deep-link support
 src/
-  components/                  Layout, Navbar, Footer, shared UI
-  data/                        Editable page content
+  components/                  Layout, Navbar, Footer, ThemeToggle, SearchDialog, shared UI
+  data/                        Editable page content and the search index
+  dark.css                     Dark theme colour mappings
   pages/                       One component per route
   config.js                    Site-wide settings
   App.jsx                      Routes

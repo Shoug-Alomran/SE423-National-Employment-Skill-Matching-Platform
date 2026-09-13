@@ -111,7 +111,7 @@ const roadmap = [
 
 function HeroIllustration() {
   return (
-    <svg className="h-full w-full p-6 sm:p-8" viewBox="0 0 400 400" fill="none" role="img" aria-label="Diagram of job seekers and employers connected through a central matching engine">
+    <svg className="hero-illustration h-full w-full p-6 sm:p-8" viewBox="0 0 400 400" fill="none" role="img" aria-label="Diagram of job seekers and employers connected through a central matching engine">
       <path d="M100 150 C 150 150, 200 200, 250 150" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
       <path d="M150 250 C 200 250, 250 200, 300 250" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
       <path d="M80 200 C 180 200, 220 200, 320 200" stroke="#006C35" strokeWidth="3" strokeLinecap="round" className="animate-pulse-slow" />
@@ -231,7 +231,7 @@ export default function Home() {
       </section>
 
       {/* Challenge */}
-      <section className="border-t border-gray-100 bg-gray-50 py-20 lg:py-24">
+      <section id="challenge" className="border-t border-gray-100 bg-gray-50 py-20 lg:py-24">
         <div className="container-page">
           <div className="mx-auto mb-14 max-w-3xl text-center">
             <h2 className="mb-4 text-3xl font-bold text-charcoal">The Challenge: A Fragmented Landscape</h2>
@@ -259,7 +259,7 @@ export default function Home() {
       </section>
 
       {/* Solution */}
-      <section className="bg-white py-20 lg:py-24">
+      <section id="solution" className="bg-white py-20 lg:py-24">
         <div className="container-page">
           <div className="mx-auto mb-16 max-w-3xl text-center">
             <h2 className="mb-4 text-3xl font-bold text-charcoal">The Solution: Intelligent Connection</h2>
@@ -296,7 +296,7 @@ export default function Home() {
       </section>
 
       {/* Modules */}
-      <section className="border-y border-gray-100 bg-gray-50 py-20 lg:py-24">
+      <section id="modules" className="border-y border-gray-100 bg-gray-50 py-20 lg:py-24">
         <div className="container-page">
           <div className="mx-auto mb-14 max-w-3xl text-center">
             <h2 className="mb-4 text-3xl font-bold text-charcoal">Core Platform Modules</h2>
@@ -322,7 +322,7 @@ export default function Home() {
       </section>
 
       {/* Impact */}
-      <section className="bg-white py-20 lg:py-24">
+      <section id="impact" className="bg-white py-20 lg:py-24">
         <div className="container-page">
           <div className="mb-14 border-l-4 border-saudi pl-6">
             <h2 className="mb-2 text-3xl font-bold text-charcoal">Expected National Impact</h2>
@@ -346,7 +346,7 @@ export default function Home() {
       </section>
 
       {/* Roadmap */}
-      <section className="overflow-hidden border-t border-gray-100 bg-gray-50 py-20 lg:py-24">
+      <section id="roadmap" className="overflow-hidden border-t border-gray-100 bg-gray-50 py-20 lg:py-24">
         <div className="container-page">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold text-charcoal">Implementation Roadmap</h2>

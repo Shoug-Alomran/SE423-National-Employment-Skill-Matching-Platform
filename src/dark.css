@@ -1,0 +1,249 @@
+/*
+ * Dark theme.
+ *
+ * Active when <html> has the "dark" class. Rather than adding dark: variants to
+ * every component, this file remaps the light palette utilities used across the
+ * site to dark equivalents. It is imported after index.css so it wins ties.
+ *
+ * If you use a new colour utility in a page, add its dark mapping here.
+ */
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --d-bg: #0b1220;
+  --d-surface: #111a2b;
+  --d-subtle: #162033;
+  --d-muted: #1c283c;
+  --d-line: #243044;
+  --d-line-strong: #334155;
+  --d-text-strong: #f1f5f9;
+  --d-text: #cbd5e1;
+  --d-text-muted: #9aa8bb;
+  --d-text-faint: #7c8aa0;
+  --d-text-ghost: #475569;
+  --d-green: #6fcf97;
+}
+
+.dark body {
+  background-color: var(--d-bg);
+  color: var(--d-text);
+}
+.dark *,
+.dark ::before,
+.dark ::after {
+  --tw-ring-offset-color: var(--d-bg);
+}
+
+/* ---------- Component classes (compiled with @apply) ---------- */
+.dark .card {
+  background-color: var(--d-surface);
+  border-color: var(--d-line);
+}
+.dark .btn-secondary {
+  background-color: var(--d-surface);
+  border-color: var(--d-line-strong);
+  color: var(--d-text-strong);
+}
+.dark .btn-secondary:hover {
+  border-color: var(--d-green);
+  color: var(--d-green);
+}
+.dark .eyebrow {
+  color: var(--d-text-faint);
+}
+
+/* ---------- Surfaces ---------- */
+.dark .bg-offwhite,
+.dark .bg-slate-50,
+.dark .bg-gray-50,
+.dark .hover\:bg-slate-50:hover,
+.dark .hover\:bg-gray-50:hover {
+  background-color: var(--d-subtle);
+}
+.dark .bg-white,
+.dark .hover\:bg-white:hover {
+  background-color: var(--d-surface);
+}
+.dark .bg-white\/95 {
+  background-color: rgb(17 26 43 / 0.95);
+}
+.dark .bg-slate-50\/60,
+.dark .bg-gray-50\/50 {
+  background-color: rgb(22 32 51 / 0.6);
+}
+.dark .bg-slate-100,
+.dark .bg-gray-100,
+.dark .hover\:bg-slate-100:hover,
+.dark .hover\:bg-gray-100:hover {
+  background-color: var(--d-muted);
+}
+.dark .bg-slate-200,
+.dark .bg-gray-200 {
+  background-color: var(--d-line);
+}
+.dark .bg-slate-200\/50 {
+  background-color: rgb(36 48 68 / 0.5);
+}
+.dark .bg-slate-300,
+.dark .bg-gray-300,
+.dark .before\:bg-slate-300::before,
+.dark .after\:bg-slate-300::after {
+  background-color: var(--d-line-strong);
+}
+.dark .bg-charcoal {
+  background-color: var(--d-line);
+}
+
+/* ---------- Borders ---------- */
+.dark .border-slate-100,
+.dark .border-gray-100,
+.dark .border-slate-200,
+.dark .border-gray-200 {
+  border-color: var(--d-line);
+}
+.dark .border-slate-300,
+.dark .border-gray-300 {
+  border-color: var(--d-line-strong);
+}
+.dark .border-white {
+  border-color: var(--d-surface);
+}
+.dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--d-line);
+}
+
+/* ---------- Text ---------- */
+.dark .text-charcoal-dark,
+.dark .text-slate-900,
+.dark .hover\:text-charcoal:hover,
+.dark .hover\:text-charcoal-dark:hover {
+  color: var(--d-text-strong);
+}
+.dark .text-charcoal,
+.dark .text-charcoal-light,
+.dark .text-slate-800,
+.dark .text-slate-700,
+.dark .text-gray-700,
+.dark .hover\:text-slate-700:hover {
+  color: var(--d-text);
+}
+.dark .text-charcoal-lighter,
+.dark .text-slate-600,
+.dark .text-gray-600 {
+  color: var(--d-text-muted);
+}
+.dark .text-slate-500,
+.dark .text-gray-500,
+.dark .text-slate-400,
+.dark .text-gray-400 {
+  color: var(--d-text-faint);
+}
+.dark .text-gray-300,
+.dark .marker\:text-gray-300 *::marker {
+  color: var(--d-text-ghost);
+}
+
+/* ---------- Saudi green ---------- */
+.dark .text-saudi,
+.dark .text-saudi-800,
+.dark .hover\:text-saudi:hover,
+.dark .group:hover .group-hover\:text-saudi {
+  color: var(--d-green);
+}
+.dark .text-saudi\/80 {
+  color: rgb(111 207 151 / 0.8);
+}
+.dark .bg-saudi-light,
+.dark .bg-saudi-50,
+.dark .bg-saudi-50\/60 {
+  background-color: rgb(0 140 70 / 0.16);
+}
+.dark .hover\:bg-saudi-100\/80:hover {
+  background-color: rgb(0 140 70 / 0.26);
+}
+.dark .border-saudi-100,
+.dark .border-saudi\/20,
+.dark .ring-saudi\/20 {
+  border-color: rgb(111 207 151 / 0.25);
+  --tw-ring-color: rgb(111 207 151 / 0.25);
+}
+.dark .border-saudi {
+  border-color: var(--d-green);
+}
+
+/* ---------- Tinted status colours ---------- */
+.dark .bg-blue-50,
+.dark .bg-blue-50\/50,
+.dark .bg-blue-50\/60 { background-color: rgb(59 130 246 / 0.12); }
+.dark .bg-blue-100,
+.dark .hover\:bg-blue-100:hover { background-color: rgb(59 130 246 / 0.2); }
+.dark .bg-purple-50 { background-color: rgb(168 85 247 / 0.12); }
+.dark .bg-purple-100,
+.dark .hover\:bg-purple-100:hover { background-color: rgb(168 85 247 / 0.2); }
+.dark .bg-green-50 { background-color: rgb(34 197 94 / 0.12); }
+.dark .bg-green-100 { background-color: rgb(34 197 94 / 0.18); }
+.dark .bg-red-50 { background-color: rgb(239 68 68 / 0.12); }
+.dark .bg-red-100 { background-color: rgb(239 68 68 / 0.2); }
+.dark .bg-rose-100 { background-color: rgb(244 63 94 / 0.2); }
+.dark .bg-orange-50 { background-color: rgb(249 115 22 / 0.12); }
+.dark .bg-orange-100 { background-color: rgb(249 115 22 / 0.2); }
+.dark .bg-amber-50 { background-color: rgb(245 158 11 / 0.12); }
+.dark .bg-amber-100 { background-color: rgb(245 158 11 / 0.2); }
+
+.dark .border-blue-100 { border-color: rgb(59 130 246 / 0.3); }
+.dark .border-purple-100 { border-color: rgb(168 85 247 / 0.3); }
+.dark .border-red-100 { border-color: rgb(239 68 68 / 0.3); }
+.dark .border-rose-200 { border-color: rgb(244 63 94 / 0.35); }
+.dark .border-green-200 { border-color: rgb(34 197 94 / 0.35); }
+.dark .border-orange-100,
+.dark .border-orange-200 { border-color: rgb(249 115 22 / 0.35); }
+.dark .border-amber-100,
+.dark .border-amber-200 { border-color: rgb(245 158 11 / 0.35); }
+
+.dark .text-blue-800,
+.dark .text-blue-700 { color: #93c5fd; }
+.dark .text-blue-700\/80 { color: rgb(147 197 253 / 0.85); }
+.dark .text-blue-600,
+.dark .text-blue-500 { color: #60a5fa; }
+.dark .hover\:text-blue-950:hover { color: #dbeafe; }
+.dark .text-purple-800,
+.dark .text-purple-700 { color: #d8b4fe; }
+.dark .text-purple-700\/80 { color: rgb(216 180 254 / 0.85); }
+.dark .text-purple-600,
+.dark .text-purple-500 { color: #c084fc; }
+.dark .text-green-800 { color: #86efac; }
+.dark .text-green-600 { color: #4ade80; }
+.dark .text-emerald-600 { color: #34d399; }
+.dark .text-red-800 { color: #fca5a5; }
+.dark .text-red-500 { color: #f87171; }
+.dark .text-rose-800 { color: #fda4af; }
+.dark .text-rose-600 { color: #fb7185; }
+.dark .text-orange-800 { color: #fdba74; }
+.dark .text-orange-500 { color: #fb923c; }
+.dark .text-amber-800 { color: #fcd34d; }
+.dark .text-amber-600,
+.dark .text-amber-500 { color: #fbbf24; }
+.dark .text-indigo-600 { color: #818cf8; }
+
+/* ---------- Risk matrix ---------- */
+.dark .matrix-cell-low { background-color: rgb(34 197 94 / 0.16); border-color: rgb(34 197 94 / 0.3); }
+.dark .matrix-cell-med { background-color: rgb(245 158 11 / 0.16); border-color: rgb(245 158 11 / 0.3); }
+.dark .matrix-cell-high { background-color: rgb(249 115 22 / 0.2); border-color: rgb(249 115 22 / 0.35); }
+.dark .matrix-cell-extreme { background-color: rgb(244 63 94 / 0.2); border-color: rgb(244 63 94 / 0.35); }
+
+/* ---------- Home hero illustration ---------- */
+.dark .hero-illustration [fill='white'] { fill: var(--d-surface); }
+.dark .hero-illustration [stroke='#E5E7EB'] { stroke: var(--d-line-strong); }
+.dark .hero-illustration [fill='#E5E7EB'] { fill: var(--d-line-strong); }
+.dark .hero-illustration [stroke='#006C35'] { stroke: var(--d-green); }
+.dark .hero-illustration [fill='#006C35'] { fill: #1f8a50; }
+
+/* ---------- Scrollbars ---------- */
+.dark .custom-scrollbar::-webkit-scrollbar-track { background: var(--d-subtle); }
+.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--d-line-strong); }
