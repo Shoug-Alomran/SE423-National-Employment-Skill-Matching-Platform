@@ -36,9 +36,9 @@ jobs:
 
       - name: Build
         env:
-          # e.g. "/SE423-National-Employment-Skill-Matching-Platform/" for a project site,
-          # or "/" when a custom domain is configured.
-          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+          # The site uses a custom domain (public/CNAME), so it is served from "/".
+          # Without a custom domain, use: ${{ steps.pages.outputs.base_path }}/
+          BASE_PATH: /
         run: npm run build
 
       - name: Upload artifact

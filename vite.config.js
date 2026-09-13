@@ -4,16 +4,14 @@ import react from '@vitejs/plugin-react';
 /**
  * Base path for GitHub Pages.
  *
- * A project site is served from https://<user>.github.io/<repo-name>/, so every
- * asset URL and route must be prefixed with "/<repo-name>/".
+ * The site is served from the custom domain
+ * https://software-project-management.shoug-tech.com/, so the base is "/".
  *
- * - In GitHub Actions, BASE_PATH is set automatically by the deploy workflow
- *   (from actions/configure-pages), so renaming the repo needs no code change.
- * - For local production builds, DEFAULT_BASE is used.
- * - For a custom domain or a <user>.github.io repository, set BASE_PATH="/".
+ * If you ever remove the custom domain and serve from
+ * https://<user>.github.io/<repo-name>/ instead, build with
+ * BASE_PATH="/<repo-name>/" (see README and .github/workflows/deploy.yml).
  */
-const REPO_NAME = 'SE423-National-Employment-Skill-Matching-Platform';
-const DEFAULT_BASE = `/${REPO_NAME}/`;
+const DEFAULT_BASE = '/';
 
 function normalizeBase(value) {
   if (!value) return DEFAULT_BASE;
