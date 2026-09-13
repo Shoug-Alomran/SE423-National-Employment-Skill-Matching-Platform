@@ -59,7 +59,17 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-slate-800 pt-8 text-sm text-slate-500 md:flex-row">
           <p>© {new Date().getFullYear()} {site.courseCode} Project Team. For academic purposes only.</p>
-          <p>Conceptual planning documentation.</p>
+          <p>
+            Made by{' '}
+            <a
+              href="https://blueprint.shoug-tech.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-saudi-400 transition-colors hover:text-saudi-300"
+            >
+              Blueprint
+            </a>
+          </p>
         </div>
       </div>
     </footer>

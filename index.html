@@ -3,23 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="SE423 Software Project Management — planning documentation for the National Employment & Skill Matching Platform (NESMP)." />
+    <meta
+      name="description"
+      content="SE423 Software Project Management — planning documentation for the National Employment & Skill Matching Platform (NESMP)."
+    />
     <meta name="theme-color" content="#006C35" />
     <script>
       // Apply the saved or system colour theme before the page paints, to avoid a flash.
       (function () {
         try {
-          var stored = localStorage.getItem('theme');
-          var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (dark) document.documentElement.classList.add('dark');
+          var stored = localStorage.getItem("theme");
+          var dark = stored
+            ? stored === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (dark) document.documentElement.classList.add("dark");
         } catch (e) {}
       })();
     </script>
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Social share preview (WhatsApp, iMessage, X, LinkedIn, Slack...). Image source: brand/og-image.html -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NESMP" />
+    <meta
+      property="og:url"
+      content="https://software-project-management.shoug-tech.com/"
+    />
+    <meta
+      property="og:title"
+      content="National Employment &amp; Skill Matching Platform"
+    />
+    <meta
+      property="og:description"
+      content="SE423 Software Project Management — planning documentation for the National Employment &amp; Skill Matching Platform (NESMP)."
+    />
+    <meta
+      property="og:image"
+      content="https://software-project-management.shoug-tech.com/og-image.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="NESMP — Connecting Saudi Talent with Opportunity"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="National Employment &amp; Skill Matching Platform"
+    />
+    <meta
+      name="twitter:description"
+      content="SE423 Software Project Management — planning documentation for the National Employment &amp; Skill Matching Platform (NESMP)."
+    />
+    <meta
+      name="twitter:image"
+      content="https://software-project-management.shoug-tech.com/og-image.png"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <title>National Employment &amp; Skill Matching Platform</title>
   </head>
   <body>
