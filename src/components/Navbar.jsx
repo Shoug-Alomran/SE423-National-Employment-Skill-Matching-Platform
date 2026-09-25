@@ -62,19 +62,28 @@ export default function Navbar() {
           <ul className="hidden items-center gap-0.5 lg:flex">
             {navItems.map((item) => (
               <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  end={item.to === '/'}
-                  className={({ isActive }) =>
-                    `relative inline-flex h-16 items-center px-2.5 text-sm font-medium transition-colors xl:px-3 ${
-                      isActive
-                        ? 'text-saudi after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-saudi'
-                        : 'text-slate-600 hover:text-saudi'
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
+                {item.external ? (
+                  <a
+                    href={item.to}
+                    className="relative inline-flex h-16 items-center px-2.5 text-sm font-medium text-slate-600 transition-colors hover:text-saudi xl:px-3"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <NavLink
+                    to={item.to}
+                    end={item.to === '/'}
+                    className={({ isActive }) =>
+                      `relative inline-flex h-16 items-center px-2.5 text-sm font-medium transition-colors xl:px-3 ${
+                        isActive
+                          ? 'text-saudi after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-saudi'
+                          : 'text-slate-600 hover:text-saudi'
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
@@ -119,19 +128,28 @@ export default function Navbar() {
           <ul className="container-page space-y-1 py-3">
             {navItems.map((item) => (
               <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  end={item.to === '/'}
-                  className={({ isActive }) =>
-                    `block rounded-md border-l-4 px-3 py-2.5 text-sm font-medium ${
-                      isActive
-                        ? 'border-saudi bg-saudi-light text-saudi'
-                        : 'border-transparent text-slate-600 hover:bg-slate-50 hover:text-charcoal'
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
+                {item.external ? (
+                  <a
+                    href={item.to}
+                    className="block rounded-md border-l-4 border-transparent px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-charcoal"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <NavLink
+                    to={item.to}
+                    end={item.to === '/'}
+                    className={({ isActive }) =>
+                      `block rounded-md border-l-4 px-3 py-2.5 text-sm font-medium ${
+                        isActive
+                          ? 'border-saudi bg-saudi-light text-saudi'
+                          : 'border-transparent text-slate-600 hover:bg-slate-50 hover:text-charcoal'
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
