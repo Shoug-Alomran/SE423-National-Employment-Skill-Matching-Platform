@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
 /**
  * Base path for GitHub Pages.
@@ -28,5 +29,11 @@ export default defineConfig(({ command }) => ({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        taskDistribution: resolve(__dirname, 'project-task-distribution.html'),
+      },
+    },
   },
 }));
