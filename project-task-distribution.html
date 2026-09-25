@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SE423 team plan: Skill Matching Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F5F2;--surface:#FFFFFF;--surface-2:#E9EEEA;--ink:#13201A;--muted:#56645C;--line:#D6DED8;
+  --m1:#0F6B45;--m2:#B97F10;--m3:#2E5AA6;--m4:#94467A;
+  --focus:#2E5AA6;--hl:#FFE98A;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1411;--surface:#151E19;--surface-2:#1C2721;--ink:#E6EDE8;--muted:#98A79E;--line:#28352E;
+    --m1:#4CC48D;--m2:#E9B44E;--m3:#83A6E8;--m4:#D790C2;--focus:#83A6E8;--hl:#6B5A12;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1411;--surface:#151E19;--surface-2:#1C2721;--ink:#E6EDE8;--muted:#98A79E;--line:#28352E;
+  --m1:#4CC48D;--m2:#E9B44E;--m3:#83A6E8;--m4:#D790C2;--focus:#83A6E8;--hl:#6B5A12;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;transition:background .3s,color .3s}
+img,svg{max-width:100%}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.brand{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.brand .dots{display:inline-flex;gap:3px}
+.brand .dots i{width:8px;height:8px;border-radius:50%;display:block}
+.icon-btn{border:1px solid var(--line);background:var(--surface);height:40px;min-width:40px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 14px;cursor:pointer;font-size:15px}
+.icon-btn:hover{border-color:var(--muted)}
+.icon-btn svg{width:18px;height:18px}
+
+/* hero */
+.hero{padding:clamp(40px,8vw,88px) 0 clamp(28px,5vw,48px)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,7.2vw,78px);line-height:.98;letter-spacing:-.035em;margin:0 0 18px;max-width:14ch}
+.hero p.lede{font-size:clamp(17px,2vw,19px);color:var(--muted);max-width:60ch;margin:0 0 36px}
+.lanes{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(16px,3vw,28px)}
+.lane{display:grid;grid-template-columns:minmax(120px,190px) 1fr auto;align-items:center;gap:16px}
+.lane input{background:transparent;border:1px dashed transparent;border-radius:8px;padding:4px 8px;margin-left:-8px;font-family:var(--display);font-weight:600;font-size:17px;width:100%;min-width:0}
+.lane input:hover{border-color:var(--line)}
+.lane input:focus{border-color:var(--muted);outline:none;background:var(--surface-2)}
+.track{display:flex;gap:4px;height:26px}
+.seg{border-radius:6px;background:var(--c);transform-origin:left center;transform:scaleX(0);animation:fill .6s cubic-bezier(.2,.8,.2,1) forwards;position:relative}
+.seg.done::after{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(135deg,transparent 0 5px,rgba(255,255,255,.35) 5px 7px)}
+@keyframes fill{to{transform:scaleX(1)}}
+.lane .pts{font-family:var(--display);font-weight:600;font-variant-numeric:tabular-nums;color:var(--muted);font-size:15px;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:6px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.legend span b{color:var(--ink);font-weight:700}
+.hint{font-size:14px;color:var(--muted);margin:12px 2px 0}
+
+/* rules */
+section{padding:clamp(28px,5vw,52px) 0}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4vw,40px);letter-spacing:-.025em;line-height:1.05;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:62ch}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(18px,3vw,36px)}
+.rule h3{font-family:var(--display);font-weight:600;font-size:20px;margin:0 0 6px;letter-spacing:-.01em}
+.rule p{margin:0;color:var(--muted)}
+.mark-del{text-decoration:line-through;color:var(--muted)}
+.mark-add{background:var(--hl);padding:0 3px;border-radius:3px;color:var(--ink)}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:t}
+.timeline li{position:relative;padding:34px 12px 0 0}
+.timeline li::before{content:"";position:absolute;top:10px;left:0;right:0;height:2px;background:var(--line)}
+.timeline li::after{content:"";position:absolute;top:4px;left:0;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--ink)}
+.timeline li:last-child::before{right:auto;width:0}
+.timeline b{display:block;font-family:var(--display);font-size:18px;letter-spacing:-.01em}
+.timeline span{display:block;font-size:14.5px;color:var(--muted);line-height:1.4}
+
+/* controls */
+.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:22px}
+.seg-ctl{display:inline-flex;background:var(--surface-2);border-radius:999px;padding:4px;position:relative}
+.seg-ctl button{border:0;background:transparent;padding:8px 18px;border-radius:999px;cursor:pointer;font-weight:700;font-size:15px;position:relative;z-index:1;color:var(--muted);transition:color .2s}
+.seg-ctl button[aria-selected="true"]{color:var(--ink)}
+.seg-ctl .pill{position:absolute;top:4px;bottom:4px;border-radius:999px;background:var(--surface);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px var(--line);transition:left .3s cubic-bezier(.2,.8,.2,1),width .3s cubic-bezier(.2,.8,.2,1)}
+.people{display:flex;gap:8px;overflow-x:auto;padding:2px;scrollbar-width:none;margin-bottom:24px}
+.people::-webkit-scrollbar{display:none}
+.person{flex:0 0 auto;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 14px 10px 12px;cursor:pointer;display:flex;align-items:center;gap:10px;text-align:left;transition:border-color .2s,background .2s}
+.person .sw{width:12px;height:12px;border-radius:4px;background:var(--c)}
+.person .nm{font-weight:700;font-size:15px;line-height:1.2}
+.person .pr{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.person[aria-selected="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,var(--surface))}
+
+/* tasks */
+.stage{transition:opacity .22s ease,transform .22s ease}
+.stage.swap{opacity:0;transform:translateY(6px)}
+.group{margin-bottom:34px}
+.group-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.group-h h3{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.015em;margin:0}
+.group-h .w{font-size:14px;color:var(--muted)}
+.note{background:var(--surface-2);border-radius:12px;padding:12px 16px;font-size:15px;color:var(--muted);margin:0 0 12px}
+.note b{color:var(--ink)}
+.cards{display:grid;gap:12px}
+.by-phase .cards{grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr))}
+.task{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:6px 16px 16px 6px;overflow:hidden;transition:border-color .2s}
+.task.is-done{opacity:.72}
+.task-h{width:100%;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start;padding:16px 18px;border:0;background:transparent;text-align:left;cursor:pointer}
+.task-h .who{font-size:13.5px;color:var(--c);font-weight:700;display:block;margin-bottom:2px}
+.task-h .t{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.2;letter-spacing:-.01em;display:block}
+.task.is-done .task-h .t{text-decoration:line-through;text-decoration-thickness:2px}
+.task-h .meta{display:flex;align-items:center;gap:12px;margin-top:8px;font-size:14px;color:var(--muted)}
+.pips{display:inline-flex;gap:3px}
+.pips i{width:9px;height:9px;border-radius:2px;background:var(--line);display:block}
+.pips i.on{background:var(--c)}
+.chev{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.task.open .chev{transform:rotate(180deg)}
+.task-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.2,.8,.2,1)}
+.task.open .task-b{grid-template-rows:1fr}
+.task-b>div{overflow:hidden}
+.task-in{padding:0 18px 18px}
+.steps{margin:0 0 14px;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:10px 0 10px 40px;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:26px;height:26px;border-radius:50%;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);font-family:var(--display);font-weight:800;font-size:14px;display:grid;place-items:center}
+.steps li b{font-weight:700}
+.out{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid var(--line)}
+.out p{margin:0;font-size:15px;color:var(--muted);max-width:60ch}
+.out p b{color:var(--ink)}
+.done-btn{border:1.5px solid var(--c);background:transparent;color:var(--c);border-radius:999px;padding:8px 16px;font-weight:700;font-size:14.5px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,color .2s}
+.done-btn[aria-pressed="true"]{background:var(--c);color:var(--surface)}
+.done-btn svg{width:16px;height:16px}
+
+footer{padding:36px 0 56px;color:var(--muted);font-size:14.5px;border-top:1px solid var(--line)}
+footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center}
+.link-btn{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:14.5px}
+
+@media (max-width:820px){
+  .timeline{grid-template-columns:1fr;gap:0}
+  .timeline li{padding:0 0 18px 32px}
+  .timeline li::before{top:14px;bottom:0;left:6px;right:auto;width:2px;height:auto}
+  .timeline li:last-child::before{display:none}
+  .timeline li::after{top:4px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .lane{grid-template-columns:1fr auto;gap:6px 12px}
+  .lane .track{grid-column:1/-1;grid-row:2}
+  .lane .pts{grid-column:2;grid-row:1}
+  .task-h{padding:14px 14px}
+  .task-in{padding:0 14px 16px}
+  .seg-ctl button{padding:8px 14px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand"><span class="dots" aria-hidden="true"><i style="background:var(--m1)"></i><i style="background:var(--m2)"></i><i style="background:var(--m3)"></i><i style="background:var(--m4)"></i></span>SE423 team plan</div>
+    <button class="icon-btn" id="themeBtn" aria-label="Switch colour theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+      <span id="themeLabel">Theme</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Four people, five deliverables, equal weight.</h1>
+      <p class="lede">Work split for Scenario 11, the National Employment and Skill Matching Platform. Every member works on every artifact and carries 21 difficulty points in total, so nobody sits idle while someone else carries a whole deliverable.</p>
+      <div class="lanes" id="lanes" aria-label="Workload per member"></div>
+      <p class="hint">Tap a name to rename it. Progress and names are saved in this browser.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>Three rules that keep it fair</h2>
+      <p class="sub">The course grades revisions and cohesion, so these matter as much as the tasks.</p>
+      <div class="rules">
+        <div class="rule"><h3>You own your sections</h3><p>Whatever you write in one artifact, you revise in the next one after feedback. Every task below ends with that revision step.</p></div>
+        <div class="rule"><h3>Mark every change</h3><p>Removed text is <span class="mark-del">struck through</span> and new or changed text is <span class="mark-add">highlighted yellow</span>, all inside one master document.</p></div>
+        <div class="rule"><h3>Sync before you split</h3><p>Hold a 30-minute kickoff at the start of each artifact and a review call two days before the deadline. Hand-offs are named in the steps.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>The sequence</h2>
+      <p class="sub">Check the LMS for exact due dates. Each artifact includes every earlier one, improved.</p>
+      <ol class="timeline">
+        <li><b>Artifact 1</b><span>Overview, organization and scope. 20%</span></li>
+        <li><b>Artifact 2</b><span>Methodology analysis, risks and decision. 20%</span></li>
+        <li><b>Artifact 3</b><span>WBS, backlog and Sprint 1. 20%</span></li>
+        <li><b>Artifact 4</b><span>Stakeholders, communications and metrics. 20%</span></li>
+        <li><b>Presentation</b><span>10 minutes covering all four. 20%</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="tasks">
+    <div class="wrap">
+      <h2>Tasks and how to do them</h2>
+      <p class="sub">Open a task to see its steps. Mark it done when it is in the master document.</p>
+      <div class="controls">
+        <div class="seg-ctl" role="tablist" aria-label="Group tasks">
+          <span class="pill" id="viewPill"></span>
+          <button role="tab" id="vPerson" aria-selected="true">By person</button>
+          <button role="tab" id="vPhase" aria-selected="false">By artifact</button>
+        </div>
+      </div>
+      <div class="people" id="people" role="tablist" aria-label="Team members"></div>
+      <div class="stage" id="stage"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>SE423 Software Project Management. Scenario 11.</span>
+    <button class="link-btn" id="resetBtn">Clear progress</button>
+  </div>
+</footer>
+
+<script>
+const PHASES=[
+ {id:"a1",name:"Artifact 1: Overview, organization and scope",short:"A1"},
+ {id:"a2",name:"Artifact 2: Methodology, risks and decision",short:"A2"},
+ {id:"a3",name:"Artifact 3: Estimation and scheduling",short:"A3"},
+ {id:"a4",name:"Artifact 4: Stakeholders, communications and metrics",short:"A4"},
+ {id:"p",name:"Final presentation",short:"Talk"}
+];
+const NOTES={
+ a3:"<b>Assumes Scrum is chosen in Artifact 2.</b> If the team picks a plan-driven method instead, keep the same owners and swap the work: Member 1 keeps the WBS and writes the companion document, Member 2 does bottom-up estimates, Member 3 builds the Gantt chart, and Member 4 does dependencies, critical path and resource assignment.",
+ a2:"Analyze two plan-driven methods (Waterfall, Spiral) and two Agile ones (Scrum, Kanban). Everyone finishes their analysis first, then the decision and the risk work start.",
+ p:"Ten minutes is about 2.5 minutes each. Tell it as a story, not in artifact order: the problem, how you will build it, what could go wrong, and how you will keep everyone informed."
+};
+const T=[
+/* ---------- A1 ---------- */
+{p:"a1",m:1,pts:4,title:"Problem statement, goals and the master document",
+ steps:[
+ "Create the shared master document (Google Docs or Word) with a heading for each of the four artifacts and a revision log table: date, section, change, reason.",
+ "Add a one-line legend at the top: <b>struck through</b> means removed, <b>yellow</b> means added or changed. Everyone uses this from Artifact 2 onward.",
+ "Write the problem and opportunity statement: the current state (fragmented private job boards, manual processes), its consequences (slow hiring, skill mismatches), and the Vision 2030 opportunity. One tight paragraph plus three supporting bullets.",
+ "Turn the scenario's benefits into 4 to 5 SMART goals, for example: reduce average time-to-hire for roles posted on the platform by a set percentage within 12 months of Phase 1. Label the numbers as targets.",
+ "Add a small table of projected benefits for each group: job seekers, employers, and the Ministry.",
+ "Check with Members 2 and 4 that every goal maps to at least one scope item, and adjust wording where it does not."],
+ out:"Sections 1.1 and 1.2, plus the master document and revision log."},
+{p:"a1",m:2,pts:4,title:"Initial stakeholder list and Phase 1 scope",
+ steps:[
+ "List stakeholders from the scenario: the Ministry of Human Resources and Social Development (sponsor), job seekers, students, employers from large firms to SMEs, universities and training providers, technology firms, and other government agencies whose services you integrate with. Verify any agency name before you cite it.",
+ "Group them as internal or external with one line on each one's stake. Keep it brief; Artifact 4 adds the detail.",
+ "Write the Phase 1 in-scope features: the Smart Matching Engine (NLP parsing of CVs and job descriptions, match scoring, recommendations), the job seeker portal (profile, CV upload, search, apply, track status) and the employer portal (post jobs, manage applications, screening, interview scheduling).",
+ "For each feature give a description, its key capabilities, and the deliverable that proves it is done.",
+ "Avoid overlap: screening lives in the employer portal and consumes match scores from the engine. The engine does not do screening itself. Note any such boundary in one sentence."],
+ out:"Section 1.3 (stakeholders) and 1.5a (Phase 1 scope)."},
+{p:"a1",m:3,pts:4,title:"Team and organizational structure",
+ steps:[
+ "Pick a structure and justify it. A mixed model fits the scenario: a Ministry sponsor and PMO, a contracted technology firm for development, Ministry subject-matter experts and data owners, and education partners as advisers.",
+ "Draw an org chart in draw.io or Figma: steering committee, project sponsor, project manager, product owner, technical lead, development teams (backend, frontend and mobile, data and NLP, QA), security and compliance, integration, and change management.",
+ "For each role write its responsibility, which organization provides it, and who it reports to.",
+ "Add the factors that decide success: Arabic and English NLP skills, personal data protection compliance, experience integrating with government systems, and how available Ministry experts will be.",
+ "Map your four real team members onto roles in the chart so the grader can see where you sit.",
+ "Keep role titles neutral for now and add a note that Artifact 2 may rename them (for example, Scrum roles)."],
+ out:"Section 1.4, including the org chart image."},
+{p:"a1",m:4,pts:4,title:"Phase 2 and 3 scope, exclusions and constraints",
+ steps:[
+ "Write the in-scope features for later phases: career guidance and training (recommendations from skills and interests, course suggestions tied to skill gaps), the Ministry analytics dashboard (labor trends, skill gaps, policy reports), professional networking (connections, forums), and government integration with national rollout.",
+ "Use exactly the same format as Member 2 so the scope reads as one section.",
+ "Write an out-of-scope list, for example: delivering training courses, payroll, and background checks. Each exclusion prevents a later argument, so be specific.",
+ "Add assumptions and constraints: data access through agency APIs, Arabic and English support, data protection law, hosting inside the Kingdom, and a phased rollout.",
+ "With Member 2, build one table listing every capability and its single home feature, and remove any duplicates you find.",
+ "Close with a deliverables list and acceptance criteria for each phase."],
+ out:"Section 1.5b (later-phase scope) and 1.6 (exclusions, assumptions, constraints)."},
+/* ---------- A2 ---------- */
+{p:"a2",m:1,pts:5,title:"Waterfall analysis and the final decision",
+ steps:[
+ "Analyze Waterfall for this project. Strengths: clear documentation for Ministry governance and fixed phases that suit procurement. Weaknesses: the matching engine needs experimentation, and users see nothing until the end.",
+ "Match it against your Artifact 1 structure and stakeholders, for example: the steering committee likes formal sign-offs, but job seekers could not give feedback until launch.",
+ "Once all four analyses are in, build a comparison matrix. Criteria: requirement stability, stakeholder involvement, risk handling, fit with a mixed team, documentation for regulators, and time to first value. Score each method from 1 to 5 and weight the criteria.",
+ "Write the selection rationale using Artifact 1 specifics: phased delivery, uncertainty in NLP matching, and many stakeholder groups.",
+ "Explain in one paragraph each why the other three lost.",
+ "Revise your Artifact 1 sections from feedback using the change marks."],
+ out:"Waterfall analysis, comparison matrix, and the decision section."},
+{p:"a2",m:2,pts:5,title:"Spiral analysis and external risks",
+ steps:[
+ "Analyze Spiral. Strengths: it is risk-driven, suits AI and NLP uncertainty, and uses prototypes on a large government system. Weaknesses: cost, the need for risk-analysis expertise, and difficulty fixing contract terms.",
+ "Match it against the team structure and stakeholders from Artifact 1.",
+ "Write four risks that are not about the methodology, drawn from inside or outside the project: for example a personal data breach, delays integrating with other agencies' systems, bias in match results, or low employer adoption.",
+ "For each give a name, a description specific to this platform, and one mitigation.",
+ "Hand the four risks to Member 4 for scoring.",
+ "Revise your Artifact 1 sections from feedback."],
+ out:"Spiral analysis and four non-methodology risks in the register."},
+{p:"a2",m:3,pts:5,title:"Scrum analysis and methodology risks",
+ steps:[
+ "Analyze Scrum. Strengths: value delivered each sprint, frequent stakeholder feedback, and room for matching requirements to evolve. Weaknesses: government documentation demands, fixed-price contracts, and how often a Ministry product owner is actually available.",
+ "Match it against the team structure and stakeholders from Artifact 1.",
+ "When the team confirms the chosen method, write four risks unique to it. For Scrum these could be: the product owner is unavailable, backlog churn causes scope creep, velocity is unstable early on, or documentation falls short of audit needs.",
+ "Test each risk: if it would also apply to Waterfall, Spiral or Kanban, replace it. The brief requires risks unique to the chosen method.",
+ "If the team picks a different method, the analyst for that method writes these risks and you take over their scoring or rationale step instead.",
+ "Revise your Artifact 1 sections from feedback."],
+ out:"Scrum analysis and the first four register rows (risk, description, mitigation)."},
+{p:"a2",m:4,pts:5,title:"Kanban analysis and the risk register",
+ steps:[
+ "Analyze Kanban. Strengths: continuous flow and WIP limits, useful for operations after rollout. Weaknesses: no timeboxes for Ministry milestones, weaker for planning a new build, and no defined roles.",
+ "Match it against the team structure and stakeholders from Artifact 1.",
+ "Build the Excel register with two sheets: Initial (risk name, description, mitigation) and Expanded (adds probability, impact, risk exposure, first indicator, and additional management strategies).",
+ "Define your scales in a header row, for example probability from 0.1 to 0.9 and impact from 1 to 5, with exposure as probability times impact. Add conditional formatting so high exposure stands out.",
+ "Score all eight risks in a short call with the team, then write a first indicator for each: an early, observable warning sign.",
+ "Revise your Artifact 1 sections from feedback."],
+ out:"Kanban analysis and the finished Excel risk register."},
+/* ---------- A3 ---------- */
+{p:"a3",m:1,pts:5,title:"Work breakdown structure and Sprint 1 backlog",
+ steps:[
+ "Choose a product-oriented WBS so it lines up with the epics, and stay consistent: every element is a deliverable, not an activity.",
+ "Set Level 1: project management, matching engine, job seeker portal, employer portal, career guidance and training, analytics dashboard, networking, integration and platform, and rollout.",
+ "Break each down into work packages using numbered bullets (2.1, 2.1.1). Stop when a package is small enough to estimate and assign.",
+ "After estimation, pick the Sprint 1 stories with the team to fit the planned velocity.",
+ "Fully elaborate each Sprint 1 story: the story, acceptance criteria in Given, When, Then form, notes, dependencies, and a task breakdown with hour estimates.",
+ "Revise your Artifact 2 sections from feedback."],
+ out:"The WBS bullet list and the elaborated Sprint 1 backlog."},
+{p:"a3",m:2,pts:5,title:"Stories for matching and job seekers, plus estimation",
+ steps:[
+ "Write 10 to 12 user stories for the matching engine and job seeker portal epics, in the form: As a (role), I want (goal) so that (benefit).",
+ "Check each against INVEST: independent, negotiable, valuable, estimable, small, testable.",
+ "Prepare estimation: a Fibonacci scale (1, 2, 3, 5, 8, 13) and one agreed reference story, such as uploading a CV, set at 3 points.",
+ "Run planning poker with the whole team for every story from all members, and discuss any spread wider than two cards.",
+ "Record the points in the shared backlog sheet and flag anything over 13 to split.",
+ "Revise your Artifact 2 sections from feedback."],
+ out:"Stories for two epics and story points for the full backlog."},
+{p:"a3",m:3,pts:5,title:"Stories for employers and guidance, plus the process overview",
+ steps:[
+ "Write 10 to 12 user stories for the employer portal and career guidance and training epics.",
+ "Write the technical process overview: sprint length (two weeks suits a Ministry review cycle), and each ceremony with its length, attendees and purpose.",
+ "Describe Sprint 0: environments, CI/CD, architecture outline, data-sharing agreements, and initial UX research.",
+ "List planned spikes, for example evaluating Arabic NLP models, testing a government API, and setting a baseline for match accuracy.",
+ "Add a definition of ready and a definition of done.",
+ "Revise your Artifact 2 sections and update the Artifact 1 org chart to use Scrum role names."],
+ out:"Stories for two epics and the process overview section."},
+{p:"a3",m:4,pts:5,title:"Stories for analytics, networking and integration, plus the release plan",
+ steps:[
+ "Write 10 to 12 user stories for the analytics dashboard, networking, and integration and platform epics, including security, admin and accessibility needs.",
+ "Decide how non-functional needs appear: as stories or as constraints on other stories. Use the same approach throughout.",
+ "Build an epic table: epic, description, total points, and which phase from the scenario it belongs to.",
+ "Make a release roadmap: total points divided by expected velocity gives the number of sprints, grouped by phase.",
+ "Merge all stories into one prioritized backlog sheet using MoSCoW or business value.",
+ "Revise your Artifact 2 sections and update risk scores if the plan changed them."],
+ out:"Stories for three epics, the epic table, release roadmap and merged backlog."},
+/* ---------- A4 ---------- */
+{p:"a4",m:1,pts:4,title:"Stakeholder register",
+ steps:[
+ "Expand the Artifact 1 list into specific groups, such as Ministry leadership, Ministry analysts, large employers, SMEs, fresh graduates, mid-career job seekers, and training providers.",
+ "Create the register with every required column: name and title, classification, power from 1 to 5, how they can affect the project, interest from 1 to 5, artifacts and metrics they receive, and a management strategy.",
+ "Choose a classification scheme and state it, for example a power-interest grid: manage closely, keep satisfied, keep informed, monitor.",
+ "Draw the power-interest grid as a figure.",
+ "Take metric names from Member 3 so the metrics column only lists metrics that exist.",
+ "Revise your Artifact 3 sections from feedback."],
+ out:"The stakeholder register and power-interest grid."},
+{p:"a4",m:2,pts:4,title:"Communications plan",
+ steps:[
+ "List the information categories: status, risks, scope and change requests, sprint review demos, metric reports, security incidents, releases, and public awareness.",
+ "For each one write why it matters, who receives it, format and tone, the responsible role, and frequency.",
+ "Use role titles that match the org chart exactly.",
+ "Add the metric reports from Member 3 as their own entries.",
+ "Add an escalation path showing who hears about what, and how fast, when something goes wrong.",
+ "Revise your Artifact 3 sections from feedback."],
+ out:"The communications plan table and escalation path."},
+{p:"a4",m:3,pts:4,title:"Metrics",
+ steps:[
+ "Choose at least four metrics, mixing how the project runs with how the product performs. Examples: sprint velocity and burndown, the share of recommended jobs that seekers apply to, defect escape rate, and trend in total risk exposure.",
+ "For each explain the rationale: why this metric, for this project, for these stakeholders.",
+ "Define the measurement: what is counted, the tool, how often, and who collects it.",
+ "Explain how it is used over time: the threshold that triggers action and who acts.",
+ "Send the final metric names to Members 1 and 2 early so the register and plan reference them.",
+ "Revise your Artifact 3 sections from feedback."],
+ out:"The metrics section with at least four metrics."},
+{p:"a4",m:4,pts:4,title:"Cohesion review and final audit",
+ steps:[
+ "Read all four artifacts end to end and list every inconsistency in feature names, role titles, and stakeholder names.",
+ "Build a traceability table: goal, scope item, epic, WBS element, related risk, and metric. Gaps show where something is missing.",
+ "Audit the change marks: every revision is struck through or highlighted, and the revision log is complete.",
+ "Check the numbers agree: story point totals, sprint counts, risk IDs, and phase names.",
+ "Finalize formatting: table of contents, figure captions, and links to the Excel register and backlog.",
+ "Revise your Artifact 3 sections from feedback."],
+ out:"A consistent final document and the traceability table."},
+/* ---------- Presentation ---------- */
+{p:"p",m:1,pts:3,title:"Opening: the problem and what you will build",
+ steps:[
+ "Draft the storyboard for the whole talk and share it with the team first.",
+ "Open with a job seeker persona, for example a new graduate applying on five job boards with no replies, to make the problem real in 20 seconds.",
+ "Cover the problem, goals and scope using the org chart and one scope visual.",
+ "Build 3 to 4 slides and keep text short.",
+ "Rehearse to 2.5 minutes and cut until you fit."],
+ out:"Storyboard and opening slides."},
+{p:"p",m:2,pts:3,title:"Why this methodology, and the risks",
+ steps:[
+ "Design the slide template (fonts, colors, layout) and share it before others build.",
+ "Show the comparison matrix and explain the decision in one sentence.",
+ "Present the top three risks by exposure and what you will do about each.",
+ "Build 3 to 4 slides in the shared template.",
+ "Rehearse to 2.5 minutes."],
+ out:"Slide template and the methodology and risk slides."},
+{p:"p",m:3,pts:3,title:"How it gets built: backlog and Sprint 1",
+ steps:[
+ "Show the epics and release roadmap as one visual.",
+ "Walk through one Sprint 1 story from story to acceptance criteria, so the audience sees how work becomes done.",
+ "Build 3 to 4 slides.",
+ "Run the full-team timing rehearsal and keep a stopwatch log.",
+ "Rehearse your part to 2.5 minutes."],
+ out:"Backlog and sprint slides, plus the rehearsal log."},
+{p:"p",m:4,pts:3,title:"Stakeholders, communication and metrics, then close",
+ steps:[
+ "Show the power-interest grid and how the key players stay informed.",
+ "Present two or three metrics as a sample dashboard.",
+ "Close by returning to the opening persona and what changes for them.",
+ "Prepare a list of likely questions with an owner for each answer.",
+ "Rehearse to 2.5 minutes."],
+ out:"Closing slides and the Q&A prep list."}
+];
+T.forEach((t,i)=>t.id=t.p+"-"+t.m);
+
+const store={
+ get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+ set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+let names=store.get("se423-names",["Member 1","Member 2","Member 3","Member 4"]);
+let done=new Set(store.get("se423-done",[]));
+let view="person",who=1,open=new Set();
+const col=m=>`var(--m${m})`;
+const nm=m=>names[m-1]||("Member "+m);
+
+/* lanes */
+function renderLanes(first){
+ const L=document.getElementById("lanes");
+ let h="";
+ for(let m=1;m<=4;m++){
+  const ts=T.filter(t=>t.m===m);
+  const total=ts.reduce((a,t)=>a+t.pts,0);
+  const got=ts.filter(t=>done.has(t.id)).reduce((a,t)=>a+t.pts,0);
+  h+=`<div class="lane" style="--c:${col(m)}">
+   <input value="${nm(m).replace(/"/g,"&quot;")}" data-m="${m}" aria-label="Name for member ${m}" maxlength="24">
+   <div class="track">${ts.map((t,i)=>`<div class="seg${done.has(t.id)?" done":""}" title="${PHASES.find(p=>p.id===t.p).short}: ${t.pts} points" style="flex:${t.pts};animation-delay:${first?(m-1)*90+i*110:0}ms${first?"":";animation:none;transform:none"}"></div>`).join("")}</div>
+   <span class="pts">${got?got+" / ":""}${total} pts</span></div>`;
+ }
+ h+=`<div class="legend">Each bar, left to right: ${PHASES.map(p=>`<span><b>${p.short}</b></span>`).join("")}</div>`;
+ L.innerHTML=h;
+ L.querySelectorAll("input").forEach(inp=>{
+  inp.addEventListener("change",e=>{
+   const m=+e.target.dataset.m;names[m-1]=e.target.value.trim()||("Member "+m);store.set("se423-names",names);renderPeople();renderStage(false);
+  });
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter")e.target.blur()});
+ });
+}
+
+/* people tabs */
+function renderPeople(){
+ const P=document.getElementById("people");
+ P.style.display=view==="person"?"flex":"none";
+ P.innerHTML=[1,2,3,4].map(m=>{
+  const ts=T.filter(t=>t.m===m),d=ts.filter(t=>done.has(t.id)).length;
+  return `<button class="person" role="tab" aria-selected="${m===who}" data-m="${m}" style="--c:${col(m)}"><span class="sw"></span><span><span class="nm">${esc(nm(m))}</span><br><span class="pr">${d} of ${ts.length} done</span></span></button>`;
+ }).join("");
+ P.querySelectorAll(".person").forEach(b=>b.onclick=()=>{who=+b.dataset.m;renderPeople();renderStage(true)});
+}
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function card(t,showWho){
+ const isOpen=open.has(t.id),isDone=done.has(t.id);
+ return `<article class="task${isOpen?" open":""}${isDone?" is-done":""}" style="--c:${col(t.m)}" data-id="${t.id}">
+  <button class="task-h" aria-expanded="${isOpen}" aria-controls="b-${t.id}">
+   <span><span class="who">${showWho?esc(nm(t.m)):PHASES.find(p=>p.id===t.p).short}</span><span class="t">${t.title}</span>
+   <span class="meta"><span class="pips" aria-label="Difficulty ${t.pts} of 5">${[1,2,3,4,5].map(i=>`<i class="${i<=t.pts?"on":""}"></i>`).join("")}</span>${t.pts} pts, ${t.steps.length} steps</span></span>
+   <span class="chev" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+  </button>
+  <div class="task-b" id="b-${t.id}"><div><div class="task-in">
+   <ol class="steps">${t.steps.map(s=>`<li>${s}</li>`).join("")}</ol>
+   <div class="out"><p><b>Hand in:</b> ${t.out}</p>
+   <button class="done-btn" aria-pressed="${isDone}" data-id="${t.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>${isDone?"Done":"Mark done"}</button></div>
+  </div></div></div></article>`;
+}
+
+function renderStage(anim){
+ const S=document.getElementById("stage");
+ const draw=()=>{
+  let h="";
+  if(view==="person"){
+   S.className="stage by-person";
+   PHASES.forEach(p=>{
+    const ts=T.filter(t=>t.p===p.id&&t.m===who);
+    h+=`<div class="group"><div class="group-h"><h3>${p.name}</h3></div>${p.id==="a3"?`<p class="note">${NOTES.a3}</p>`:""}<div class="cards">${ts.map(t=>card(t,false)).join("")}</div></div>`;
+   });
+  }else{
+   S.className="stage by-phase";
+   PHASES.forEach(p=>{
+    const ts=T.filter(t=>t.p===p.id);
+    const pts=ts.map(t=>t.pts);
+    h+=`<div class="group"><div class="group-h"><h3>${p.name}</h3><span class="w">${pts[0]} points each</span></div>${NOTES[p.id]?`<p class="note">${NOTES[p.id]}</p>`:""}<div class="cards">${ts.map(t=>card(t,true)).join("")}</div></div>`;
+   });
+  }
+  S.innerHTML=h;
+  bindCards();
+ };
+ if(anim){S.classList.add("swap");setTimeout(()=>{draw();requestAnimationFrame(()=>S.classList.remove("swap"))},180)}else draw();
+}
+
+function bindCards(){
+ document.querySelectorAll(".task-h").forEach(b=>b.onclick=()=>{
+  const a=b.closest(".task"),id=a.dataset.id;
+  if(open.has(id)){open.delete(id);a.classList.remove("open");b.setAttribute("aria-expanded","false")}
+  else{open.add(id);a.classList.add("open");b.setAttribute("aria-expanded","true")}
+ });
+ document.querySelectorAll(".done-btn").forEach(b=>b.onclick=()=>{
+  const id=b.dataset.id,a=b.closest(".task");
+  if(done.has(id))done.delete(id);else done.add(id);
+  store.set("se423-done",[...done]);
+  const d=done.has(id);
+  b.setAttribute("aria-pressed",d);b.lastChild.textContent=d?"Done":"Mark done";
+  a.classList.toggle("is-done",d);
+  renderPeople();renderLanes(false);
+ });
+}
+
+/* view switch */
+function setView(v){
+ view=v;
+ const vp=document.getElementById("vPerson"),va=document.getElementById("vPhase");
+ vp.setAttribute("aria-selected",v==="person");va.setAttribute("aria-selected",v==="phase");
+ movePill();renderPeople();renderStage(true);
+}
+function movePill(){
+ const b=document.getElementById(view==="person"?"vPerson":"vPhase"),pill=document.getElementById("viewPill");
+ pill.style.left=b.offsetLeft+"px";pill.style.width=b.offsetWidth+"px";
+}
+document.getElementById("vPerson").onclick=()=>setView("person");
+document.getElementById("vPhase").onclick=()=>setView("phase");
+window.addEventListener("resize",movePill);
+
+/* theme */
+const root=document.documentElement;
+const icons={
+ light:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+ dark:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>'
+};
+function effective(){const t=root.getAttribute("data-theme");if(t)return t;return matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}
+function paintThemeBtn(){const e=effective();document.getElementById("themeIcon").innerHTML=icons[e==="dark"?"light":"dark"];document.getElementById("themeLabel").textContent=e==="dark"?"Light":"Dark"}
+const savedTheme=store.get("se423-theme",null);if(savedTheme)root.setAttribute("data-theme",savedTheme);
+document.getElementById("themeBtn").onclick=()=>{const n=effective()==="dark"?"light":"dark";root.setAttribute("data-theme",n);store.set("se423-theme",n);paintThemeBtn()};
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paintThemeBtn);
+
+document.getElementById("resetBtn").onclick=()=>{done.clear();store.set("se423-done",[]);renderLanes(false);renderPeople();renderStage(false)};
+
+paintThemeBtn();renderLanes(true);renderPeople();renderStage(false);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(movePill);else setTimeout(movePill,300);
+movePill();
+</script>
+</body>
+</html>
