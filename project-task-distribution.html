@@ -433,7 +433,7 @@ const store={
  get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 };
-let names=store.get("se423-names",["Member 1","Member 2","Member 3","Member 4"]);
+  let names=store.get("se423-names",["Yara Faris","Hatoon","Rose Alrakan","Shoug Alomran"]);
 let done=new Set(store.get("se423-done",[]));
 let view="person",who=1,open=new Set();
 const col=m=>`var(--m${m})`;
