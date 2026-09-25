@@ -17,4 +17,5 @@ export const navItems = [
   { to: '/planning', label: 'Planning' },
   { to: '/stakeholders-metrics', label: 'Stakeholders & Metrics' },
   { to: '/team', label: 'Team' },
+  { to: '/project-task-distribution.html', label: 'Task Distribution', external: true },
 ];
