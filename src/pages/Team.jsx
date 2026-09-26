@@ -8,6 +8,8 @@ import {
   FileText,
   GithubLogo,
   Info,
+  ListChecks,
+  ArrowSquareOut,
   Kanban,
   LinkedinLogo,
   MicrosoftTeamsLogo,
@@ -17,7 +19,7 @@ import {
   UsersThree,
 } from '@phosphor-icons/react';
 import { site } from '../config.js';
-import { members, tools } from '../data/team.js';
+import { artifacts, members, tools } from '../data/team.js';
 
 const domains = [
   { icon: Kanban, title: 'Project Management', text: 'Oversight, integration, and final approvals.', to: '/project' },
@@ -110,6 +112,52 @@ export default function Team() {
                   ))}
                 </ul>
               </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="contributions" className="container-page border-t border-slate-200 py-12">
+        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 id="contributions" className="flex items-center gap-2 text-2xl font-bold text-charcoal-dark">
+              <ListChecks size={28} className="text-saudi" />
+              Who Did What
+            </h2>
+            <p className="mt-2 max-w-2xl text-charcoal-lighter">
+              Every member worked on every artifact, each owning separate sections with an equal share of the work.
+            </p>
+          </div>
+          <a
+            href={`${import.meta.env.BASE_URL}project-task-distribution.html`}
+            className="inline-flex items-center gap-2 self-start rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-charcoal-dark transition-colors hover:border-saudi/50 sm:self-auto"
+          >
+            Full task breakdown <ArrowSquareOut size={16} />
+          </a>
+        </div>
+        <div className="space-y-6">
+          {artifacts.map((a) => (
+            <article key={a.key} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 className="text-lg font-bold text-charcoal-dark">{a.title}</h3>
+                <p className="text-sm text-charcoal-lighter">{a.subtitle}</p>
+              </div>
+              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {members.map((m) => (
+                  <li key={m.name} className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-4">
+                    <div
+                      aria-hidden="true"
+                      className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-saudi-light text-sm font-bold text-saudi"
+                    >
+                      {initials(m.name)}
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-charcoal-dark">{m.name.split(' ')[0]}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-charcoal-light">{m.contributions[a.key]}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </article>
           ))}
         </div>

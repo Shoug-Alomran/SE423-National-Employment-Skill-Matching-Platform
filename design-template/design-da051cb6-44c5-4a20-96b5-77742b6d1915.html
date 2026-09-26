@@ -1,0 +1,1256 @@
+<html lang="en" vid="0">
+  <head vid="1">
+    <meta charset="UTF-8" vid="2" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      vid="3"
+    />
+    <title vid="4">
+      Planning - National Employment &amp; Skill Matching Platform
+    </title>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="5"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web" vid="6"></script>
+    <script vid="7">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              saudi: {
+                green: "#006C35",
+                light: "#E6F0EA",
+                hover: "#005a2c",
+              },
+              charcoal: {
+                light: "#475569",
+                DEFAULT: "#1F2937",
+                dark: "#0f172a",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style vid="8">
+      .wbs-line-vertical {
+        width: 2px;
+        background-color: #cbd5e1;
+      }
+      .wbs-line-horizontal {
+        height: 2px;
+        background-color: #cbd5e1;
+      }
+      .wbs-node-connector::before {
+        content: "";
+        position: absolute;
+        left: -17px;
+        top: 20px;
+        width: 16px;
+        height: 2px;
+        background-color: #cbd5e1;
+      }
+      .wbs-node-connector::after {
+        content: "";
+        position: absolute;
+        left: -17px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #cbd5e1;
+      }
+      .wbs-node-connector:last-child::after {
+        bottom: auto;
+        height: 22px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      .dash-border {
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%2394A3B8FF' stroke-width='2' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-charcoal font-sans antialiased flex flex-col min-h-screen"
+    vid="9"
+  >
+    <nav
+      class="fixed top-0 w-full bg-white border-b border-slate-200 z-50"
+      vid="10"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" vid="11">
+        <div class="flex justify-between h-16" vid="12">
+          <div class="flex items-center gap-3" vid="13">
+            <div
+              class="w-8 h-8 rounded bg-saudi-green flex items-center justify-center text-white font-bold"
+              vid="14"
+            >
+              <i class="ph ph-briefcase text-xl" vid="15"></i>
+            </div>
+            <span
+              class="font-bold text-xl text-charcoal tracking-tight"
+              vid="16"
+              >NESMP</span
+            >
+          </div>
+          <div class="hidden md:flex items-center space-x-1" vid="17">
+            <a
+              href="#"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-saudi-green hover:bg-slate-50 transition-colors"
+              vid="18"
+              >Home</a
+            >
+            <a
+              href="#"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-saudi-green hover:bg-slate-50 transition-colors"
+              vid="19"
+              >Project</a
+            >
+            <a
+              href="#"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-saudi-green hover:bg-slate-50 transition-colors"
+              vid="20"
+              >Methodology &amp; Risk</a
+            >
+            <a
+              href="#"
+              class="px-3 py-2 rounded-md text-sm font-medium bg-saudi-light text-saudi-green border-b-2 border-saudi-green transition-colors"
+              vid="21"
+              >Planning</a
+            >
+            <a
+              href="#"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-saudi-green hover:bg-slate-50 transition-colors"
+              vid="22"
+              >Stakeholders &amp; Metrics</a
+            >
+            <a
+              href="#"
+              class="px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:text-saudi-green hover:bg-slate-50 transition-colors"
+              vid="23"
+              >Team</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main
+      class="flex-grow pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full"
+      vid="24"
+    >
+      <header class="mb-12" vid="25">
+        <div
+          class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-saudi-light text-saudi-green text-xs font-semibold uppercase tracking-wider mb-4 border border-saudi-green/20"
+          vid="26"
+        >
+          <i class="ph ph-kanban" vid="27"></i> Artifact 03
+        </div>
+        <h1 class="text-4xl font-bold text-charcoal mb-3" vid="28">
+          Estimation &amp; Scheduling
+        </h1>
+        <p class="text-lg text-slate-600 max-w-3xl" vid="29">
+          Breaking down the project, estimating effort, and defining how the
+          work will be delivered.
+        </p>
+      </header>
+
+      <div class="space-y-12" vid="30">
+        <section
+          id="wbs"
+          class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 overflow-hidden"
+          vid="31"
+        >
+          <div class="flex justify-between items-center mb-8" vid="32">
+            <div vid="33">
+              <h2
+                class="text-2xl font-bold text-charcoal flex items-center gap-2"
+                vid="34"
+              >
+                <i class="ph ph-tree-structure text-saudi-green" vid="35"></i>
+                Work Breakdown Structure
+              </h2>
+              <p class="text-sm text-slate-500 mt-1" vid="36">
+                Hierarchical visualization of all major project deliverables.
+              </p>
+            </div>
+            <button
+              class="px-4 py-2 text-sm font-medium text-saudi-green bg-saudi-light hover:bg-saudi-green hover:text-white rounded-lg transition-colors flex items-center gap-2 border border-saudi-green/20"
+              vid="37"
+            >
+              <i class="ph ph-pencil-simple" vid="38"></i> Edit WBS
+            </button>
+          </div>
+
+          <div class="w-full overflow-x-auto custom-scrollbar pb-6" vid="39">
+            <div class="min-w-[1000px] flex flex-col items-center" vid="40">
+              <div
+                class="px-6 py-3 bg-charcoal text-white rounded-lg font-semibold shadow-md border-b-4 border-saudi-green z-10 flex items-center gap-2"
+                vid="41"
+              >
+                <i class="ph ph-rocket-launch text-saudi-green" vid="42"></i>
+                NESMP System
+              </div>
+
+              <div class="wbs-line-vertical h-8" vid="43"></div>
+
+              <div class="wbs-line-horizontal w-[90%] relative" vid="44">
+                <div
+                  class="absolute -left-0.5 top-0 w-1 h-[2px] bg-white"
+                  vid="45"
+                ></div>
+                <div
+                  class="absolute -right-0.5 top-0 w-1 h-[2px] bg-white"
+                  vid="46"
+                ></div>
+              </div>
+
+              <div class="flex justify-between w-[90%] pt-6 gap-4" vid="47">
+                <div
+                  class="flex-1 flex flex-col items-center relative"
+                  vid="48"
+                >
+                  <div
+                    class="absolute top-[-24px] left-1/2 wbs-line-vertical h-6"
+                    vid="49"
+                  ></div>
+                  <div
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-center font-medium text-charcoal shadow-sm mb-4"
+                    vid="50"
+                  >
+                    Foundation &amp; Prep
+                  </div>
+                  <div class="w-full relative pl-6" vid="51">
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="52"
+                    >
+                      Project Management
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="53"
+                    >
+                      Requirements &amp; UX
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 hover:border-saudi-green cursor-pointer"
+                      vid="54"
+                    >
+                      Architecture Design
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="flex-1 flex flex-col items-center relative"
+                  vid="55"
+                >
+                  <div
+                    class="absolute top-[-24px] left-1/2 wbs-line-vertical h-6"
+                    vid="56"
+                  ></div>
+                  <div
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-center font-medium text-charcoal shadow-sm mb-4"
+                    vid="57"
+                  >
+                    User Portals
+                  </div>
+                  <div class="w-full relative pl-6" vid="58">
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="59"
+                    >
+                      Job Seeker Portal
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="60"
+                    >
+                      Employer Portal
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 hover:border-saudi-green cursor-pointer"
+                      vid="61"
+                    >
+                      Admin Dashboard
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="flex-1 flex flex-col items-center relative"
+                  vid="62"
+                >
+                  <div
+                    class="absolute top-[-24px] left-1/2 wbs-line-vertical h-6"
+                    vid="63"
+                  ></div>
+                  <div
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-center font-medium text-charcoal shadow-sm mb-4"
+                    vid="64"
+                  >
+                    Intelligence &amp; Data
+                  </div>
+                  <div class="w-full relative pl-6" vid="65">
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="66"
+                    >
+                      Smart Matching Engine
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="67"
+                    >
+                      Data Analytics
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 hover:border-saudi-green cursor-pointer"
+                      vid="68"
+                    >
+                      Reporting Services
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="flex-1 flex flex-col items-center relative"
+                  vid="69"
+                >
+                  <div
+                    class="absolute top-[-24px] left-1/2 wbs-line-vertical h-6"
+                    vid="70"
+                  ></div>
+                  <div
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-center font-medium text-charcoal shadow-sm mb-4"
+                    vid="71"
+                  >
+                    Value-Added Services
+                  </div>
+                  <div class="w-full relative pl-6" vid="72">
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="73"
+                    >
+                      Career Guidance &amp; Training
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 hover:border-saudi-green cursor-pointer"
+                      vid="74"
+                    >
+                      Professional Networking
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="flex-1 flex flex-col items-center relative"
+                  vid="75"
+                >
+                  <div
+                    class="absolute top-[-24px] left-1/2 wbs-line-vertical h-6"
+                    vid="76"
+                  ></div>
+                  <div
+                    class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-center font-medium text-charcoal shadow-sm mb-4"
+                    vid="77"
+                  >
+                    Integration &amp; Delivery
+                  </div>
+                  <div class="w-full relative pl-6" vid="78">
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="79"
+                    >
+                      Government Integrations
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 mb-2 hover:border-saudi-green cursor-pointer"
+                      vid="80"
+                    >
+                      QA &amp; Testing
+                    </div>
+                    <div
+                      class="wbs-node-connector relative p-3 bg-white border border-slate-200 rounded text-sm text-slate-600 hover:border-saudi-green cursor-pointer"
+                      vid="81"
+                    >
+                      Deployment &amp; Ops
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" vid="82">
+          <section
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 flex flex-col h-full"
+            vid="83"
+          >
+            <h2
+              class="text-2xl font-bold text-charcoal mb-2 flex items-center gap-2"
+              vid="84"
+            >
+              <i class="ph ph-calculator text-saudi-green" vid="85"></i>
+              Estimation Approach
+            </h2>
+            <p class="text-sm text-slate-500 mb-6" vid="86">
+              Methodology used to forecast project effort and cost.
+            </p>
+
+            <div class="space-y-6 flex-grow" vid="87">
+              <div vid="88">
+                <label
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  vid="89"
+                  >Selected Estimation Technique</label
+                >
+                <div class="relative" vid="90">
+                  <select
+                    class="block w-full rounded-md border-slate-300 bg-slate-50 py-2.5 pl-3 pr-10 text-slate-900 border focus:border-saudi-green focus:ring-saudi-green sm:text-sm appearance-none cursor-pointer"
+                    vid="91"
+                  >
+                    <option vid="92">Select technique...</option>
+                    <option vid="93">Function Point Analysis (FPA)</option>
+                    <option vid="94">Use Case Points (UCP)</option>
+                    <option vid="95">
+                      Story Points (Agile Planning Poker)
+                    </option>
+                    <option vid="96">COCOMO II</option>
+                    <option vid="97">Expert Judgment / Delphi</option>
+                  </select>
+                  <div
+                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
+                    vid="98"
+                  >
+                    <i class="ph ph-caret-down text-slate-400" vid="99"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div vid="100">
+                <label
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  vid="101"
+                  >Rationale</label
+                >
+                <div
+                  class="dash-border p-4 h-24 bg-slate-50 flex items-center justify-center"
+                  vid="102"
+                >
+                  <span class="text-slate-400 text-sm italic" vid="103"
+                    >Define why this technique is appropriate for NESMP...</span
+                  >
+                </div>
+              </div>
+
+              <div class="mt-auto pt-6 border-t border-slate-100" vid="104">
+                <h3
+                  class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4"
+                  vid="105"
+                >
+                  Estimated Effort Overview
+                </h3>
+                <div class="grid grid-cols-2 gap-4" vid="106">
+                  <div
+                    class="bg-slate-50 rounded-lg p-4 border border-slate-200 text-center"
+                    vid="107"
+                  >
+                    <div
+                      class="text-3xl font-light text-slate-300 mb-1"
+                      vid="108"
+                    >
+                      [XX]
+                    </div>
+                    <div
+                      class="text-xs font-medium text-slate-500 uppercase"
+                      vid="109"
+                    >
+                      Total Points / Units
+                    </div>
+                  </div>
+                  <div
+                    class="bg-slate-50 rounded-lg p-4 border border-slate-200 text-center"
+                    vid="110"
+                  >
+                    <div
+                      class="text-3xl font-light text-slate-300 mb-1"
+                      vid="111"
+                    >
+                      [XX]
+                    </div>
+                    <div
+                      class="text-xs font-medium text-slate-500 uppercase"
+                      vid="112"
+                    >
+                      Person-Months
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 flex flex-col h-full"
+            vid="113"
+          >
+            <div class="flex justify-between items-center mb-6" vid="114">
+              <div vid="115">
+                <h2
+                  class="text-2xl font-bold text-charcoal flex items-center gap-2"
+                  vid="116"
+                >
+                  <i class="ph ph-info text-saudi-green" vid="117"></i> Planning
+                  Assumptions
+                </h2>
+                <p class="text-sm text-slate-500 mt-1" vid="118">
+                  Factors considered true, real, or certain for planning
+                  purposes.
+                </p>
+              </div>
+              <button
+                class="p-2 text-slate-400 hover:text-saudi-green transition-colors rounded-lg hover:bg-slate-50"
+                vid="119"
+              >
+                <i class="ph ph-plus text-xl" vid="120"></i>
+              </button>
+            </div>
+
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow"
+              vid="121"
+            >
+              <div
+                class="bg-slate-50 border border-slate-200 rounded-lg p-4 border-t-4 border-t-blue-500"
+                vid="122"
+              >
+                <div class="flex items-center gap-2 mb-2" vid="123">
+                  <i class="ph ph-lightbulb text-blue-500" vid="124"></i>
+                  <h3 class="font-semibold text-charcoal text-sm" vid="125">
+                    Assumptions
+                  </h3>
+                </div>
+                <ul
+                  class="text-sm text-slate-600 space-y-2 list-disc pl-4"
+                  vid="126"
+                >
+                  <li vid="127">Cloud infrastructure provisioned by Q3.</li>
+                  <li vid="128">
+                    Stakeholder availability for sprint reviews.
+                  </li>
+                  <li class="text-slate-400 italic" vid="129">
+                    Add assumption...
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-slate-50 border border-slate-200 rounded-lg p-4 border-t-4 border-t-red-500"
+                vid="130"
+              >
+                <div class="flex items-center gap-2 mb-2" vid="131">
+                  <i class="ph ph-warning-circle text-red-500" vid="132"></i>
+                  <h3 class="font-semibold text-charcoal text-sm" vid="133">
+                    Constraints
+                  </h3>
+                </div>
+                <ul
+                  class="text-sm text-slate-600 space-y-2 list-disc pl-4"
+                  vid="134"
+                >
+                  <li vid="135">Fixed national launch date (TBD).</li>
+                  <li vid="136">Compliance with national data privacy laws.</li>
+                  <li class="text-slate-400 italic" vid="137">
+                    Add constraint...
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-slate-50 border border-slate-200 rounded-lg p-4 border-t-4 border-t-amber-500"
+                vid="138"
+              >
+                <div class="flex items-center gap-2 mb-2" vid="139">
+                  <i class="ph ph-plugs text-amber-500" vid="140"></i>
+                  <h3 class="font-semibold text-charcoal text-sm" vid="141">
+                    Dependencies
+                  </h3>
+                </div>
+                <ul
+                  class="text-sm text-slate-600 space-y-2 list-disc pl-4"
+                  vid="142"
+                >
+                  <li vid="143">NIC integration API readiness.</li>
+                  <li vid="144">Ministry of Labor data schemas.</li>
+                  <li class="text-slate-400 italic" vid="145">
+                    Add dependency...
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-slate-50 border border-slate-200 rounded-lg p-4 border-t-4 border-t-purple-500"
+                vid="146"
+              >
+                <div class="flex items-center gap-2 mb-2" vid="147">
+                  <i class="ph ph-note-pencil text-purple-500" vid="148"></i>
+                  <h3 class="font-semibold text-charcoal text-sm" vid="149">
+                    Planning Notes
+                  </h3>
+                </div>
+                <div
+                  class="dash-border h-full min-h-[60px] bg-white flex items-center justify-center p-2 text-center mt-2"
+                  vid="150"
+                >
+                  <span class="text-xs text-slate-400 italic" vid="151"
+                    >Drop general notes or methodology specifics here...</span
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+          vid="152"
+        >
+          <div class="p-8 pb-0 border-b border-slate-200" vid="153">
+            <h2
+              class="text-2xl font-bold text-charcoal mb-2 flex items-center gap-2"
+              vid="154"
+            >
+              <i class="ph ph-calendar-check text-saudi-green" vid="155"></i>
+              Schedule &amp; Delivery Model
+            </h2>
+            <p class="text-sm text-slate-500 mb-6" vid="156">
+              Adaptable workspace based on the selected project management
+              methodology.
+            </p>
+
+            <div class="flex space-x-8 border-b border-slate-200" vid="157">
+              <button
+                id="tab-agile"
+                class="pb-4 text-sm font-medium text-saudi-green border-b-2 border-saudi-green transition-all"
+                onclick="switchTab('agile')"
+                vid="158"
+              >
+                Agile Framework (Draft)
+              </button>
+              <button
+                id="tab-plan"
+                class="pb-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-all border-b-2 border-transparent"
+                onclick="switchTab('plan')"
+                vid="159"
+              >
+                Plan-Driven Framework (Draft)
+              </button>
+            </div>
+          </div>
+
+          <div class="p-8 bg-slate-50/50" vid="160">
+            <div id="content-agile" class="block space-y-6" vid="161">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6" vid="162">
+                <div
+                  class="bg-white border border-slate-200 rounded-lg shadow-sm"
+                  vid="163"
+                >
+                  <div
+                    class="px-4 py-3 border-b border-slate-200 bg-slate-50 rounded-t-lg flex justify-between items-center"
+                    vid="164"
+                  >
+                    <h3 class="font-semibold text-sm text-charcoal" vid="165">
+                      Product Backlog / Epics
+                    </h3>
+                    <span
+                      class="bg-slate-200 text-slate-600 text-xs px-2 py-0.5 rounded-full"
+                      vid="166"
+                      >TBD</span
+                    >
+                  </div>
+                  <div class="p-4 space-y-3" vid="167">
+                    <div
+                      class="dash-border h-12 flex items-center px-3"
+                      vid="168"
+                    >
+                      <span class="text-sm text-slate-400 italic" vid="169"
+                        >User Profile Management</span
+                      >
+                    </div>
+                    <div
+                      class="dash-border h-12 flex items-center px-3"
+                      vid="170"
+                    >
+                      <span class="text-sm text-slate-400 italic" vid="171"
+                        >Core Matching Algorithm</span
+                      >
+                    </div>
+                    <div
+                      class="dash-border h-12 flex items-center px-3"
+                      vid="172"
+                    >
+                      <span class="text-sm text-slate-400 italic" vid="173"
+                        >Gov Data Integration</span
+                      >
+                    </div>
+                    <button
+                      class="w-full py-2 text-sm text-saudi-green border border-saudi-green/20 rounded hover:bg-saudi-light transition-colors"
+                      vid="174"
+                    >
+                      + Add Epic
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  class="bg-white border border-slate-200 rounded-lg shadow-sm"
+                  vid="175"
+                >
+                  <div
+                    class="px-4 py-3 border-b border-slate-200 bg-saudi-light rounded-t-lg flex justify-between items-center"
+                    vid="176"
+                  >
+                    <h3
+                      class="font-semibold text-sm text-saudi-green"
+                      vid="177"
+                    >
+                      Sprint 0 (Setup &amp; Spikes)
+                    </h3>
+                    <span class="text-xs text-saudi-green" vid="178"
+                      ><i class="ph ph-clock" vid="179"></i> 2 Weeks</span
+                    >
+                  </div>
+                  <div class="p-4 space-y-3" vid="180">
+                    <div
+                      class="flex items-start gap-3 p-3 bg-slate-50 rounded border border-slate-100"
+                      vid="181"
+                    >
+                      <input
+                        type="checkbox"
+                        class="mt-1 rounded text-saudi-green focus:ring-saudi-green"
+                        disabled=""
+                        vid="182"
+                      />
+                      <div vid="183">
+                        <p class="text-sm font-medium text-charcoal" vid="184">
+                          Architecture Setup
+                        </p>
+                        <p class="text-xs text-slate-500" vid="185">
+                          Cloud env provisioning
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-start gap-3 p-3 bg-slate-50 rounded border border-slate-100"
+                      vid="186"
+                    >
+                      <input
+                        type="checkbox"
+                        class="mt-1 rounded text-saudi-green focus:ring-saudi-green"
+                        disabled=""
+                        vid="187"
+                      />
+                      <div vid="188">
+                        <p class="text-sm font-medium text-charcoal" vid="189">
+                          Design System Spike
+                        </p>
+                        <p class="text-xs text-slate-500" vid="190">
+                          Initial component library
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="dash-border h-12 flex justify-center items-center"
+                      vid="191"
+                    >
+                      <span class="text-xs text-slate-400 italic" vid="192"
+                        >Space for tasks...</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="bg-white border border-slate-200 rounded-lg shadow-sm"
+                  vid="193"
+                >
+                  <div
+                    class="px-4 py-3 border-b border-slate-200 bg-slate-50 rounded-t-lg flex justify-between items-center"
+                    vid="194"
+                  >
+                    <h3 class="font-semibold text-sm text-charcoal" vid="195">
+                      Sprint 1 Backlog
+                    </h3>
+                    <span
+                      class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium"
+                      vid="196"
+                      >Drafting</span
+                    >
+                  </div>
+                  <div class="p-4" vid="197">
+                    <div
+                      class="flex justify-between items-center mb-4 pb-2 border-b border-slate-100"
+                      vid="198"
+                    >
+                      <span class="text-sm text-slate-600" vid="199"
+                        >Total Velocity Cap:</span
+                      >
+                      <span class="text-sm font-bold text-charcoal" vid="200"
+                        >[XX] pts</span
+                      >
+                    </div>
+                    <div class="space-y-2" vid="201">
+                      <div
+                        class="p-2 border border-slate-200 rounded text-sm text-slate-500 bg-slate-50 flex justify-between"
+                        vid="202"
+                      >
+                        <span vid="203">User Auth Module</span>
+                        <span
+                          class="bg-slate-200 rounded px-1.5 text-xs"
+                          vid="204"
+                          >- pts</span
+                        >
+                      </div>
+                      <div
+                        class="p-2 border border-slate-200 rounded text-sm text-slate-500 bg-slate-50 flex justify-between"
+                        vid="205"
+                      >
+                        <span vid="206">Basic Landing Page</span>
+                        <span
+                          class="bg-slate-200 rounded px-1.5 text-xs"
+                          vid="207"
+                          >- pts</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="mt-4 dash-border h-16 flex justify-center items-center text-center p-2"
+                      vid="208"
+                    >
+                      <span class="text-xs text-slate-400 italic" vid="209"
+                        >Drag stories from backlog once estimations are
+                        complete.</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="content-plan" class="hidden space-y-6" vid="210">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" vid="211">
+                <div class="lg:col-span-1 space-y-6" vid="212">
+                  <div
+                    class="bg-white border border-slate-200 rounded-lg p-5 shadow-sm"
+                    vid="213"
+                  >
+                    <h3
+                      class="font-semibold text-sm text-charcoal mb-4 flex items-center gap-2"
+                      vid="214"
+                    >
+                      <i class="ph ph-list-numbers" vid="215"></i> Task
+                      Breakdown
+                    </h3>
+                    <table class="w-full text-left text-sm" vid="216">
+                      <thead vid="217">
+                        <tr
+                          class="text-slate-500 border-b border-slate-200"
+                          vid="218"
+                        >
+                          <th class="pb-2 font-medium" vid="219">Task</th>
+                          <th class="pb-2 font-medium" vid="220">Duration</th>
+                          <th class="pb-2 font-medium" vid="221">Pre-req</th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        class="divide-y divide-slate-100 text-slate-600"
+                        vid="222"
+                      >
+                        <tr vid="223">
+                          <td class="py-2" vid="224">Req Analysis</td>
+                          <td class="py-2" vid="225">-</td>
+                          <td class="py-2" vid="226">None</td>
+                        </tr>
+                        <tr vid="227">
+                          <td class="py-2" vid="228">System Design</td>
+                          <td class="py-2" vid="229">-</td>
+                          <td class="py-2" vid="230">Reqs</td>
+                        </tr>
+                        <tr vid="231">
+                          <td class="py-2" vid="232">DB Schema</td>
+                          <td class="py-2" vid="233">-</td>
+                          <td class="py-2" vid="234">Design</td>
+                        </tr>
+                        <tr vid="235">
+                          <td
+                            colspan="3"
+                            class="py-2 text-center text-slate-400 italic text-xs"
+                            vid="236"
+                          >
+                            Define tasks based on WBS
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div
+                    class="bg-white border border-slate-200 rounded-lg p-5 shadow-sm"
+                    vid="237"
+                  >
+                    <h3
+                      class="font-semibold text-sm text-charcoal mb-4 flex items-center gap-2"
+                      vid="238"
+                    >
+                      <i class="ph ph-users" vid="239"></i> Resource Allocation
+                    </h3>
+                    <div
+                      class="dash-border h-24 flex items-center justify-center p-4 text-center"
+                      vid="240"
+                    >
+                      <span class="text-sm text-slate-400 italic" vid="241"
+                        >Space for assigning team roles to specific phases or
+                        critical path tasks.</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="lg:col-span-2 bg-white border border-slate-200 rounded-lg p-5 shadow-sm flex flex-col"
+                  vid="242"
+                >
+                  <div class="flex justify-between items-center mb-6" vid="243">
+                    <h3
+                      class="font-semibold text-sm text-charcoal flex items-center gap-2"
+                      vid="244"
+                    >
+                      <i class="ph ph-chart-bar-horizontal" vid="245"></i> Gantt
+                      Chart Schedule
+                    </h3>
+                    <span
+                      class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded border border-slate-200"
+                      vid="246"
+                      >Critical Path Analysis Pending</span
+                    >
+                  </div>
+
+                  <div class="flex-grow space-y-3 relative" vid="247">
+                    <div
+                      class="flex text-xs text-slate-400 mb-2 pb-2 border-b border-slate-100 ml-[120px]"
+                      vid="248"
+                    >
+                      <div class="flex-1" vid="249">Month 1</div>
+                      <div class="flex-1" vid="250">Month 2</div>
+                      <div class="flex-1" vid="251">Month 3</div>
+                      <div class="flex-1" vid="252">Month 4</div>
+                    </div>
+
+                    <div class="flex items-center" vid="253">
+                      <div
+                        class="w-[120px] text-sm text-slate-600 truncate pr-2"
+                        vid="254"
+                      >
+                        Phase 1: Planning
+                      </div>
+                      <div
+                        class="flex-1 bg-slate-50 h-6 rounded relative"
+                        vid="255"
+                      >
+                        <div
+                          class="absolute left-0 w-1/4 h-full bg-saudi-green/80 rounded border border-saudi-green"
+                          vid="256"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="flex items-center" vid="257">
+                      <div
+                        class="w-[120px] text-sm text-slate-600 truncate pr-2 pl-4 text-xs"
+                        vid="258"
+                      >
+                        Requirements
+                      </div>
+                      <div
+                        class="flex-1 bg-slate-50 h-4 rounded relative"
+                        vid="259"
+                      >
+                        <div
+                          class="absolute left-[2%] w-[15%] h-full bg-saudi-green/50 rounded"
+                          vid="260"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="flex items-center" vid="261">
+                      <div
+                        class="w-[120px] text-sm text-slate-600 truncate pr-2 pl-4 text-xs"
+                        vid="262"
+                      >
+                        Design
+                      </div>
+                      <div
+                        class="flex-1 bg-slate-50 h-4 rounded relative"
+                        vid="263"
+                      >
+                        <div
+                          class="absolute left-[15%] w-[10%] h-full bg-saudi-green/50 rounded"
+                          vid="264"
+                        ></div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center mt-4" vid="265">
+                      <div
+                        class="w-[120px] text-sm text-slate-600 truncate pr-2"
+                        vid="266"
+                      >
+                        Phase 2: Execution
+                      </div>
+                      <div
+                        class="flex-1 bg-slate-50 h-6 rounded relative"
+                        vid="267"
+                      >
+                        <div
+                          class="absolute left-[25%] w-1/2 h-full bg-blue-500/80 rounded border border-blue-600"
+                          vid="268"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="flex items-center" vid="269">
+                      <div
+                        class="w-[120px] text-sm text-slate-400 italic text-xs pl-4 truncate"
+                        vid="270"
+                      >
+                        More tasks...
+                      </div>
+                      <div
+                        class="flex-1 dash-border h-4 rounded relative opacity-50"
+                        vid="271"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="bg-white rounded-xl shadow-sm border border-slate-200 p-8"
+          vid="272"
+        >
+          <h2
+            class="text-2xl font-bold text-charcoal mb-2 flex items-center gap-2"
+            vid="273"
+          >
+            <i class="ph ph-flag text-saudi-green" vid="274"></i> Project
+            Timeline Overview
+          </h2>
+          <p class="text-sm text-slate-500 mb-12" vid="275">
+            High-level phases and major delivery milestones.
+          </p>
+
+          <div class="relative w-full max-w-5xl mx-auto px-4" vid="276">
+            <div
+              class="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -translate-y-1/2 z-0"
+              vid="277"
+            ></div>
+
+            <div
+              class="absolute top-1/2 left-0 w-1/4 h-1 bg-saudi-green -translate-y-1/2 z-0"
+              vid="278"
+            ></div>
+
+            <div class="relative z-10 flex justify-between" vid="279">
+              <div
+                class="flex flex-col items-center group w-48 -ml-24 cursor-pointer"
+                vid="280"
+              >
+                <div class="mb-3 text-center" vid="281">
+                  <h4
+                    class="text-sm font-bold text-charcoal group-hover:text-saudi-green transition-colors"
+                    vid="282"
+                  >
+                    Inception Phase
+                  </h4>
+                  <p class="text-xs text-slate-500" vid="283">M1 - Planning</p>
+                </div>
+                <div
+                  class="w-6 h-6 rounded-full bg-saudi-green border-4 border-white shadow flex items-center justify-center"
+                  vid="284"
+                >
+                  <div
+                    class="w-1.5 h-1.5 bg-white rounded-full"
+                    vid="285"
+                  ></div>
+                </div>
+                <div
+                  class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity absolute top-16 bg-slate-800 text-white text-xs p-2 rounded shadow-lg w-40 text-center z-20 pointer-events-none"
+                  vid="286"
+                >
+                  Scope defined, architecture drafted, initial estimates.
+                </div>
+              </div>
+
+              <div
+                class="flex flex-col items-center group w-48 cursor-pointer"
+                vid="287"
+              >
+                <div class="mb-3 text-center" vid="288">
+                  <h4
+                    class="text-sm font-bold text-charcoal group-hover:text-saudi-green transition-colors"
+                    vid="289"
+                  >
+                    Elaboration Phase
+                  </h4>
+                  <p class="text-xs text-slate-500" vid="290">M2 - Core Base</p>
+                </div>
+                <div
+                  class="w-6 h-6 rounded-full bg-white border-4 border-saudi-green shadow flex items-center justify-center"
+                  vid="291"
+                ></div>
+                <div
+                  class="mt-3 text-xs text-slate-400 italic text-center"
+                  vid="292"
+                >
+                  [Date TBD]
+                </div>
+              </div>
+
+              <div
+                class="flex flex-col items-center group w-48 cursor-pointer"
+                vid="293"
+              >
+                <div class="mb-3 text-center" vid="294">
+                  <h4
+                    class="text-sm font-bold text-charcoal group-hover:text-saudi-green transition-colors"
+                    vid="295"
+                  >
+                    Construction Phase
+                  </h4>
+                  <p class="text-xs text-slate-500" vid="296">
+                    M3 - Beta Release
+                  </p>
+                </div>
+                <div
+                  class="w-6 h-6 rounded-full bg-slate-200 border-4 border-white shadow flex items-center justify-center"
+                  vid="297"
+                ></div>
+                <div
+                  class="mt-3 text-xs text-slate-400 italic text-center"
+                  vid="298"
+                >
+                  [Date TBD]
+                </div>
+              </div>
+
+              <div
+                class="flex flex-col items-center group w-48 -mr-24 cursor-pointer"
+                vid="299"
+              >
+                <div class="mb-3 text-center" vid="300">
+                  <h4
+                    class="text-sm font-bold text-charcoal group-hover:text-saudi-green transition-colors"
+                    vid="301"
+                  >
+                    Transition Phase
+                  </h4>
+                  <p class="text-xs text-slate-500" vid="302">M4 - Go Live</p>
+                </div>
+                <div
+                  class="w-6 h-6 rounded-full bg-slate-200 border-4 border-white shadow flex items-center justify-center flex-shrink-0"
+                  vid="303"
+                >
+                  <i
+                    class="ph-fill ph-flag text-slate-400 text-[10px]"
+                    vid="304"
+                  ></i>
+                </div>
+                <div
+                  class="mt-3 text-xs text-slate-400 italic text-center"
+                  vid="305"
+                >
+                  [Date TBD]
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-8 mt-auto" vid="306">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4"
+        vid="307"
+      >
+        <div class="text-sm text-slate-500" vid="308">
+          <p class="font-medium text-charcoal" vid="309">
+            SE423 Software Project Management
+          </p>
+          <p vid="310">National Employment &amp; Skill Matching Platform</p>
+        </div>
+        <div class="flex items-center gap-4" vid="311">
+          <a
+            href="#"
+            class="text-slate-400 hover:text-charcoal transition-colors flex items-center gap-1 text-sm"
+            vid="312"
+          >
+            <i class="ph ph-github-logo text-lg" vid="313"></i>
+            <span vid="314">Repository [Placeholder]</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script vid="315">
+      function switchTab(tabId) {
+        const btnAgile = document.getElementById("tab-agile");
+        const btnPlan = document.getElementById("tab-plan");
+        const contentAgile = document.getElementById("content-agile");
+        const contentPlan = document.getElementById("content-plan");
+
+        btnAgile.className =
+          "pb-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-all border-b-2 border-transparent";
+        btnPlan.className =
+          "pb-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-all border-b-2 border-transparent";
+
+        contentAgile.classList.add("hidden");
+        contentAgile.classList.remove("block");
+        contentPlan.classList.add("hidden");
+        contentPlan.classList.remove("block");
+
+        if (tabId === "agile") {
+          btnAgile.className =
+            "pb-4 text-sm font-medium text-saudi-green border-b-2 border-saudi-green transition-all";
+          contentAgile.classList.remove("hidden");
+          contentAgile.classList.add("block");
+        } else {
+          btnPlan.className =
+            "pb-4 text-sm font-medium text-saudi-green border-b-2 border-saudi-green transition-all";
+          contentPlan.classList.remove("hidden");
+          contentPlan.classList.add("block");
+        }
+      }
+    </script>
+  </body>
+</html>

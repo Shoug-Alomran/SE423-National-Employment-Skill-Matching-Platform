@@ -1,0 +1,1745 @@
+<html lang="en" vid="0">
+  <head vid="1">
+    <meta charset="UTF-8" vid="2" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+      vid="3"
+    />
+    <title vid="4">
+      Methodology &amp; Risk - National Employment &amp; Skill Matching Platform
+    </title>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="5"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="6" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin=""
+      vid="7"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      vid="8"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web" vid="9"></script>
+    <script vid="10">
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              saudi: {
+                50: "#ecfdf5",
+                100: "#d1fae5",
+                200: "#a7f3d0",
+                300: "#6ee7b7",
+                400: "#34d399",
+                500: "#10b981",
+                600: "#059669",
+                700: "#047857",
+                800: "#065f46",
+                900: "#064e3b",
+                950: "#022c22",
+              },
+              charcoal: {
+                800: "#1e293b",
+                900: "#0f172a",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style vid="11">
+      body {
+        background-color: #f8f9fa;
+        color: #334155;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      .matrix-cell-low {
+        background-color: #dcfce7;
+        border: 1px solid #bbf7d0;
+      }
+      .matrix-cell-med {
+        background-color: #fef3c7;
+        border: 1px solid #fde68a;
+      }
+      .matrix-cell-high {
+        background-color: #ffedd5;
+        border: 1px solid #fed7aa;
+      }
+      .matrix-cell-extreme {
+        background-color: #ffe4e6;
+        border: 1px solid #fecdd3;
+      }
+    </style>
+  </head>
+  <body
+    class="font-sans antialiased selection:bg-saudi-200 selection:text-saudi-900 flex flex-col min-h-screen"
+    vid="12"
+  >
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50" vid="13">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" vid="14">
+        <div class="flex justify-between h-16" vid="15">
+          <div class="flex items-center" vid="16">
+            <div class="flex-shrink-0 flex items-center gap-3" vid="17">
+              <div
+                class="w-8 h-8 bg-saudi-800 rounded-md flex items-center justify-center text-white"
+                vid="18"
+              >
+                <i class="ph ph-briefcase text-xl" vid="19"></i>
+              </div>
+              <span
+                class="font-bold text-charcoal-900 tracking-tight text-lg"
+                vid="20"
+                >NESMP</span
+              >
+            </div>
+            <div class="hidden sm:ml-10 sm:flex sm:space-x-8" vid="21">
+              <a
+                href="#"
+                class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                vid="22"
+              >
+                Home
+              </a>
+              <a
+                href="#"
+                class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                vid="23"
+              >
+                Project
+              </a>
+              <a
+                href="#"
+                class="border-saudi-700 text-saudi-800 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                vid="24"
+              >
+                Methodology &amp; Risk
+              </a>
+              <a
+                href="#"
+                class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                vid="25"
+              >
+                Planning
+              </a>
+              <a
+                href="#"
+                class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                vid="26"
+              >
+                Stakeholders &amp; Metrics
+              </a>
+              <a
+                href="#"
+                class="border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                vid="27"
+              >
+                Team
+              </a>
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center" vid="28">
+            <button
+              type="button"
+              class="bg-white p-1 rounded-full text-slate-400 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-saudi-500"
+              vid="29"
+            >
+              <span class="sr-only" vid="30">View notifications</span>
+              <i class="ph ph-bell text-xl" vid="31"></i>
+            </button>
+            <div class="ml-3 relative" vid="32">
+              <div vid="33">
+                <button
+                  type="button"
+                  class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-saudi-500"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  vid="34"
+                >
+                  <span class="sr-only" vid="35">Open user menu</span>
+                  <div
+                    class="h-8 w-8 rounded-full bg-saudi-100 flex items-center justify-center text-saudi-800 font-bold border border-saudi-200"
+                    vid="36"
+                  >
+                    PM
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main
+      class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12"
+      vid="37"
+    >
+      <header class="border-b border-slate-200 pb-8" vid="38">
+        <div
+          class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-saudi-50 border border-saudi-100 text-saudi-700 text-xs font-semibold tracking-wide uppercase mb-4"
+          vid="39"
+        >
+          <i class="ph ph-files" vid="40"></i>
+          Artifact 02
+        </div>
+        <h1
+          class="text-4xl font-bold text-charcoal-900 tracking-tight"
+          vid="41"
+        >
+          Methodology &amp; Risk
+        </h1>
+        <p
+          class="mt-3 text-xl text-slate-600 max-w-3xl leading-relaxed"
+          vid="42"
+        >
+          Evaluating development approaches and managing uncertainty throughout
+          the project lifecycle for the National Employment &amp; Skill Matching
+          Platform.
+        </p>
+      </header>
+
+      <section aria-labelledby="methodology-analysis-heading" vid="43">
+        <div class="flex items-center justify-between mb-6" vid="44">
+          <h2
+            id="methodology-analysis-heading"
+            class="text-2xl font-bold text-charcoal-900 flex items-center gap-2"
+            vid="45"
+          >
+            <i class="ph ph-git-merge text-saudi-700" vid="46"></i>
+            Methodology Analysis
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8" vid="47">
+          <div class="space-y-6" vid="48">
+            <div
+              class="bg-slate-200/50 rounded-lg py-2 px-4 border border-slate-200"
+              vid="49"
+            >
+              <h3
+                class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2"
+                vid="50"
+              >
+                <i class="ph ph-kanban" vid="51"></i> Plan-Driven Approaches
+              </h3>
+            </div>
+
+            <div
+              class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-shadow hover:shadow-md"
+              vid="52"
+            >
+              <div
+                class="border-b border-slate-100 bg-slate-50 px-6 py-4 flex justify-between items-center"
+                vid="53"
+              >
+                <h4 class="text-lg font-semibold text-charcoal-900" vid="54">
+                  [Methodology Name 1]
+                </h4>
+              </div>
+              <div class="p-6 space-y-5" vid="55">
+                <div vid="56">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="57"
+                  >
+                    <i class="ph ph-plus-circle text-emerald-600" vid="58"></i>
+                    Strengths
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="59">
+                    [Enter specific strengths of this methodology, e.g.,
+                    predictable timelines, comprehensive documentation, clear
+                    milestones.]
+                  </p>
+                </div>
+                <div vid="60">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="61"
+                  >
+                    <i class="ph ph-minus-circle text-rose-600" vid="62"></i>
+                    Weaknesses
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="63">
+                    [Enter specific weaknesses, e.g., inflexibility to changing
+                    requirements, late testing phases, heavy overhead.]
+                  </p>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100"
+                  vid="64"
+                >
+                  <div vid="65">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="66"
+                    >
+                      Project Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="67">
+                      [Evaluate fit for project scope and stability]
+                    </p>
+                  </div>
+                  <div vid="68">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="69"
+                    >
+                      Team Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="70">
+                      [Evaluate fit for team size and experience]
+                    </p>
+                  </div>
+                  <div vid="71">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="72"
+                    >
+                      Stakeholder Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="73">
+                      [Evaluate fit for client involvement style]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-shadow hover:shadow-md"
+              vid="74"
+            >
+              <div
+                class="border-b border-slate-100 bg-slate-50 px-6 py-4 flex justify-between items-center"
+                vid="75"
+              >
+                <h4 class="text-lg font-semibold text-charcoal-900" vid="76">
+                  [Methodology Name 2]
+                </h4>
+              </div>
+              <div class="p-6 space-y-5" vid="77">
+                <div vid="78">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="79"
+                  >
+                    <i class="ph ph-plus-circle text-emerald-600" vid="80"></i>
+                    Strengths
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="81">
+                    [Enter specific strengths of this methodology, e.g., strong
+                    risk management, iterative refinement within phases.]
+                  </p>
+                </div>
+                <div vid="82">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="83"
+                  >
+                    <i class="ph ph-minus-circle text-rose-600" vid="84"></i>
+                    Weaknesses
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="85">
+                    [Enter specific weaknesses, e.g., complex to manage,
+                    requires highly skilled risk assessors, costly.]
+                  </p>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100"
+                  vid="86"
+                >
+                  <div vid="87">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="88"
+                    >
+                      Project Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="89">
+                      [Evaluate fit for project scope and stability]
+                    </p>
+                  </div>
+                  <div vid="90">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="91"
+                    >
+                      Team Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="92">
+                      [Evaluate fit for team size and experience]
+                    </p>
+                  </div>
+                  <div vid="93">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="94"
+                    >
+                      Stakeholder Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="95">
+                      [Evaluate fit for client involvement style]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6" vid="96">
+            <div
+              class="bg-saudi-50/50 rounded-lg py-2 px-4 border border-saudi-100"
+              vid="97"
+            >
+              <h3
+                class="text-sm font-bold text-saudi-800 uppercase tracking-wider flex items-center gap-2"
+                vid="98"
+              >
+                <i class="ph ph-arrows-clockwise" vid="99"></i> Agile Approaches
+              </h3>
+            </div>
+
+            <div
+              class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-shadow hover:shadow-md"
+              vid="100"
+            >
+              <div
+                class="border-b border-slate-100 bg-slate-50 px-6 py-4 flex justify-between items-center"
+                vid="101"
+              >
+                <h4 class="text-lg font-semibold text-charcoal-900" vid="102">
+                  [Methodology Name 3]
+                </h4>
+              </div>
+              <div class="p-6 space-y-5" vid="103">
+                <div vid="104">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="105"
+                  >
+                    <i class="ph ph-plus-circle text-emerald-600" vid="106"></i>
+                    Strengths
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="107">
+                    [Enter specific strengths of this methodology, e.g., high
+                    adaptability, frequent value delivery, strong team
+                    collaboration.]
+                  </p>
+                </div>
+                <div vid="108">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="109"
+                  >
+                    <i class="ph ph-minus-circle text-rose-600" vid="110"></i>
+                    Weaknesses
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="111">
+                    [Enter specific weaknesses, e.g., scope creep risk, requires
+                    dedicated client involvement, less predictable final cost.]
+                  </p>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100"
+                  vid="112"
+                >
+                  <div vid="113">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="114"
+                    >
+                      Project Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="115">
+                      [Evaluate fit for evolving requirements]
+                    </p>
+                  </div>
+                  <div vid="116">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="117"
+                    >
+                      Team Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="118">
+                      [Evaluate fit for cross-functional teams]
+                    </p>
+                  </div>
+                  <div vid="119">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="120"
+                    >
+                      Stakeholder Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="121">
+                      [Evaluate fit for continuous engagement]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden transition-shadow hover:shadow-md"
+              vid="122"
+            >
+              <div
+                class="border-b border-slate-100 bg-slate-50 px-6 py-4 flex justify-between items-center"
+                vid="123"
+              >
+                <h4 class="text-lg font-semibold text-charcoal-900" vid="124">
+                  [Methodology Name 4]
+                </h4>
+              </div>
+              <div class="p-6 space-y-5" vid="125">
+                <div vid="126">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="127"
+                  >
+                    <i class="ph ph-plus-circle text-emerald-600" vid="128"></i>
+                    Strengths
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="129">
+                    [Enter specific strengths of this methodology, e.g., visual
+                    workflow, continuous delivery, flexibility in
+                    reprioritization.]
+                  </p>
+                </div>
+                <div vid="130">
+                  <h5
+                    class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5"
+                    vid="131"
+                  >
+                    <i class="ph ph-minus-circle text-rose-600" vid="132"></i>
+                    Weaknesses
+                  </h5>
+                  <p class="text-sm text-slate-700 leading-relaxed" vid="133">
+                    [Enter specific weaknesses, e.g., lacks fixed iterations,
+                    potential for bottlenecks if not monitored closely.]
+                  </p>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100"
+                  vid="134"
+                >
+                  <div vid="135">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="136"
+                    >
+                      Project Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="137">
+                      [Evaluate fit for support or continuous dev]
+                    </p>
+                  </div>
+                  <div vid="138">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="139"
+                    >
+                      Team Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="140">
+                      [Evaluate fit for capacity-driven work]
+                    </p>
+                  </div>
+                  <div vid="141">
+                    <h5
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+                      vid="142"
+                    >
+                      Stakeholder Fit
+                    </h5>
+                    <p class="text-sm text-slate-700" vid="143">
+                      [Evaluate fit for dynamic priorities]
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="selected-methodology-heading" vid="144">
+        <div
+          class="bg-saudi-800 rounded-2xl shadow-xl overflow-hidden relative border border-saudi-900"
+          vid="145"
+        >
+          <div
+            class="absolute top-0 right-0 -mr-16 -mt-16 opacity-10 pointer-events-none"
+            vid="146"
+          >
+            <svg
+              width="404"
+              height="404"
+              fill="none"
+              viewBox="0 0 404 404"
+              vid="147"
+            >
+              <defs vid="148">
+                <pattern
+                  id="85737c0e-0916-41d7-917f-596dc7edfa27"
+                  x="0"
+                  y="0"
+                  width="20"
+                  height="20"
+                  patternUnits="userSpaceOnUse"
+                  vid="149"
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width="4"
+                    height="4"
+                    fill="currentColor"
+                    vid="150"
+                  ></rect>
+                </pattern>
+              </defs>
+              <rect
+                width="404"
+                height="404"
+                fill="url(#85737c0e-0916-41d7-917f-596dc7edfa27)"
+                vid="151"
+              ></rect>
+            </svg>
+          </div>
+
+          <div class="p-8 lg:p-10 relative z-10" vid="152">
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4"
+              vid="153"
+            >
+              <div vid="154">
+                <span
+                  class="text-saudi-300 font-semibold tracking-wider uppercase text-sm mb-2 block"
+                  vid="155"
+                  >Final Recommendation</span
+                >
+                <h2
+                  id="selected-methodology-heading"
+                  class="text-3xl lg:text-4xl font-bold text-white"
+                  vid="156"
+                >
+                  Selected:
+                  <span class="text-saudi-200" vid="157"
+                    >[Selected Methodology Name]</span
+                  >
+                </h2>
+              </div>
+              <div
+                class="bg-saudi-900/50 rounded-lg px-4 py-2 border border-saudi-700 backdrop-blur-sm inline-flex items-center gap-2"
+                vid="158"
+              >
+                <i
+                  class="ph ph-check-circle text-saudi-400 text-xl"
+                  vid="159"
+                ></i>
+                <span class="text-white text-sm font-medium" vid="160"
+                  >Approved Approach</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10"
+              vid="161"
+            >
+              <div
+                class="bg-saudi-900/30 rounded-xl p-6 border border-saudi-700/50 backdrop-blur-sm"
+                vid="162"
+              >
+                <h3
+                  class="text-lg font-semibold text-white mb-3 flex items-center gap-2"
+                  vid="163"
+                >
+                  <i class="ph ph-target text-saudi-400" vid="164"></i> Why it
+                  was selected
+                </h3>
+                <p class="text-saudi-100 text-sm leading-relaxed" vid="165">
+                  [Explain the core reasoning behind this selection. Outline the
+                  main drivers that made this the optimal choice for realizing
+                  the platform's vision within the given constraints.]
+                </p>
+              </div>
+              <div
+                class="bg-saudi-900/30 rounded-xl p-6 border border-saudi-700/50 backdrop-blur-sm"
+                vid="166"
+              >
+                <h3
+                  class="text-lg font-semibold text-white mb-3 flex items-center gap-2"
+                  vid="167"
+                >
+                  <i class="ph ph-puzzle-piece text-saudi-400" vid="168"></i>
+                  Why it fits this project
+                </h3>
+                <p class="text-saudi-100 text-sm leading-relaxed" vid="169">
+                  [Detail how this methodology specifically aligns with the
+                  National Employment &amp; Skill Matching Platform's scale,
+                  regulatory requirements, target audience, and national impact
+                  goals.]
+                </p>
+              </div>
+              <div
+                class="bg-saudi-900/30 rounded-xl p-6 border border-saudi-700/50 backdrop-blur-sm"
+                vid="170"
+              >
+                <h3
+                  class="text-lg font-semibold text-white mb-3 flex items-center gap-2"
+                  vid="171"
+                >
+                  <i class="ph ph-scales text-saudi-400" vid="172"></i> Why
+                  preferred over others
+                </h3>
+                <p class="text-saudi-100 text-sm leading-relaxed" vid="173">
+                  [Provide a comparative justification. Explain the trade-offs
+                  accepted and why the rejected methodologies from Section 1
+                  were deemed less suitable for this specific initiative.]
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="risk-overview-heading" vid="174">
+        <h2
+          id="risk-overview-heading"
+          class="text-2xl font-bold text-charcoal-900 flex items-center gap-2 mb-6"
+          vid="175"
+        >
+          <i class="ph ph-chart-pie-slice text-saudi-700" vid="176"></i>
+          Risk Overview
+        </h2>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          vid="177"
+        >
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 relative overflow-hidden flex flex-col justify-center"
+            vid="178"
+          >
+            <div
+              class="absolute left-0 top-0 bottom-0 w-1.5 bg-slate-400"
+              vid="179"
+            ></div>
+            <dt
+              class="text-sm font-medium text-slate-500 truncate mb-1"
+              vid="180"
+            >
+              Total Risks Identified
+            </dt>
+            <dd class="text-3xl font-bold text-charcoal-900" vid="181">8</dd>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 relative overflow-hidden flex flex-col justify-center"
+            vid="182"
+          >
+            <div
+              class="absolute left-0 top-0 bottom-0 w-1.5 bg-rose-500"
+              vid="183"
+            ></div>
+            <dt
+              class="text-sm font-medium text-slate-500 truncate mb-1"
+              vid="184"
+            >
+              High Priority Risks
+            </dt>
+            <dd class="text-3xl font-bold text-charcoal-900" vid="185">[#]</dd>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 relative overflow-hidden flex flex-col justify-center"
+            vid="186"
+          >
+            <div
+              class="absolute left-0 top-0 bottom-0 w-1.5 bg-saudi-500"
+              vid="187"
+            ></div>
+            <dt
+              class="text-sm font-medium text-slate-500 truncate mb-1"
+              vid="188"
+            >
+              Methodology-Specific
+            </dt>
+            <dd class="text-3xl font-bold text-charcoal-900" vid="189">4</dd>
+          </div>
+
+          <div
+            class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 relative overflow-hidden flex flex-col justify-center"
+            vid="190"
+          >
+            <div
+              class="absolute left-0 top-0 bottom-0 w-1.5 bg-blue-500"
+              vid="191"
+            ></div>
+            <dt
+              class="text-sm font-medium text-slate-500 truncate mb-1"
+              vid="192"
+            >
+              General Project Risks
+            </dt>
+            <dd class="text-3xl font-bold text-charcoal-900" vid="193">4</dd>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="risk-register-heading" vid="194">
+        <div class="flex items-center justify-between mb-4" vid="195">
+          <h2
+            id="risk-register-heading"
+            class="text-2xl font-bold text-charcoal-900 flex items-center gap-2"
+            vid="196"
+          >
+            <i class="ph ph-table text-saudi-700" vid="197"></i>
+            Risk Register
+          </h2>
+          <button
+            class="text-sm bg-white border border-slate-300 text-slate-700 px-3 py-1.5 rounded hover:bg-slate-50 transition-colors flex items-center gap-1.5 font-medium shadow-sm"
+            vid="198"
+          >
+            <i class="ph ph-download-simple" vid="199"></i> Export
+          </button>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+          vid="200"
+        >
+          <div class="overflow-x-auto custom-scrollbar" vid="201">
+            <table
+              class="min-w-full divide-y divide-slate-200 text-sm"
+              vid="202"
+            >
+              <thead class="bg-slate-50 border-b border-slate-200" vid="203">
+                <tr vid="204">
+                  <th
+                    scope="col"
+                    class="px-4 py-3 text-left font-semibold text-slate-700 uppercase tracking-wider text-xs whitespace-nowrap"
+                    vid="205"
+                  >
+                    ID / Name
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-4 py-3 text-left font-semibold text-slate-700 uppercase tracking-wider text-xs min-w-[200px]"
+                    vid="206"
+                  >
+                    Description
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-4 py-3 text-left font-semibold text-slate-700 uppercase tracking-wider text-xs whitespace-nowrap"
+                    vid="207"
+                  >
+                    Probability
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-4 py-3 text-left font-semibold text-slate-700 uppercase tracking-wider text-xs whitespace-nowrap"
+                    vid="208"
+                  >
+                    Impact
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-4 py-3 text-left font-semibold text-slate-700 uppercase tracking-wider text-xs whitespace-nowrap"
+                    vid="209"
+                  >
+                    Exposure
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-4 py-3 text-left font-semibold text-slate-700 uppercase tracking-wider text-xs min-w-[150px]"
+                    vid="210"
+                  >
+                    First Indicator
+                  </th>
+                  <th
+                    scope="col"
+                    class="px-4 py-3 text-left font-semibold text-slate-700 uppercase tracking-wider text-xs min-w-[250px]"
+                    vid="211"
+                  >
+                    Mitigation / Management
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-slate-200" vid="212">
+                <tr class="bg-slate-50/80" vid="213">
+                  <td
+                    colspan="7"
+                    class="px-4 py-2 text-xs font-bold text-saudi-800 uppercase tracking-wider border-b border-slate-200 bg-saudi-50/30"
+                    vid="214"
+                  >
+                    <i class="ph ph-git-branch mr-1" vid="215"></i>
+                    Methodology-Specific Risks
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="216">
+                  <td class="px-4 py-4 align-top" vid="217">
+                    <div class="font-bold text-slate-900" vid="218">M1</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="219">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="220">
+                    [Describe how the chosen methodology introduces specific
+                    vulnerabilities to the timeline or budget]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="221">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="222"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="223">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="224"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="225"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="226"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="227"
+                  >
+                    [Detailed mitigation strategy aligned with methodology best
+                    practices]
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="228">
+                  <td class="px-4 py-4 align-top" vid="229">
+                    <div class="font-bold text-slate-900" vid="230">M2</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="231">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="232">
+                    [Description placeholder...]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="233">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="234"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="235">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="236"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="237"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="238"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="239"
+                  >
+                    [Mitigation strategy...]
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="240">
+                  <td class="px-4 py-4 align-top" vid="241">
+                    <div class="font-bold text-slate-900" vid="242">M3</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="243">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="244">
+                    [Description placeholder...]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="245">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="246"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="247">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="248"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="249"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="250"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="251"
+                  >
+                    [Mitigation strategy...]
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="252">
+                  <td class="px-4 py-4 align-top" vid="253">
+                    <div class="font-bold text-slate-900" vid="254">M4</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="255">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="256">
+                    [Description placeholder...]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="257">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="258"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="259">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="260"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="261"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="262"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="263"
+                  >
+                    [Mitigation strategy...]
+                  </td>
+                </tr>
+
+                <tr class="bg-slate-50/80" vid="264">
+                  <td
+                    colspan="7"
+                    class="px-4 py-2 text-xs font-bold text-blue-800 uppercase tracking-wider border-y border-slate-200 bg-blue-50/30"
+                    vid="265"
+                  >
+                    <i class="ph ph-globe mr-1" vid="266"></i> General Project
+                    Risks (Internal/External)
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="267">
+                  <td class="px-4 py-4 align-top" vid="268">
+                    <div class="font-bold text-slate-900" vid="269">G1</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="270">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="271">
+                    [Describe broader project risks like API integrations,
+                    stakeholder alignment, or regulatory shifts]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="272">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="273"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="274">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="275"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="276"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="277"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="278"
+                  >
+                    [General mitigation plan]
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="279">
+                  <td class="px-4 py-4 align-top" vid="280">
+                    <div class="font-bold text-slate-900" vid="281">G2</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="282">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="283">
+                    [Description placeholder...]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="284">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="285"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="286">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="287"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="288"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="289"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="290"
+                  >
+                    [Mitigation strategy...]
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="291">
+                  <td class="px-4 py-4 align-top" vid="292">
+                    <div class="font-bold text-slate-900" vid="293">G3</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="294">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="295">
+                    [Description placeholder...]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="296">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="297"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="298">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="299"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="300"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="301"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="302"
+                  >
+                    [Mitigation strategy...]
+                  </td>
+                </tr>
+
+                <tr class="hover:bg-slate-50 transition-colors" vid="303">
+                  <td class="px-4 py-4 align-top" vid="304">
+                    <div class="font-bold text-slate-900" vid="305">G4</div>
+                    <div class="text-slate-600 text-xs mt-0.5" vid="306">
+                      [Risk Name]
+                    </div>
+                  </td>
+                  <td class="px-4 py-4 align-top text-slate-600" vid="307">
+                    [Description placeholder...]
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="308">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="309"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td class="px-4 py-4 align-top" vid="310">
+                    <span
+                      class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-800 border border-slate-200"
+                      vid="311"
+                      >[L/M/H]</span
+                    >
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top font-semibold text-slate-700"
+                    vid="312"
+                  >
+                    [Score]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="313"
+                  >
+                    [Trigger event or metric]
+                  </td>
+                  <td
+                    class="px-4 py-4 align-top text-slate-600 text-xs"
+                    vid="314"
+                  >
+                    [Mitigation strategy...]
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="risk-matrix-heading" class="pb-10" vid="315">
+        <h2
+          id="risk-matrix-heading"
+          class="text-2xl font-bold text-charcoal-900 flex items-center gap-2 mb-6"
+          vid="316"
+        >
+          <i class="ph ph-squares-four text-saudi-700" vid="317"></i>
+          Risk Matrix Visualization
+        </h2>
+
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 p-8 flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-16"
+          vid="318"
+        >
+          <div class="relative inline-flex items-start" vid="319">
+            <div
+              class="flex flex-col items-center justify-center mr-4"
+              vid="320"
+            >
+              <span
+                class="text-sm font-bold text-slate-600 uppercase tracking-widest"
+                style="
+                  writing-mode: vertical-rl;
+                  transform: rotate(180deg);
+                  height: 300px;
+                "
+                vid="321"
+                >Probability</span
+              >
+            </div>
+
+            <div vid="322">
+              <div class="flex" vid="323">
+                <div
+                  class="flex flex-col justify-around mr-3 text-xs font-medium text-slate-500 h-[300px] text-right"
+                  vid="324"
+                >
+                  <span class="h-[60px] flex items-center justify-end" vid="325"
+                    >Almost Certain</span
+                  >
+                  <span class="h-[60px] flex items-center justify-end" vid="326"
+                    >Likely</span
+                  >
+                  <span class="h-[60px] flex items-center justify-end" vid="327"
+                    >Possible</span
+                  >
+                  <span class="h-[60px] flex items-center justify-end" vid="328"
+                    >Unlikely</span
+                  >
+                  <span class="h-[60px] flex items-center justify-end" vid="329"
+                    >Rare</span
+                  >
+                </div>
+
+                <div
+                  class="grid grid-cols-5 grid-rows-5 gap-1 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
+                  vid="330"
+                >
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="331"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="332"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-high rounded-sm relative group"
+                    vid="333"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="334"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-high rounded-sm relative group"
+                    vid="335"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="336"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-extreme rounded-sm relative group"
+                    vid="337"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="338"
+                    >
+                      <span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="339"
+                        >M1</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="matrix-cell-extreme rounded-sm relative group"
+                    vid="340"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="341"
+                    ></div>
+                  </div>
+
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="342"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="343"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="344"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="345"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-high rounded-sm relative group"
+                    vid="346"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="347"
+                    >
+                      <span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="348"
+                        >G2</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="matrix-cell-high rounded-sm relative group"
+                    vid="349"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="350"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-extreme rounded-sm relative group"
+                    vid="351"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="352"
+                    ></div>
+                  </div>
+
+                  <div
+                    class="matrix-cell-low rounded-sm relative group"
+                    vid="353"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="354"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="355"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="356"
+                    >
+                      <span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="357"
+                        >M3</span
+                      ><span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="358"
+                        >G1</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="359"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="360"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-high rounded-sm relative group"
+                    vid="361"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="362"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-extreme rounded-sm relative group"
+                    vid="363"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="364"
+                    ></div>
+                  </div>
+
+                  <div
+                    class="matrix-cell-low rounded-sm relative group"
+                    vid="365"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="366"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-low rounded-sm relative group"
+                    vid="367"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="368"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="369"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="370"
+                    >
+                      <span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="371"
+                        >M2</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="372"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="373"
+                    >
+                      <span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="374"
+                        >G4</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="matrix-cell-high rounded-sm relative group"
+                    vid="375"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="376"
+                    ></div>
+                  </div>
+
+                  <div
+                    class="matrix-cell-low rounded-sm relative group"
+                    vid="377"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="378"
+                    >
+                      <span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="379"
+                        >M4</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="matrix-cell-low rounded-sm relative group"
+                    vid="380"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="381"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-low rounded-sm relative group"
+                    vid="382"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="383"
+                    >
+                      <span
+                        class="w-5 h-5 flex items-center justify-center bg-white text-slate-800 text-[10px] font-bold rounded-full shadow-sm"
+                        vid="384"
+                        >G3</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="385"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="386"
+                    ></div>
+                  </div>
+                  <div
+                    class="matrix-cell-med rounded-sm relative group"
+                    vid="387"
+                  >
+                    <div
+                      class="absolute inset-0 flex items-center justify-center flex-wrap gap-1 p-1"
+                      vid="388"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="flex mt-3 ml-[72px] sm:ml-[88px] w-[300px] sm:w-[400px]"
+                vid="389"
+              >
+                <div
+                  class="w-1/5 text-center text-xs font-medium text-slate-500"
+                  vid="390"
+                >
+                  Negligible
+                </div>
+                <div
+                  class="w-1/5 text-center text-xs font-medium text-slate-500"
+                  vid="391"
+                >
+                  Minor
+                </div>
+                <div
+                  class="w-1/5 text-center text-xs font-medium text-slate-500"
+                  vid="392"
+                >
+                  Moderate
+                </div>
+                <div
+                  class="w-1/5 text-center text-xs font-medium text-slate-500"
+                  vid="393"
+                >
+                  Major
+                </div>
+                <div
+                  class="w-1/5 text-center text-xs font-medium text-slate-500"
+                  vid="394"
+                >
+                  Extreme
+                </div>
+              </div>
+
+              <div
+                class="text-center mt-4 ml-[72px] sm:ml-[88px] w-[300px] sm:w-[400px]"
+                vid="395"
+              >
+                <span
+                  class="text-sm font-bold text-slate-600 uppercase tracking-widest"
+                  vid="396"
+                  >Impact</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col gap-4 bg-slate-50 border border-slate-200 p-5 rounded-lg min-w-[200px]"
+            vid="397"
+          >
+            <h4
+              class="font-bold text-slate-800 text-sm mb-2 border-b border-slate-200 pb-2"
+              vid="398"
+            >
+              Severity Legend
+            </h4>
+            <div class="flex items-center gap-3" vid="399">
+              <div
+                class="w-4 h-4 rounded-sm matrix-cell-extreme"
+                vid="400"
+              ></div>
+              <span class="text-sm text-slate-700" vid="401">Extreme Risk</span>
+            </div>
+            <div class="flex items-center gap-3" vid="402">
+              <div class="w-4 h-4 rounded-sm matrix-cell-high" vid="403"></div>
+              <span class="text-sm text-slate-700" vid="404">High Risk</span>
+            </div>
+            <div class="flex items-center gap-3" vid="405">
+              <div class="w-4 h-4 rounded-sm matrix-cell-med" vid="406"></div>
+              <span class="text-sm text-slate-700" vid="407">Medium Risk</span>
+            </div>
+            <div class="flex items-center gap-3" vid="408">
+              <div class="w-4 h-4 rounded-sm matrix-cell-low" vid="409"></div>
+              <span class="text-sm text-slate-700" vid="410">Low Risk</span>
+            </div>
+            <div
+              class="mt-4 pt-4 border-t border-slate-200 text-xs text-slate-500 italic"
+              vid="411"
+            >
+              Placements are illustrative placeholders pending final assessment.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-charcoal-900 border-t border-slate-200 mt-auto" vid="412">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" vid="413">
+        <div class="md:flex md:items-center md:justify-between" vid="414">
+          <div
+            class="flex justify-center md:justify-start mb-6 md:mb-0"
+            vid="415"
+          >
+            <div class="flex items-center gap-3 text-slate-300" vid="416">
+              <i class="ph ph-buildings text-2xl text-saudi-400" vid="417"></i>
+              <div vid="418">
+                <p class="text-base font-semibold" vid="419">
+                  National Employment &amp; Skill Matching Platform
+                </p>
+                <p class="text-sm text-slate-400 mt-1" vid="420">
+                  SE423 Software Project Management Documentation
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-center md:justify-end gap-6" vid="421">
+            <a
+              href="#"
+              class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm bg-slate-800 px-4 py-2 rounded-md border border-slate-700"
+              vid="422"
+            >
+              <i class="ph ph-github-logo text-lg" vid="423"></i>
+              <span vid="424">[Repository Link]</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-8 border-t border-slate-800 pt-8 flex items-center justify-between"
+          vid="425"
+        >
+          <p class="text-sm text-slate-500" vid="426">
+            © 2024 Project Team. Placeholder data used for structural planning.
+          </p>
+          <div class="text-sm text-slate-500" vid="427">Artifact 02 v1.0</div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

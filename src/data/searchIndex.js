@@ -55,6 +55,7 @@ const sections = [
   entry('Section', 'Performance Overview', '/stakeholders-metrics', 'performance-overview', 'dashboard targets active users match rate uptime retention'),
 
   entry('Section', 'Core Members', '/team', 'core-members', 'team members roles'),
+  entry('Section', 'Who Did What', '/team', 'contributions', 'contributions work split artifact tasks each member did'),
   entry('Section', 'Responsibility Distribution', '/team', 'responsibilities', 'project management planning risk stakeholder documentation quality'),
 ];
 
@@ -75,7 +76,7 @@ const content = [
     entry('Communication', c.info, '/stakeholders-metrics', 'communication-plan', `${c.why} ${c.audience} ${c.method} ${c.owner} ${c.frequency}`),
   ),
   ...metrics.map((m) => entry('Metric', m.title, '/stakeholders-metrics', 'project-metrics', `${m.rationale} ${m.measure} ${m.responsible}`)),
-  ...members.map((m) => entry('Team', m.name, '/team', 'core-members', `${m.role} ${m.responsibilities.join(' ')}`)),
+  ...members.map((m) => entry('Team', m.name, '/team', 'core-members', `${m.role} ${m.responsibilities.join(' ')} ${Object.values(m.contributions).join(' ')}`)),
 ];
 
 export const searchIndex = [...pages, ...sections, ...content];
