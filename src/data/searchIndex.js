@@ -42,8 +42,8 @@ const sections = [
 
   entry('Section', 'Methodology Analysis', '/methodology-risk', 'methodology-analysis', 'plan-driven agile Waterfall Incremental Model Scrum XP Extreme Programming strengths weaknesses team fit organizational structure fit stakeholder fit overall suitability'),
   entry('Section', `Selected Methodology: ${selectedMethodology.name}`, '/methodology-risk', 'selected-methodology', `${selectedMethodology.qualifier} ${selectedMethodology.why}`),
-  entry('Section', 'Risk Overview', '/methodology-risk', 'risk-overview', 'total risks high priority methodology-specific general'),
-  entry('Section', 'Risk Register', '/methodology-risk', 'risk-register', 'probability impact exposure first indicator mitigation export CSV'),
+  entry('Section', 'Risk Overview', '/methodology-risk', 'risk-overview', 'total risks extreme high Scrum XP Waterfall Incremental selected methodology'),
+  entry('Section', 'Risk Register', '/methodology-risk', 'risk-register', 'probability impact exposure first indicator mitigation management strategies Excel workbook export CSV'),
   entry('Section', 'Risk Matrix Visualization', '/methodology-risk', 'risk-matrix', 'probability impact severity heat map'),
 
   entry('Section', 'Work Breakdown Structure', '/planning', 'wbs', 'WBS deliverables hierarchy'),
@@ -68,7 +68,7 @@ const content = [
     entry('Methodology', m.name, '/methodology-risk', 'methodology-analysis', `${m.overview ?? ''} ${pointsText(m.strengths)} ${pointsText(m.weaknesses)}`),
   ),
   ...risks.map((r) =>
-    entry('Risk', `${r.id} · ${r.name}`, '/methodology-risk', 'risk-register', `${r.description} ${r.indicator} ${r.mitigation}`),
+    entry('Risk', `${r.id} · ${r.name}`, '/methodology-risk', 'risk-register', `${r.description} ${r.prevention} ${r.indicator} ${r.mitigation}`),
   ),
   ...wbs.branches.map((b) => entry('WBS', `${b.id}.0 ${b.title}`, '/planning', 'wbs', b.items.join(' '))),
   ...planningFactors.map((f) => entry('Planning', f.title, '/planning', 'assumptions', f.items.join(' '))),

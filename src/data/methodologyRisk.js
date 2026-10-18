@@ -216,103 +216,237 @@ export const selectedMethodology = {
 export const probabilityLabels = ['Rare', 'Unlikely', 'Possible', 'Likely', 'Almost Certain'];
 export const impactLabels = ['Negligible', 'Minor', 'Moderate', 'Major', 'Extreme'];
 
+// Risk register groups, one per analyzed methodology (see public/artifact-2-risk-register.xlsx).
+export const riskGroups = [
+  { key: 'scrum', label: 'Agile 1 · Scrum', family: 'agile' },
+  { key: 'xp', label: 'Agile 2 · Extreme Programming (XP)', family: 'agile' },
+  { key: 'waterfall', label: 'Plan-Driven 1 · Waterfall', family: 'planDriven' },
+  { key: 'incremental', label: 'Plan-Driven 2 · Incremental Model', family: 'planDriven' },
+];
+
 // probability and impact are on a 1–5 scale; exposure = probability × impact.
+// prevention = the "Risk Mitigation" column; mitigation = "Mitigation/Management Strategies".
 export const risks = [
   {
-    id: 'M1',
-    category: 'methodology',
+    id: 'S1',
+    category: 'scrum',
     name: 'Scope Creep',
     description:
-      'An evolving backlog and frequent stakeholder requests expand scope sprint by sprint, pushing Phase 1 release dates and budget.',
+      "Managing and prioritizing the backlog is one of the Product Owner's many tasks. If they fail to do it, scope creep begins — partly because Scrum is open to continuous change.",
+    prevention:
+      "Set a sprint goal during planning, so changes can still happen throughout the project, in keeping with Scrum's values, as long as they align with that sprint's goal. Anything that doesn't fit moves to the product backlog.",
+    probability: 3,
+    impact: 4,
+    indicator:
+      "Skill-matching features or user stories are suddenly added mid-sprint without adjusting the commitment or checking alignment with the sprint goal.",
+    mitigation:
+      'Abide by the sprint goal: even if stakeholders suggest something new mid-sprint, keep it in the product backlog.',
+  },
+  {
+    id: 'S2',
+    category: 'scrum',
+    name: 'Lack of Awareness of the Scrum Method',
+    description:
+      "Not understanding Scrum's principles can defeat its purpose. If members aren't used to quick-paced meetings and continuous change, the project's success is at risk.",
+    prevention:
+      "Before the organization shifts to Scrum, prepare everyone involved with introductory training sessions so those unfamiliar with it understand how the method works.",
+    probability: 3,
+    impact: 3,
+    indicator:
+      'Members miss daily stand-ups and don’t engage with the team; a lack of communication and planning skills is an early sign.',
+    mitigation:
+      'Ensure all organization staff fully understand sprint methods, and hold them accountable according to our policy.',
+  },
+  {
+    id: 'S3',
+    category: 'scrum',
+    name: 'Going Over Budget and Time',
+    description:
+      'Scrum focuses on short-term sprint goals rather than the big-picture plan, which lets slip-ups happen with deadlines and finances.',
+    prevention:
+      'Plan sprints realistically according to the team’s abilities, and track a sprint burndown chart daily so no red flags are missed.',
     probability: 4,
     impact: 4,
-    indicator: 'Backlog grows by more than 15% between releases, or unplanned items enter an active sprint.',
+    indicator:
+      'The sprint burndown chart rises above the ideal line mid-sprint, or plans go against the known historical velocity and staff skills.',
     mitigation:
-      'Product Owner owns a prioritised backlog; changes enter via backlog refinement only; release goals are locked at the phase gate; formal change requests for anything affecting the release scope.',
+      'Track the sprint burndown chart and plan according to it, to avoid exceeding the budget or missing deadlines.',
   },
   {
-    id: 'M2',
-    category: 'methodology',
-    name: 'Limited Product Owner Availability',
+    id: 'S4',
+    category: 'scrum',
+    name: 'Developer Burnout',
     description:
-      'MHRSD representatives cannot attend sprint reviews or answer questions quickly, causing blocked stories and misaligned increments.',
+      "Fast sprints and constant iteration can tire out members who aren't used to them.",
+    prevention:
+      'Use historical velocity — the average story points completed per sprint — to make plans that are more likely to match reality, and move unfinished work to the backlog without penalizing the team.',
     probability: 3,
     impact: 4,
-    indicator: 'Two consecutive sprint reviews without sponsor attendance, or stories blocked waiting for decisions for more than 3 days.',
-    mitigation:
-      'Appoint a dedicated, empowered Product Owner and a delegate; agree a decision-response SLA in the project charter; schedule reviews a quarter in advance.',
+    indicator:
+      "Team complaints about sprint tasks are dismissed, especially when the sprint's planned velocity is clearly higher than the team's history supports.",
+    mitigation: 'Stick to historical velocity and actively listen to our staff.',
   },
   {
-    id: 'M3',
-    category: 'methodology',
-    name: 'Insufficient Compliance Documentation',
+    id: 'X1',
+    category: 'xp',
+    name: 'Insufficient Test-Driven Development (TDD) Skills',
     description:
-      "Scrum's lightweight documentation falls short of government audit, security and data-privacy documentation requirements.",
+      'XP relies on writing automated tests before code. If the team lacks TDD experience, tests may be poorly designed or the practice abandoned, leaving defects in CV parsing, match scoring or portal workflows undetected.',
+    prevention:
+      'Provide a short TDD workshop and agree on test-writing standards before applying the practice to Phase 1 features.',
     probability: 3,
-    impact: 3,
-    indicator: 'Gate-review checklist items marked incomplete, or audit requests that cannot be answered from existing artifacts.',
+    impact: 4,
+    indicator:
+      'Developers frequently skip writing tests first, or automated tests fail to cover important matching and portal behavior.',
     mitigation:
-      'Add compliance documentation to the Definition of Done; maintain architecture decision records; the Docs & Quality lead reviews artifacts every sprint.',
+      'Pair less-experienced developers with experienced team members; review test coverage during code reviews; include test quality in the Definition of Done.',
   },
   {
-    id: 'M4',
-    category: 'methodology',
-    name: 'Multi-Team Coordination Overhead',
+    id: 'X2',
+    category: 'xp',
+    name: 'Pair-Programming Scheduling Conflicts',
     description:
-      'Multiple Scrum teams working on shared components (matching engine, integrations) create dependency conflicts and unstable velocity.',
-    probability: 2,
-    impact: 3,
-    indicator: 'Velocity varies by more than 25% between sprints, or cross-team dependencies block stories.',
-    mitigation:
-      'Weekly Scrum-of-Scrums; shared dependency board; joint sprint planning for integration work; stable team membership.',
-  },
-  {
-    id: 'G1',
-    category: 'general',
-    name: 'Government API Integration Delays',
-    description:
-      'Integrations with national systems (e.g., Yakeen, Absher, GOSI) depend on external agencies for access approvals, sandboxes and API changes.',
+      "XP encourages developers to work in pairs. In Fursah's matrix structure, competing responsibilities from functional managers can make pairing sessions hard to maintain and slow implementation.",
+    prevention:
+      'Agree on protected pairing time and coordinate developer availability with functional managers before each development cycle.',
     probability: 4,
-    impact: 5,
-    indicator: 'API access or sandbox credentials not granted by Sprint 4; integration test environments unavailable.',
-    mitigation:
-      'Start access requests during Sprint 0; build against mocked contracts; assign an integration liaison; sequence dependent features later in the release.',
-  },
-  {
-    id: 'G2',
-    category: 'general',
-    name: 'Data Privacy & Security Breach',
-    description:
-      'Personal data of job seekers and employers is exposed or processed in breach of the national Personal Data Protection Law (PDPL) and cybersecurity controls.',
-    probability: 2,
-    impact: 5,
-    indicator: 'Penetration test findings rated high or critical; anomalous access in audit logs.',
-    mitigation:
-      'Privacy-by-design reviews; encryption in transit and at rest; role-based access control; regular penetration testing; an incident response plan agreed with regulators.',
-  },
-  {
-    id: 'G3',
-    category: 'general',
-    name: 'Low User Adoption',
-    description:
-      'Job seekers and employers continue using existing private job boards, limiting data volume and match quality.',
-    probability: 3,
     impact: 3,
-    indicator: 'Weekly registrations below target for four consecutive weeks after launch; low employer job-post activity.',
+    indicator: 'Pairing sessions are repeatedly cancelled, or tasks stay blocked waiting for an available partner.',
     mitigation:
-      'Pilot with selected employers and universities; usability testing every release; onboarding campaigns; employer incentives coordinated with MHRSD.',
+      'Plan pairing rotations; use shared calendars; document decisions and code context; check that pairing is applied to the highest-risk or most complex tasks.',
   },
   {
-    id: 'G4',
-    category: 'general',
-    name: 'Algorithmic Bias in Matching',
+    id: 'X3',
+    category: 'xp',
+    name: 'Continuous-Integration Build Instability',
     description:
-      'The matching engine systematically disadvantages certain groups (e.g., by gender, region or institution), damaging fairness and public trust.',
+      'XP emphasizes frequent integration. Unreliable builds and tests, or incompatible changes, may repeatedly break the shared codebase and delay work across the Smart Matching Engine and both portals.',
+    prevention:
+      'Configure a shared automated build and test pipeline, and require changes to pass the agreed checks before integration.',
     probability: 3,
     impact: 4,
-    indicator: 'Fairness metrics show significant disparity in match or interview rates between demographic groups.',
+    indicator: 'The main branch frequently fails automated builds, or integration defects recur across components.',
     mitigation:
-      'Bias audits on training data and outputs each release; explainable match scores; human review of flagged cases; oversight from the Policy & Compliance team.',
+      'Keep changes small; fix broken builds promptly; automate unit and integration tests; assign responsibility for monitoring pipeline health and reviewing recurring failures.',
+  },
+  {
+    id: 'X4',
+    category: 'xp',
+    name: 'Refactoring Introduces Regressions',
+    description:
+      'XP encourages frequent refactoring. Without adequate automated regression tests, previously working CV parsing, matching scores, job recommendations or application functions may break.',
+    prevention: 'Run automated unit and regression tests before and after refactoring, and refactor in small, reviewable changes.',
+    probability: 3,
+    impact: 4,
+    indicator:
+      'Previously passing tests fail after code restructuring, or defects keep appearing in features that were already completed.',
+    mitigation:
+      'Maintain regression tests for critical workflows; require peer review for high-impact changes; use version control and revert unsafe changes promptly.',
+  },
+  {
+    id: 'W1',
+    category: 'waterfall',
+    name: 'Fixed Requirements No Longer Meet Project Needs',
+    description:
+      'Requirements are approved at the start and stay unchanged through development. By launch, job-market needs and HRSD policies may have changed, leaving features out of date.',
+    prevention: 'Review project requirements with HRSD at each approval stage and follow a process to approve necessary changes.',
+    probability: 4,
+    impact: 4,
+    indicator:
+      'HRSD introduces new labor policies or Vision 2030 goals, or stakeholders request changes after requirements are approved.',
+    mitigation:
+      'Apply a formal change control board involving HRSD and functional managers; keep a prioritized list of changes to implement after launch; include extra schedule time for approved changes.',
+  },
+  {
+    id: 'W2',
+    category: 'waterfall',
+    name: 'User Rejection During Acceptance Testing',
+    description:
+      'Job seekers, employers and HRSD can only test the platform in the final stages. Dissatisfaction with usability, language support or how the system works would be costly and time-consuming to fix that late.',
+    prevention:
+      'Create UI prototypes during the design phase and have users test and approve them before the final design is approved.',
+    probability: 3,
+    impact: 5,
+    indicator: 'Users give negative feedback on prototypes, or stakeholders often miss design review meetings.',
+    mitigation:
+      'Require stakeholders to review and approve UI designs; involve employers, job seekers and people with disabilities in design evaluations; allocate extra budget to fix issues found in final testing.',
+  },
+  {
+    id: 'W3',
+    category: 'waterfall',
+    name: 'Matching Engine Fails Final Testing',
+    description:
+      'The NLP matching engine is fully planned before development and only tested at the final stage. If matching accuracy is too low, there may not be enough time or money to improve the design.',
+    prevention:
+      'Test the NLP approach on sample resumes and job listings during the requirements stage to confirm it is suitable before finalizing the design.',
+    probability: 3,
+    impact: 5,
+    indicator: 'Initial tests show inaccurate job matching, or trouble understanding information in Arabic resumes.',
+    mitigation:
+      'Set a minimum matching accuracy the system must achieve; keep a keyword-based matching fallback; assign NLP experts from the matrix organization from the earliest stages.',
+  },
+  {
+    id: 'W4',
+    category: 'waterfall',
+    name: 'Failure During Full System Launch',
+    description:
+      'Waterfall delivers every component at once — matching engine, portals, networking and government integrations. A problem in one component, or a government system that fails to connect, could delay the whole national launch.',
+    prevention: 'Test the complete platform with a selected group of users and government agencies before the national launch.',
+    probability: 3,
+    impact: 5,
+    indicator: 'Testing shows issues in several parts of the system, or connections with government agencies are delayed.',
+    mitigation:
+      'Create a detailed integration testing plan with entry and exit criteria; prepare a backup and recovery plan for launch problems; confirm government systems are ready to connect at each approval stage.',
+  },
+  {
+    id: 'I1',
+    category: 'incremental',
+    name: 'Late Requirement Changes',
+    description:
+      'Changes to employer recruitment requirements or government integration specifications after requirements approval may require extensive rework of completed phases.',
+    prevention: 'Validate requirements with employers and government stakeholders before final approval.',
+    probability: 4,
+    impact: 4,
+    indicator: 'New requirements are requested after requirements sign-off.',
+    mitigation: 'Apply formal change control, assess the impact on scope and schedule, and update approved documentation.',
+  },
+  {
+    id: 'I2',
+    category: 'incremental',
+    name: 'Late Discovery of Matching Errors',
+    description:
+      'Problems with the NLP-based matching engine may only appear during system testing, requiring changes to earlier design and implementation work.',
+    prevention: 'Define measurable matching accuracy criteria and review the matching design before implementation.',
+    probability: 3,
+    impact: 5,
+    indicator: 'Matching results fail acceptance criteria during system testing.',
+    mitigation:
+      'Review NLP matching requirements early, establish measurable acceptance criteria, and allocate time for corrective testing.',
+  },
+  {
+    id: 'I3',
+    category: 'incremental',
+    name: 'Delayed Stakeholder Validation',
+    description:
+      'Job seekers and employers may not evaluate the working platform until late in development, leaving usability problems undiscovered.',
+    prevention: 'Conduct formal stakeholder reviews of requirements and interface designs before development.',
+    probability: 4,
+    impact: 4,
+    indicator: 'Major usability issues are identified during stakeholder acceptance testing.',
+    mitigation:
+      'Conduct stakeholder reviews at requirements and design milestones, and document feedback before implementation.',
+  },
+  {
+    id: 'I4',
+    category: 'incremental',
+    name: 'Sequential Phase Dependencies',
+    description:
+      'Delays in completing the platform architecture or government integration specifications may stop later development and testing from starting on schedule.',
+    prevention: 'Establish phase milestones and monitor critical dependencies throughout development.',
+    probability: 3,
+    impact: 4,
+    indicator: 'A development phase misses its milestone and delays dependent activities.',
+    mitigation: 'Track phase dependencies, monitor critical milestones, and allocate schedule contingency for delays.',
   },
 ];
 

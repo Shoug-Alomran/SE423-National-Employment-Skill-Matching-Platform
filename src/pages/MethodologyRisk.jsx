@@ -3,10 +3,9 @@ import {
   ChartPieSlice,
   CheckCircle,
   DownloadSimple,
+  FileXls,
   Files,
-  GitBranch,
   GitMerge,
-  Globe,
   Kanban,
   MinusCircle,
   PlusCircle,
@@ -22,6 +21,7 @@ import {
   impactLabels,
   methodologies,
   probabilityLabels,
+  riskGroups,
   risks,
   selectedMethodology,
   severity,
@@ -122,15 +122,17 @@ function ScaleBadge({ value, labels }) {
 }
 
 function downloadRiskRegister() {
-  const header = ['ID', 'Name', 'Category', 'Description', 'Probability', 'Impact', 'Exposure', 'Severity', 'First Indicator', 'Mitigation'];
+  const header = ['ID', 'Name', 'Methodology', 'Description', 'Risk Mitigation', 'Probability', 'Impact', 'Exposure', 'Severity', 'First Indicator', 'Mitigation / Management Strategies'];
+  const groupLabel = Object.fromEntries(riskGroups.map((g) => [g.key, g.label]));
   const escape = (v) => `"${String(v).replace(/"/g, '""')}"`;
   const rows = risks.map((r) => {
     const score = exposure(r);
     return [
       r.id,
       r.name,
-      r.category === 'methodology' ? 'Methodology-Specific' : 'General Project',
+      groupLabel[r.category],
       r.description,
+      r.prevention,
       `${probabilityLabels[r.probability - 1]} (${r.probability})`,
       `${impactLabels[r.impact - 1]} (${r.impact})`,
       score,
@@ -150,21 +152,47 @@ function downloadRiskRegister() {
   URL.revokeObjectURL(url);
 }
 
-const groups = [
-  { key: 'methodology', label: 'Methodology-Specific Risks', icon: GitBranch, tone: 'text-saudi-800 bg-saudi-50/60' },
-  { key: 'general', label: 'General Project Risks (Internal/External)', icon: Globe, tone: 'text-blue-800 bg-blue-50/60' },
-];
+const familyStyle = {
+  agile: { icon: ArrowsClockwise, tone: 'text-saudi-800 bg-saudi-50/60' },
+  planDriven: { icon: Kanban, tone: 'text-blue-800 bg-blue-50/60' },
+};
+const groups = riskGroups.map((g) => ({ ...g, ...familyStyle[g.family] }));
+
+function RiskStrategies({ risk }) {
+  return (
+    <>
+      <p>
+        <span className="eyebrow mb-0.5 block text-slate-400">Mitigation</span>
+        {risk.prevention}
+      </p>
+      <p className="mt-2">
+        <span className="eyebrow mb-0.5 block text-slate-400">Management</span>
+        {risk.mitigation}
+      </p>
+    </>
+  );
+}
 
 export default function MethodologyRisk() {
-  const methodologyCount = risks.filter((r) => r.category === 'methodology').length;
-  const generalCount = risks.length - methodologyCount;
-  const highPriority = risks.filter((r) => exposure(r) >= 10).length;
+  // Occupied matrix cells, highest exposure first, for the phone-sized list under the matrix.
+  const matrixCells = [5, 4, 3, 2, 1]
+    .flatMap((p) => [5, 4, 3, 2, 1].map((i) => ({ p, i, ids: risks.filter((r) => r.probability === p && r.impact === i).map((r) => r.id) })))
+    .filter((c) => c.ids.length > 0)
+    .sort((a, b) => b.p * b.i - a.p * a.i);
+
+  const countBySeverity = (level) => risks.filter((r) => severity(exposure(r)) === level).length;
+  const selectedKey = riskGroups.find((g) => g.label.includes(selectedMethodology.name))?.key;
 
   const stats = [
-    { label: 'Total Risks Identified', value: risks.length, bar: 'bg-slate-400' },
-    { label: 'High Priority Risks', value: highPriority, bar: 'bg-rose-500', note: 'Exposure ≥ 10' },
-    { label: 'Methodology-Specific', value: methodologyCount, bar: 'bg-saudi-500' },
-    { label: 'General Project Risks', value: generalCount, bar: 'bg-blue-500' },
+    { label: 'Total Risks Identified', value: risks.length, bar: 'bg-slate-400', note: `Four per methodology, across ${riskGroups.length}` },
+    { label: 'Extreme Risks', value: countBySeverity('extreme'), bar: 'bg-rose-500', note: 'Exposure 16–25' },
+    { label: 'High Risks', value: countBySeverity('high'), bar: 'bg-orange-500', note: 'Exposure 10–15' },
+    {
+      label: `${selectedMethodology.name} Risks (Selected)`,
+      value: risks.filter((r) => r.category === selectedKey).length,
+      bar: 'bg-saudi-500',
+      note: 'Risks of the chosen methodology',
+    },
   ];
 
   return (
@@ -268,15 +296,24 @@ export default function MethodologyRisk() {
             id="risk-register"
             icon={Table}
             title="Risk Register"
-            description="Probability and impact are scored 1–5; exposure = probability × impact."
+            description="Risks for each analyzed methodology. Probability and impact are scored 1–5; exposure = probability × impact."
             action={
-              <button
-                type="button"
-                onClick={downloadRiskRegister}
-                className="inline-flex items-center gap-1.5 self-start rounded border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 sm:self-auto"
-              >
-                <DownloadSimple size={16} /> Export CSV
-              </button>
+              <div className="flex flex-wrap gap-2 self-start sm:self-auto">
+                <a
+                  href={`${import.meta.env.BASE_URL}artifact-2-risk-register.xlsx`}
+                  download
+                  className="inline-flex items-center gap-1.5 rounded border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50"
+                >
+                  <FileXls size={16} /> Excel workbook
+                </a>
+                <button
+                  type="button"
+                  onClick={downloadRiskRegister}
+                  className="inline-flex items-center gap-1.5 rounded border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50"
+                >
+                  <DownloadSimple size={16} /> Export CSV
+                </button>
+              </div>
             }
           />
 
@@ -319,7 +356,9 @@ export default function MethodologyRisk() {
                             <SeverityBadge score={exposure(r)} />
                           </td>
                           <td className="min-w-[170px] px-4 py-4 align-top text-xs text-slate-600">{r.indicator}</td>
-                          <td className="min-w-[260px] px-4 py-4 align-top text-xs text-slate-600">{r.mitigation}</td>
+                          <td className="min-w-[260px] px-4 py-4 align-top text-xs text-slate-600">
+                            <RiskStrategies risk={r} />
+                          </td>
                         </tr>
                       ))}
                   </tbody>
@@ -363,6 +402,10 @@ export default function MethodologyRisk() {
                           </div>
                           <div>
                             <dt className="eyebrow text-slate-400">Mitigation</dt>
+                            <dd className="mt-0.5 text-slate-600">{r.prevention}</dd>
+                          </div>
+                          <div>
+                            <dt className="eyebrow text-slate-400">Management</dt>
                             <dd className="mt-0.5 text-slate-600">{r.mitigation}</dd>
                           </div>
                         </dl>
@@ -401,13 +444,22 @@ export default function MethodologyRisk() {
                           <div
                             key={`${p}-${i}`}
                             title={`Probability: ${probabilityLabels[p - 1]} · Impact: ${impactLabels[i - 1]}`}
-                            className={`matrix-cell-${severity(p * i)} flex flex-wrap content-center items-center justify-center gap-0.5 rounded-sm p-0.5`}
+                            className={`matrix-cell-${severity(p * i)} flex min-h-0 min-w-0 flex-wrap content-center items-center justify-center gap-0.5 overflow-hidden rounded-sm p-0.5`}
                           >
+                            {/* Phones: crowded cells show a count; the list below names the risks. */}
+                            {cellRisks.length > 0 && (
+                              <span
+                                title={cellRisks.map((r) => r.id).join(', ')}
+                                className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-slate-800 shadow-sm sm:hidden"
+                              >
+                                {cellRisks.length === 1 ? cellRisks[0].id : cellRisks.length}
+                              </span>
+                            )}
                             {cellRisks.map((r) => (
                               <span
                                 key={r.id}
                                 title={r.name}
-                                className="flex h-5 w-6 items-center justify-center rounded-full bg-white text-[9px] font-bold text-slate-800 shadow-sm sm:h-6 sm:w-7 sm:text-[10px]"
+                                className="hidden h-6 w-7 items-center justify-center rounded-full bg-white text-[10px] font-bold text-slate-800 shadow-sm sm:flex"
                               >
                                 {r.id}
                               </span>
@@ -428,6 +480,19 @@ export default function MethodologyRisk() {
                 <div className="ml-16 mt-3 text-center sm:ml-[5.5rem]">
                   <span className="text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm">Impact</span>
                 </div>
+                <ul className="mt-5 space-y-1.5 text-xs text-slate-600 sm:hidden">
+                  {matrixCells.map(({ p, i, ids }) => (
+                    <li key={`${p}-${i}`} className="flex gap-2">
+                      <span className={`mt-0.5 h-3 w-3 flex-shrink-0 rounded-sm matrix-cell-${severity(p * i)}`} />
+                      <span>
+                        <strong className="font-semibold text-slate-800">
+                          {probabilityLabels[p - 1]} × {impactLabels[i - 1]}:
+                        </strong>{' '}
+                        {ids.join(', ')}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
