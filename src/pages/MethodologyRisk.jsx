@@ -35,7 +35,31 @@ const severityBadge = {
   low: 'bg-green-100 text-green-800 border-green-200',
 };
 
+const fitLabels = {
+  project: 'Project Fit',
+  team: 'Team Fit',
+  organization: 'Organizational Structure Fit',
+  stakeholder: 'Stakeholder Fit',
+  overall: 'Overall Suitability',
+};
+
+function MethodPoints({ value }) {
+  if (!Array.isArray(value)) return <p className="text-sm leading-relaxed text-slate-700">{value}</p>;
+  return (
+    <ul className="space-y-2">
+      {value.map((p) => (
+        <li key={p.title} className="text-sm leading-relaxed text-slate-700">
+          <strong className="font-semibold text-charcoal-dark">{p.title}:</strong> {p.text}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function MethodCard({ method }) {
+  const fit = Object.entries(method.fit);
+  // Long-form fit discussions read better stacked than in narrow columns.
+  const stacked = fit.length > 3;
   return (
     <article className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       <div className="border-b border-slate-100 bg-slate-50 px-6 py-4">
@@ -46,23 +70,19 @@ function MethodCard({ method }) {
           <h5 className="eyebrow mb-1.5 flex items-center gap-1.5 text-slate-400">
             <PlusCircle size={14} className="text-emerald-600" /> Strengths
           </h5>
-          <p className="text-sm leading-relaxed text-slate-700">{method.strengths}</p>
+          <MethodPoints value={method.strengths} />
         </div>
         <div>
           <h5 className="eyebrow mb-1.5 flex items-center gap-1.5 text-slate-400">
             <MinusCircle size={14} className="text-rose-600" /> Weaknesses
           </h5>
-          <p className="text-sm leading-relaxed text-slate-700">{method.weaknesses}</p>
+          <MethodPoints value={method.weaknesses} />
         </div>
-        <dl className="grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 md:grid-cols-3">
-          {[
-            ['Project Fit', method.fit.project],
-            ['Team Fit', method.fit.team],
-            ['Stakeholder Fit', method.fit.stakeholder],
-          ].map(([label, value]) => (
-            <div key={label}>
-              <dt className="eyebrow mb-1 text-slate-400">{label}</dt>
-              <dd className="text-sm text-slate-700">{value}</dd>
+        <dl className={`grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 ${stacked ? '' : 'md:grid-cols-3'}`}>
+          {fit.map(([key, value]) => (
+            <div key={key}>
+              <dt className="eyebrow mb-1 text-slate-400">{fitLabels[key] ?? key}</dt>
+              <dd className="text-sm leading-relaxed text-slate-700">{value}</dd>
             </div>
           ))}
         </dl>

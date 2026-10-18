@@ -7,6 +7,9 @@ import { milestones, planningFactors, wbs } from './planning.js';
 import { communicationPlan, metrics, stakeholders } from './stakeholders.js';
 import { members } from './team.js';
 
+// Strengths and weaknesses are either a string or a list of { title, text } points.
+const pointsText = (v) => (Array.isArray(v) ? v.map((p) => `${p.title} ${p.text}`).join(' ') : v);
+
 const pageLabel = Object.fromEntries(navItems.map((n) => [n.to, n.label]));
 
 function entry(type, title, path, hash, text = '') {
@@ -15,7 +18,7 @@ function entry(type, title, path, hash, text = '') {
 
 const pages = [
   entry('Page', 'Home', '/', null, 'National Employment & Skill Matching Platform overview, challenge, solution, modules, impact, roadmap'),
-  entry('Page', 'Project Overview', '/project', null, 'Artifact 01 vision objectives organization scope'),
+  entry('Page', 'Project Overview', '/project', null, 'Artifact 01 Fursah vision objectives organization scope'),
   entry('Page', 'Methodology & Risk', '/methodology-risk', null, 'Artifact 02 development approaches risk management'),
   entry('Page', 'Estimation & Scheduling', '/planning', null, 'Artifact 03 planning WBS estimation schedule'),
   entry('Page', 'Stakeholders, Communication & Metrics', '/stakeholders-metrics', null, 'Artifact 04 stakeholder communication performance measurement'),
@@ -29,12 +32,13 @@ const sections = [
   entry('Section', 'Expected National Impact', '/', 'impact', 'labor market efficiency skill mismatches empowered workforce informed policymaking Vision 2030'),
   entry('Section', 'Implementation Roadmap', '/', 'roadmap', 'phase 1 core platform phase 2 career training expansion phase 3 national rollout'),
 
-  entry('Section', 'Problem & Opportunity', '/project', 'problem', 'fragmented employment ecosystem job boards hiring inefficiencies unified intelligent platform'),
-  entry('Section', 'Project Goals & Benefits', '/project', 'goals', 'improve labor market efficiency reduce skill mismatches empower workforce informed policymaking MHRSD'),
-  entry('Section', 'Project Scope', '/project', 'scope', 'in scope out of scope matching engine portals career guidance analytics networking government integrations Yakeen Absher payroll HR visa'),
-  entry('Section', 'Initial Stakeholders', '/project', 'stakeholders', 'MHRSD job seekers employers students educational institutions government agencies technology partners'),
-  entry('Section', 'Organizational Structure', '/project', 'org-structure', 'steering committee project management office product design engineering policy strategy'),
-  entry('Section', 'Implementation Approach', '/project', 'implementation', 'phases core matching engine portals career guidance national rollout'),
+  entry('Section', 'Problem & Opportunity', '/project', 'problem', 'Fursah fragmented platforms manual procedures skill mismatch Vision 2030 unemployment 7% female unemployment 10.3% people with disabilities 15%'),
+  entry('Section', 'Project Goals & Benefits', '/project', 'goals', 'unified national platform skill-based matching close skill gaps learning programs faster hiring recruitment'),
+  entry('Section', 'Initial Stakeholders', '/project', 'stakeholders', 'HRSD ministry sponsor job seekers students employers SMEs universities training providers technology firms government agencies classification stake'),
+  entry('Section', 'Team & Organizational Structure', '/project', 'org-structure', 'creativity objective team structure matrix organization board of directors chief executive vice presidents'),
+  entry('Section', 'Detailed Scope Statement', '/project', 'scope', 'in scope out of scope phases job seeker portal smart matching engine NLP employer portal career guidance analytics dashboard networking government integration national rollout training delivery payroll background checks hiring decisions contracts'),
+  entry('Section', 'Assumptions & Constraints', '/project', 'assumptions', 'government authorization accurate information cooperation training programs Arabic English data protection hosting in Saudi Arabia phased rollout'),
+  entry('Section', 'Phase Deliverables & Acceptance Criteria', '/project', 'deliverables', 'deliverable acceptance criteria core platform platform expansion national rollout integration'),
 
   entry('Section', 'Methodology Analysis', '/methodology-risk', 'methodology-analysis', 'plan-driven agile strengths weaknesses project fit team fit stakeholder fit'),
   entry('Section', `Selected Methodology: ${selectedMethodology.name}`, '/methodology-risk', 'selected-methodology', `${selectedMethodology.qualifier} ${selectedMethodology.why}`),
@@ -61,7 +65,7 @@ const sections = [
 
 const content = [
   ...[...methodologies.planDriven, ...methodologies.agile].map((m) =>
-    entry('Methodology', m.name, '/methodology-risk', 'methodology-analysis', `${m.strengths} ${m.weaknesses}`),
+    entry('Methodology', m.name, '/methodology-risk', 'methodology-analysis', `${pointsText(m.strengths)} ${pointsText(m.weaknesses)}`),
   ),
   ...risks.map((r) =>
     entry('Risk', `${r.id} · ${r.name}`, '/methodology-risk', 'risk-register', `${r.description} ${r.indicator} ${r.mitigation}`),

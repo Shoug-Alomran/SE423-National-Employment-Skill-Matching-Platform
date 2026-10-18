@@ -5,14 +5,51 @@ export const methodologies = {
   planDriven: [
     {
       name: 'Waterfall',
-      strengths:
-        'Predictable timelines and budgets, comprehensive up-front documentation, and clear phase-gate milestones that suit formal government approval and procurement processes.',
-      weaknesses:
-        'Inflexible to changing requirements, testing happens late in the lifecycle, and users see no working software until the end — risky for an AI matching engine whose behaviour must be tuned with real feedback.',
+      // Strengths and weaknesses may be a single string or a list of { title, text } points.
+      strengths: [
+        {
+          title: 'Proper Requirements and Documentation',
+          text: "Requirements are defined and documented at the start, making it clear how Employer Portal functions should work — the employer's profile, job postings, applications, candidate filtering and interviews.",
+        },
+        {
+          title: 'Predictable Scheduling and Budgeting',
+          text: 'Tasks planned in advance make it possible to assess the resources, budget and schedule needed, so development fits within project constraints.',
+        },
+        {
+          title: 'Defined Responsibilities',
+          text: "Team members' responsibilities can be clearly defined across requirement definition, design, implementation and testing.",
+        },
+        {
+          title: 'Quality Assurance',
+          text: 'Reviews confirm that all requirements are met, particularly authentication, application management and the security of candidate information.',
+        },
+      ],
+      weaknesses: [
+        {
+          title: 'Inflexibility',
+          text: 'Changing requirements after planning is hard and expensive, yet employers may need more screening requirements or hiring-process changes during development.',
+        },
+        {
+          title: 'Lack of Early Stakeholder Feedback',
+          text: 'Stakeholders may only interact with the finished application, so usability issues are likely to surface late.',
+        },
+        {
+          title: 'More Documentation Work',
+          text: 'Writing and maintaining documentation adds extra work that can be difficult for a small development team.',
+        },
+        {
+          title: 'Potential Redesign or Re-development',
+          text: 'If requirements are wrong, already-developed components must be redesigned or rebuilt.',
+        },
+      ],
       fit: {
-        project: 'Low. Requirements for matching, career guidance and analytics will evolve as data and policy mature.',
-        team: 'Medium. Works with large teams, but slows cross-team learning between engineering and data science.',
-        stakeholder: 'Medium. Suits MHRSD reporting, but limits end-user feedback until late.',
+        team: 'Fursah organized a creative team that values experimentation, diverse skills and flexibility. Defining requirements and processes up front makes it hard to experiment — especially when developing the NLP-based smart matching engine — even though clear responsibilities improve accountability.',
+        organization:
+          "Waterfall helps create schedules, documents and processes within Fursah's departments, but the matrix structure was chosen to respond quickly to job-market changes, and a formal change-control process would slow decision-making.",
+        stakeholder:
+          'Collecting and analyzing every stakeholder requirement before development helps with government integration, data security and regulation. But employer, job seeker and market needs will change during the project, and limited stakeholder involvement risks delivering features that no longer meet their needs.',
+        overall:
+          'Strong on documentation, predictability and control, but it cannot provide the flexibility our creativity-focused team and matrix organizational structure require.',
       },
     },
     {
