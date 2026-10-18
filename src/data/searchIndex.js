@@ -40,7 +40,7 @@ const sections = [
   entry('Section', 'Assumptions & Constraints', '/project', 'assumptions', 'government authorization accurate information cooperation training programs Arabic English data protection hosting in Saudi Arabia phased rollout'),
   entry('Section', 'Phase Deliverables & Acceptance Criteria', '/project', 'deliverables', 'deliverable acceptance criteria core platform platform expansion national rollout integration'),
 
-  entry('Section', 'Methodology Analysis', '/methodology-risk', 'methodology-analysis', 'plan-driven agile strengths weaknesses project fit team fit stakeholder fit'),
+  entry('Section', 'Methodology Analysis', '/methodology-risk', 'methodology-analysis', 'plan-driven agile Waterfall Incremental Model Scrum XP Extreme Programming strengths weaknesses team fit organizational structure fit stakeholder fit overall suitability'),
   entry('Section', `Selected Methodology: ${selectedMethodology.name}`, '/methodology-risk', 'selected-methodology', `${selectedMethodology.qualifier} ${selectedMethodology.why}`),
   entry('Section', 'Risk Overview', '/methodology-risk', 'risk-overview', 'total risks high priority methodology-specific general'),
   entry('Section', 'Risk Register', '/methodology-risk', 'risk-register', 'probability impact exposure first indicator mitigation export CSV'),
@@ -65,7 +65,7 @@ const sections = [
 
 const content = [
   ...[...methodologies.planDriven, ...methodologies.agile].map((m) =>
-    entry('Methodology', m.name, '/methodology-risk', 'methodology-analysis', `${pointsText(m.strengths)} ${pointsText(m.weaknesses)}`),
+    entry('Methodology', m.name, '/methodology-risk', 'methodology-analysis', `${m.overview ?? ''} ${pointsText(m.strengths)} ${pointsText(m.weaknesses)}`),
   ),
   ...risks.map((r) =>
     entry('Risk', `${r.id} · ${r.name}`, '/methodology-risk', 'risk-register', `${r.description} ${r.indicator} ${r.mitigation}`),

@@ -57,15 +57,28 @@ function MethodPoints({ value }) {
 }
 
 function MethodCard({ method }) {
-  const fit = Object.entries(method.fit);
-  // Long-form fit discussions read better stacked than in narrow columns.
-  const stacked = fit.length > 3;
   return (
     <article className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       <div className="border-b border-slate-100 bg-slate-50 px-6 py-4">
         <h4 className="text-lg font-semibold text-charcoal-dark">{method.name}</h4>
+        {method.subtitle && <p className="text-xs text-slate-500">{method.subtitle}</p>}
       </div>
       <div className="space-y-5 p-6">
+        {method.overview && <p className="text-sm leading-relaxed text-slate-700">{method.overview}</p>}
+        {method.increments && (
+          <ol className="space-y-2">
+            {method.increments.map((text, i) => (
+              <li key={text} className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-3 text-sm text-slate-700">
+                <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-saudi text-xs font-bold text-white">
+                  {i + 1}
+                </span>
+                <span>
+                  <strong className="font-semibold text-charcoal-dark">Increment {i + 1}:</strong> {text}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
         <div>
           <h5 className="eyebrow mb-1.5 flex items-center gap-1.5 text-slate-400">
             <PlusCircle size={14} className="text-emerald-600" /> Strengths
@@ -78,8 +91,8 @@ function MethodCard({ method }) {
           </h5>
           <MethodPoints value={method.weaknesses} />
         </div>
-        <dl className={`grid grid-cols-1 gap-4 border-t border-slate-100 pt-4 ${stacked ? '' : 'md:grid-cols-3'}`}>
-          {fit.map(([key, value]) => (
+        <dl className="grid grid-cols-1 gap-4 border-t border-slate-100 pt-4">
+          {Object.entries(method.fit).map(([key, value]) => (
             <div key={key}>
               <dt className="eyebrow mb-1 text-slate-400">{fitLabels[key] ?? key}</dt>
               <dd className="text-sm leading-relaxed text-slate-700">{value}</dd>
