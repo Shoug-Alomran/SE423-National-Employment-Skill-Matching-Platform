@@ -33,6 +33,7 @@ export default defineConfig(({ command }) => ({
       input: {
         main: resolve(__dirname, 'index.html'),
         taskDistribution: resolve(__dirname, 'project-task-distribution.html'),
+        presentation: resolve(__dirname, 'presentation.html'),
       },
     },
   },

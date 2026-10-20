@@ -16,6 +16,7 @@ This repository contains the project website: a static React + Vite site deploye
 | `/planning` | Estimation & Scheduling (Artifact 03) |
 | `/stakeholders-metrics` | Stakeholders, Communication & Metrics (Artifact 04) |
 | `/team` | Team |
+| `/presentation.html` | Slide deck (standalone page; add Artifact 3 slides at the `Artifact 3: add slides here` marker) |
 
 ## Tech stack
 

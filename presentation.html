@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Fursah Presentation</title>
+    <meta name="description" content="SE423 presentation of the National Employment & Skill Matching Platform (Fursah): Artifacts 1 and 2." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      /*
+       * Slide deck for the SE423 project.
+       *
+       * Every slide is a <section class="slide"> drawn on a fixed 1280×720 stage
+       * that scales to fit the window. To add Artifact 3, copy an artifact divider
+       * slide and the content slides after it, then update the agenda slide.
+       *
+       * Keys: → / Space / PageDown next · ← / PageUp back · Home / End · F fullscreen.
+       */
+      :root {
+        --green: #006c35;
+        --green-dark: #004d25;
+        --green-deep: #022c16;
+        --green-mid: #1f8a50;
+        --green-soft: #e6f0ea;
+        --green-line: #c4ddce;
+        --ink: #111827;
+        --text: #374151;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --paper: #ffffff;
+        --off: #f8f9fa;
+        --amber: #b45309;
+        --amber-soft: #fef3c7;
+        --rose: #be123c;
+        --rose-soft: #ffe4e6;
+        --orange-soft: #ffedd5;
+        --orange: #c2410c;
+        --yellow-soft: #fef9c3;
+        --blue: #1d4ed8;
+        --blue-soft: #dbeafe;
+        --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; }
+      body {
+        background: #0b1410;
+        color: var(--text);
+        font-family: var(--font);
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Stage: fixed design size, scaled by script. */
+      .viewport { position: fixed; inset: 0; overflow: hidden; }
+      .stage {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 1280px;
+        height: 720px;
+        transform-origin: center center;
+        transform: translate(-50%, -50%);
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        background: var(--paper);
+        padding: 56px 72px 64px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s;
+        border-radius: 6px;
+      }
+      .slide.active { opacity: 1; visibility: visible; }
+      @media (prefers-reduced-motion: reduce) { .slide { transition: none; } }
+
+      /* Slide chrome */
+      .slide::after {
+        content: attr(data-label);
+        position: absolute;
+        left: 72px;
+        bottom: 26px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .slide .num {
+        position: absolute;
+        right: 72px;
+        bottom: 24px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Type */
+      .eyebrow {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 10px;
+      }
+      h1 { font-size: 64px; line-height: 1.05; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+      h2 { font-size: 40px; line-height: 1.12; font-weight: 800; color: var(--ink); letter-spacing: -0.015em; margin-bottom: 28px; }
+      h3 { font-size: 22px; line-height: 1.25; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+      p, li { font-size: 19px; line-height: 1.5; }
+      .lead { font-size: 23px; line-height: 1.5; color: var(--text); max-width: 980px; }
+      .small { font-size: 16px; line-height: 1.45; }
+      .muted { color: var(--muted); }
+      strong { color: var(--ink); font-weight: 700; }
+
+      /* Layout helpers */
+      .grow { flex: 1; min-height: 0; }
+      .grid { display: grid; gap: 20px; }
+      .g2 { grid-template-columns: repeat(2, 1fr); }
+      .g3 { grid-template-columns: repeat(3, 1fr); }
+      .g4 { grid-template-columns: repeat(4, 1fr); }
+      .card {
+        background: var(--off);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px 24px;
+      }
+      .card.accent { border-left: 6px solid var(--green); }
+      .card.warn { border-left: 6px solid var(--amber); }
+      .card p { font-size: 18px; }
+      .card ul { padding-left: 20px; }
+      .card li { font-size: 17.5px; line-height: 1.45; margin-bottom: 5px; }
+      .tag {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--green-soft);
+        color: var(--green-dark);
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+      .tag.grey { background: #f3f4f6; color: var(--text); }
+      .tag.blue { background: var(--blue-soft); color: var(--blue); }
+
+      /* Title + divider slides */
+      .slide.dark {
+        background:
+          radial-gradient(circle at 85% 15%, rgba(91, 170, 125, 0.25), transparent 45%),
+          linear-gradient(135deg, var(--green-dark), var(--green-deep));
+        color: #d1fae5;
+      }
+      .slide.dark h1, .slide.dark h2, .slide.dark strong { color: #fff; }
+      .slide.dark .eyebrow { color: #8fc3a4; }
+      .slide.dark::after, .slide.dark .num { color: #8fc3a4; }
+      .slide.dark .lead { color: #d1fae5; }
+      .divider-num {
+        font-size: 180px;
+        font-weight: 800;
+        line-height: 0.9;
+        color: rgba(255, 255, 255, 0.12);
+        letter-spacing: -0.04em;
+      }
+      .members { display: grid; grid-template-columns: repeat(2, auto); gap: 6px 48px; justify-content: start; }
+      .members li { list-style: none; font-size: 19px; color: #fff; font-weight: 600; }
+
+      /* Stats */
+      .stat { font-size: 64px; font-weight: 800; color: var(--green); line-height: 1; letter-spacing: -0.02em; }
+
+      /* Tables */
+      table { width: 100%; border-collapse: collapse; }
+      th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+      th { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 700; }
+      td { font-size: 17.5px; line-height: 1.4; }
+      td:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+      /* Org chart */
+      .org { display: flex; flex-direction: column; align-items: center; gap: 0; }
+      .org .box {
+        background: var(--ink);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        padding: 10px 22px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .org .stem { width: 2px; height: 16px; background: #9ca3af; }
+      .matrix { border-collapse: separate; border-spacing: 6px; width: 100%; }
+      .matrix th, .matrix td { border: 0; text-align: center; border-radius: 8px; padding: 10px 8px; font-size: 14px; }
+      .matrix thead th { background: #f3f4f6; color: var(--ink); text-transform: none; letter-spacing: 0; font-size: 14px; }
+      .matrix tbody th { background: var(--green); color: #fff; font-size: 14px; text-transform: none; letter-spacing: 0; }
+      .matrix td { background: var(--off); border: 1.5px dashed #d1d5db; color: var(--muted); font-weight: 500; white-space: normal; }
+      .matrix .sub { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.75; font-weight: 600; }
+
+      /* Phases */
+      .phase-n {
+        width: 44px; height: 44px; border-radius: 50%;
+        display: grid; place-items: center;
+        background: var(--green); color: #fff; font-weight: 800; font-size: 20px;
+        margin-bottom: 12px;
+      }
+
+      /* Methodology cards */
+      .method h3 { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+      .pro, .con { font-size: 17px; line-height: 1.45; padding-left: 26px; position: relative; margin-top: 8px; }
+      .pro::before, .con::before { position: absolute; left: 0; top: 0; font-weight: 800; }
+      .pro::before { content: "+"; color: var(--green-mid); }
+      .con::before { content: "−"; color: var(--rose); }
+      .chosen { outline: 3px solid var(--green); outline-offset: -1px; background: var(--green-soft); border-color: var(--green-line); }
+
+      /* Risk matrix */
+      .rm { display: grid; grid-template-columns: 110px repeat(5, 1fr); grid-template-rows: repeat(5, 1fr) 30px; gap: 5px; height: 100%; }
+      .rm .ylab { font-size: 13px; font-weight: 600; color: var(--muted); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; text-align: right; }
+      .rm .xlab { font-size: 13px; font-weight: 600; color: var(--muted); text-align: center; align-self: center; }
+      .rm .cell { border-radius: 6px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 4px; padding: 4px; }
+      .rm .low { background: #dcfce7; } .rm .med { background: var(--yellow-soft); }
+      .rm .high { background: var(--orange-soft); } .rm .ext { background: var(--rose-soft); }
+      .chip { background: #fff; color: var(--ink); font-weight: 800; font-size: 12.5px; padding: 3px 7px; border-radius: 999px; box-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+      .legend { display: flex; flex-direction: column; gap: 10px; }
+      .legend span { display: inline-block; width: 16px; height: 16px; border-radius: 4px; vertical-align: -2px; margin-right: 10px; }
+      .sev { font-size: 12.5px; font-weight: 800; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+      .sev.ext { background: var(--rose-soft); color: var(--rose); }
+      .sev.high { background: var(--orange-soft); color: var(--orange); }
+
+      /* Controls */
+      .progress { position: fixed; left: 0; top: 0; height: 4px; background: #5baa7d; transition: width 0.3s ease; z-index: 10; }
+      .controls {
+        position: fixed; right: 16px; top: 14px; z-index: 10;
+        display: flex; gap: 6px; align-items: center;
+        opacity: 0.35; transition: opacity 0.2s;
+      }
+      .controls:hover, .controls:focus-within { opacity: 1; }
+      .controls button, .controls a {
+        font: 600 14px var(--font);
+        background: rgba(255, 255, 255, 0.12);
+        color: #e6f0ea;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        padding: 7px 12px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .controls button:hover, .controls a:hover { background: rgba(255, 255, 255, 0.22); }
+      .controls button:focus-visible, .controls a:focus-visible { outline: 2px solid #8fc3a4; outline-offset: 2px; }
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+      @media print {
+        body { background: #fff; overflow: visible; }
+        .viewport { position: static; display: block; }
+        .stage { position: static; transform: none !important; width: auto; height: auto; }
+        .slide { position: relative; opacity: 1; visibility: visible; width: 1280px; height: 720px; break-after: page; border-radius: 0; }
+        .controls, .progress { display: none; }
+        @page { size: 1280px 720px; margin: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+    <main class="viewport" id="viewport">
+      <div class="stage" id="stage" aria-live="polite">
+        <!-- ============ Title ============ -->
+        <section class="slide dark" data-label="SE423 · Scenario 11">
+          <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
+            <p class="eyebrow">SE423 Software Project Management</p>
+            <h1 style="font-size: 92px">Fursah</h1>
+            <p class="lead" style="font-size: 30px; margin-top: 10px; color: #fff; font-weight: 600">
+              National Employment &amp; Skill Matching Platform
+            </p>
+            <p class="lead" style="margin-top: 8px">“Fursah” means <em>chance</em> — a fair chance for everyone in Saudi Arabia to find work that fits their skills.</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 40px">
+            <ul class="members">
+              <li>Shoug Fawaz Abdullah Alomran</li>
+              <li>Rose Saeed Rakan Al Rakan</li>
+              <li>Yara Faris Faihan Albugami</li>
+              <li>Hatoon Abdullah</li>
+            </ul>
+            <p class="small" style="text-align: right">Instructor: Ms. Alhanouf Almutairi<br />Section 1480</p>
+          </div>
+        </section>
+
+        <!-- ============ Agenda ============ -->
+        <section class="slide" data-label="Agenda">
+          <p class="eyebrow">Agenda</p>
+          <h2>Where we are in the project</h2>
+          <div class="grid g4 grow" style="align-content: start">
+            <div class="card accent">
+              <span class="tag">Artifact 1</span>
+              <h3 style="margin-top: 12px">Overview, Organization &amp; Scope</h3>
+              <p class="muted">Problem, goals, stakeholders, team &amp; org structure, scope and acceptance criteria.</p>
+            </div>
+            <div class="card accent">
+              <span class="tag">Artifact 2</span>
+              <h3 style="margin-top: 12px">Methodology, Risks &amp; Decision</h3>
+              <p class="muted">Scrum, XP, Waterfall and Incremental compared; risk register; final choice.</p>
+            </div>
+            <div class="card" style="border-style: dashed">
+              <span class="tag grey">Artifact 3 · Coming soon</span>
+              <h3 style="margin-top: 12px; color: var(--muted)">Estimation &amp; Scheduling</h3>
+              <p class="muted">WBS, estimates and the delivery schedule.</p>
+            </div>
+            <div class="card" style="border-style: dashed">
+              <span class="tag grey">Artifact 4 · Later</span>
+              <h3 style="margin-top: 12px; color: var(--muted)">Stakeholders, Communication &amp; Metrics</h3>
+              <p class="muted">Stakeholder management, communication plan and project metrics.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ Artifact 1 ============ -->
+        <section class="slide dark" data-label="Artifact 1">
+          <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
+            <div class="divider-num">01</div>
+            <p class="eyebrow" style="margin-top: 16px">Artifact 1</p>
+            <h1>Overview, Organizational<br />Structure &amp; Scope</h1>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 1 · Problem &amp; Opportunity">
+          <p class="eyebrow">Problem &amp; Opportunity</p>
+          <h2>Employment efforts are scattered — skills aren’t matched to jobs</h2>
+          <div class="grid g2">
+            <div class="card warn">
+              <h3>The problem</h3>
+              <p>National employment efforts are spread across different platforms, causing confusion. Manual procedures make finding suitable candidates hard, and current methods don’t accurately show whether a person’s skills fit the job.</p>
+            </div>
+            <div class="card accent">
+              <h3>The opportunity</h3>
+              <p>A digital platform can reach people across the nation — including people with disabilities — and match them to jobs within their skill set, supporting the Labor Market Strategy and Human Capability Development Program.</p>
+            </div>
+          </div>
+          <div class="grid g3" style="margin-top: 28px">
+            <div><div class="stat">7%</div><p class="small muted" style="margin-top: 6px">Unemployment target by 2030 (Vision 2030)</p></div>
+            <div><div class="stat">10.3%</div><p class="small muted" style="margin-top: 6px">Female unemployment in 2025, falling with participation</p></div>
+            <div><div class="stat">15%</div><p class="small muted" style="margin-top: 6px">Target employment of people with disabilities by 2030</p></div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 1 · Goals &amp; Benefits">
+          <p class="eyebrow">Goals &amp; Benefits</p>
+          <h2>What Fursah sets out to do</h2>
+          <div class="grid g2 grow" style="align-content: start">
+            <div class="card accent"><h3>One national platform</h3><p>A unified employment and skill matching platform that refines how employers and applicants connect, replacing traditional job searching.</p></div>
+            <div class="card accent"><h3>Skill-based matching</h3><p>Propose opportunities from users’ skills and experience; help employers find applicants who meet their requirements.</p></div>
+            <div class="card accent"><h3>Close skill gaps</h3><p>Recommend learning programs based on qualifications and interests so users can spot and close gaps in their skills.</p></div>
+            <div class="card accent"><h3>Faster, better hiring</h3><p>Less time and effort to find matches, a stronger recruitment process, and better career opportunities.</p></div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 1 · Stakeholders">
+          <p class="eyebrow">Initial Stakeholders</p>
+          <h2>Seven stakeholder groups, led by HRSD</h2>
+          <table>
+            <thead><tr><th>Stakeholder</th><th>Type</th><th>Stake</th></tr></thead>
+            <tbody>
+              <tr><td>HRSD (Ministry)</td><td><span class="tag">Internal – Sponsor</span></td><td>Sponsors and oversees the project to support employment and reduce skill mismatch.</td></tr>
+              <tr><td>Job Seekers</td><td><span class="tag grey">External</span></td><td>Create profiles, discover opportunities, apply and track applications.</td></tr>
+              <tr><td>Students</td><td><span class="tag grey">External</span></td><td>Explore careers and opportunities aligned with their skills.</td></tr>
+              <tr><td>Employers (Large &amp; SMEs)</td><td><span class="tag grey">External</span></td><td>Publish jobs, manage applications, screen candidates, schedule interviews.</td></tr>
+              <tr><td>Universities &amp; Training</td><td><span class="tag grey">External</span></td><td>Provide education and training for labor-market skills.</td></tr>
+              <tr><td>Technology Firms</td><td><span class="tag grey">External</span></td><td>Provide technical expertise and implementation support.</td></tr>
+              <tr><td>Government Agencies</td><td><span class="tag grey">External</span></td><td>Provide services or data integrated in later phases.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="slide" data-label="Artifact 1 · Team &amp; Organization">
+          <p class="eyebrow">Team &amp; Organizational Structure</p>
+          <h2>A creative team inside a matrix organization</h2>
+          <div class="grid g2 grow" style="grid-template-columns: 1fr 1.1fr; align-items: start">
+            <div style="display: flex; flex-direction: column; gap: 16px">
+              <div class="card accent">
+                <h3>Team: creativity objective</h3>
+                <p>Fursah is a new concept needing quick adaptation and out-of-the-box ideas. The team tolerates ambiguity and iteration, experiments, and shares ideas and risks.</p>
+              </div>
+              <div class="card accent">
+                <h3>Organization: matrix</h3>
+                <p>Rapid response to market change (project structure) with loyalty to the firm (functional structure); coordinates shared, limited resources.</p>
+              </div>
+            </div>
+            <div class="org">
+              <div class="box">Board of Directors</div>
+              <div class="stem"></div>
+              <div class="box">Chief Executive</div>
+              <div class="stem"></div>
+              <table class="matrix">
+                <thead>
+                  <tr><th style="background: transparent"></th><th><span class="sub">VP</span>Product &amp; Design</th><th><span class="sub">VP</span>Engineering</th><th><span class="sub">VP</span>Policy &amp; Strategy</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th><span class="sub">VP of Projects</span>Fursah Project</th><td>UX/UI Lead · Product Owner</td><td>Technical Lead · Data Scientists</td><td>Labor Experts · Compliance</td></tr>
+                </tbody>
+              </table>
+              <p class="small muted" style="margin-top: 10px; text-align: center">Staff report to both their functional VP and the VP of Projects.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 1 · Scope">
+          <p class="eyebrow">Detailed Scope</p>
+          <h2>Delivered in three phases</h2>
+          <div class="grid g3 grow" style="align-content: start">
+            <div class="card">
+              <div class="phase-n">1</div>
+              <h3>Core Matching Engine &amp; Basic Portals</h3>
+              <ul>
+                <li><strong>Job Seeker Portal</strong> — profiles, resumes, browse, apply, track</li>
+                <li><strong>Smart Matching Engine</strong> — NLP analysis of profiles and job descriptions</li>
+                <li><strong>Employer Portal</strong> — postings, requirements, review &amp; screen</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="phase-n">2</div>
+              <h3>Career Guidance, Training &amp; Expansion</h3>
+              <ul>
+                <li><strong>Career Guidance &amp; Training</strong> — skill-gap analysis and course suggestions</li>
+                <li><strong>Analytics Dashboard</strong> — labor-market trends for HRSD</li>
+                <li><strong>Professional Networking</strong> — connections, insights, forums</li>
+              </ul>
+            </div>
+            <div class="card">
+              <div class="phase-n">3</div>
+              <h3>National Rollout &amp; Gov. Integration</h3>
+              <ul>
+                <li><strong>Government Service Integration</strong> — authorized data exchange</li>
+                <li><strong>National Rollout</strong> — nationwide, more industries, awareness campaigns, Arabic &amp; English</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 1 · Boundaries">
+          <p class="eyebrow">Out of Scope · Assumptions · Constraints</p>
+          <h2>Where Fursah stops, and what it depends on</h2>
+          <div class="grid g3 grow" style="align-content: start">
+            <div class="card">
+              <h3>Out of scope</h3>
+              <ul>
+                <li>Delivering training courses</li>
+                <li>Payroll processing</li>
+                <li>Background checks</li>
+                <li>Final hiring decisions</li>
+                <li>Employment contracts</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Assumptions</h3>
+              <ul>
+                <li>Agencies authorize and provide integration interfaces</li>
+                <li>Users provide accurate, complete information</li>
+                <li>Partners cooperate throughout the project</li>
+                <li>Suitable external training exists to recommend</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Constraints</h3>
+              <ul>
+                <li>Arabic and English support</li>
+                <li>Saudi data-protection compliance</li>
+                <li>Hosting within Saudi Arabia</li>
+                <li>Phased rollout, not all at once</li>
+                <li>Integrations depend on agency readiness</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 1 · Acceptance Criteria">
+          <p class="eyebrow">Phase Deliverables &amp; Acceptance Criteria</p>
+          <h2>How we’ll know each phase is done</h2>
+          <table>
+            <thead><tr><th>Deliverable</th><th>Accepted when…</th></tr></thead>
+            <tbody>
+              <tr><td>Job Seeker Portal</td><td>Users manage profiles and skills, search jobs, apply and track status.</td></tr>
+              <tr><td>Smart Matching Engine</td><td>Recommends jobs to seekers and candidates to employers based on skills and requirements.</td></tr>
+              <tr><td>Employer Portal</td><td>Employers post jobs, review and screen applicants, track hiring and schedule interviews.</td></tr>
+              <tr><td>Career Guidance &amp; Training</td><td>Users get career recommendations, see skill gaps and matching courses.</td></tr>
+              <tr><td>Analytics Dashboard</td><td>Authorized Ministry users see labor-market trends and skill gaps for policy decisions.</td></tr>
+              <tr><td>Professional Networking</td><td>Users connect, share career insights and join industry forums.</td></tr>
+              <tr><td>Gov. Integration &amp; Rollout</td><td>Authorized data exchange works; available nationwide, bilingual, with awareness campaigns.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- ============ Artifact 2 ============ -->
+        <section class="slide dark" data-label="Artifact 2">
+          <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
+            <div class="divider-num">02</div>
+            <p class="eyebrow" style="margin-top: 16px">Artifact 2</p>
+            <h1>Methodology Analysis,<br />Risks &amp; Decision</h1>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 2 · Methodologies">
+          <p class="eyebrow">Methodology Analysis</p>
+          <h2>Four methodologies, two families</h2>
+          <div class="grid g4 grow" style="align-content: start">
+            <div class="card method chosen">
+              <h3>Scrum <span class="tag">Agile</span></h3>
+              <p class="pro">Daily communication, adaptable plans, rapid feedback and retrospectives</p>
+              <p class="pro">Focus on finishing work</p>
+              <p class="con">Assumes ideal communicators; risk of burnout</p>
+              <p class="con">Replacing members disrupts schedule</p>
+            </div>
+            <div class="card method">
+              <h3>XP <span class="tag">Agile</span></h3>
+              <p class="pro">TDD and continuous integration catch defects early</p>
+              <p class="pro">Pair programming spreads knowledge</p>
+              <p class="con">Demands strong technical discipline</p>
+              <p class="con">Pairing clashes with matrix assignments</p>
+            </div>
+            <div class="card method">
+              <h3>Waterfall <span class="tag blue">Plan-driven</span></h3>
+              <p class="pro">Documented requirements for PDPL and HRSD approval</p>
+              <p class="pro">Fixed cost and schedule; phase gates</p>
+              <p class="con">Poor at handling change</p>
+              <p class="con">Nothing usable until the end</p>
+            </div>
+            <div class="card method">
+              <h3>Incremental <span class="tag blue">Plan-driven</span></h3>
+              <p class="pro">Core value early; matching engine risk tackled first</p>
+              <p class="pro">Ministry gate review per increment</p>
+              <p class="con">Requirements locked early</p>
+              <p class="con">Integration work grows each increment</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 2 · Fit">
+          <p class="eyebrow">Fit with Team, Organization &amp; Stakeholders</p>
+          <h2>Only the adaptive methods suit a creative, matrix team</h2>
+          <table>
+            <thead><tr><th style="width: 16%">Method</th><th>Creative team</th><th>Matrix organization</th><th>Stakeholders</th></tr></thead>
+            <tbody>
+              <tr><td>Scrum</td><td>Direct match — built for iteration and change</td><td>Built for quick response, like the matrix</td><td>Sprint reviews and backlog input via the Product Owner</td></tr>
+              <tr><td>XP</td><td>Supports experimenting with CV parsing and matching</td><td>CI and shared code help; pairing is hard with competing work</td><td>Frequent feedback, but needs timely participation</td></tr>
+              <tr><td>Waterfall</td><td>Designs must be final before ideas are tested</td><td>Partially — fixed phases aid planning but slow response</td><td>Good for HRSD approvals; users give feedback only at the end</td></tr>
+              <tr><td>Incremental</td><td>Better than Waterfall, less flexible than Agile</td><td>Clear staffing per increment; change control slows response</td><td>Predictable milestones; users shape later increments</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="slide dark" data-label="Artifact 2 · Decision">
+          <p class="eyebrow">Selected Process Methodology</p>
+          <h1 style="font-size: 76px; margin-bottom: 28px">We chose <span style="color: #8fc3a4">Scrum</span></h1>
+          <div class="grid g3">
+            <div class="card" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15)">
+              <h3 style="color: #fff">New, evolving product</h3>
+              <p style="color: #d1fae5">Fursah involves risk-taking, experimentation and iteration — Scrum is built for that.</p>
+            </div>
+            <div class="card" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15)">
+              <h3 style="color: #fff">No predictive methods</h3>
+              <p style="color: #d1fae5">Requirements aren’t well defined at the start, ruling out Waterfall and Incremental.</p>
+            </div>
+            <div class="card" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15)">
+              <h3 style="color: #fff">Scrum over XP</h3>
+              <p style="color: #d1fae5">Responds quickly to customer needs, makes change easy, and copes with an unstable scope.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 2 · Risk Register">
+          <p class="eyebrow">Risk Register</p>
+          <h2>16 risks — four per methodology</h2>
+          <div class="grid grow" style="grid-template-columns: 1.45fr 1fr; gap: 40px; min-height: 0">
+            <div class="rm" role="img" aria-label="Risk matrix: Likely × Major holds S3, W1, I1, I3; Possible × Extreme holds W2, W3, W4, I2; Possible × Major holds S1, S4, X1, X3, X4, I4; Likely × Moderate holds X2; Possible × Moderate holds S2.">
+              <div class="ylab">Almost Certain</div><div class="cell med"></div><div class="cell high"></div><div class="cell high"></div><div class="cell ext"></div><div class="cell ext"></div>
+              <div class="ylab">Likely</div><div class="cell low"></div><div class="cell med"></div><div class="cell high"><b class="chip">X2</b></div><div class="cell ext"><b class="chip">S3</b><b class="chip">W1</b><b class="chip">I1</b><b class="chip">I3</b></div><div class="cell ext"></div>
+              <div class="ylab">Possible</div><div class="cell low"></div><div class="cell med"></div><div class="cell med"><b class="chip">S2</b></div><div class="cell high"><b class="chip">S1</b><b class="chip">S4</b><b class="chip">X1</b><b class="chip">X3</b><b class="chip">X4</b><b class="chip">I4</b></div><div class="cell high"><b class="chip">W2</b><b class="chip">W3</b><b class="chip">W4</b><b class="chip">I2</b></div>
+              <div class="ylab">Unlikely</div><div class="cell low"></div><div class="cell low"></div><div class="cell med"></div><div class="cell med"></div><div class="cell high"></div>
+              <div class="ylab">Rare</div><div class="cell low"></div><div class="cell low"></div><div class="cell low"></div><div class="cell low"></div><div class="cell med"></div>
+              <div></div><div class="xlab">Negligible</div><div class="xlab">Minor</div><div class="xlab">Moderate</div><div class="xlab">Major</div><div class="xlab">Extreme</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 22px; justify-content: center">
+              <div class="legend">
+                <p class="small"><span style="background: var(--rose-soft)"></span><strong>4 Extreme</strong> · exposure 16–25</p>
+                <p class="small"><span style="background: var(--orange-soft)"></span><strong>11 High</strong> · exposure 10–15</p>
+                <p class="small"><span style="background: var(--yellow-soft)"></span><strong>1 Medium</strong> · exposure 5–9</p>
+              </div>
+              <p class="small muted">Probability and impact scored 1–5 (rows: probability; columns: impact). Exposure = probability × impact.</p>
+              <p class="small"><strong>S</strong> Scrum · <strong>X</strong> XP · <strong>W</strong> Waterfall · <strong>I</strong> Incremental</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 2 · Scrum Risks">
+          <p class="eyebrow">Risks of the Chosen Methodology</p>
+          <h2>How we’ll manage Scrum’s risks</h2>
+          <table>
+            <thead><tr><th style="width: 24%">Risk</th><th style="width: 10%">Exposure</th><th>Response</th></tr></thead>
+            <tbody>
+              <tr><td>S3 · Over budget &amp; time</td><td><span class="sev ext">16</span></td><td>Plan sprints to the team’s real capacity; track the sprint burndown chart daily.</td></tr>
+              <tr><td>S1 · Scope creep</td><td><span class="sev high">12</span></td><td>Set a sprint goal; new mid-sprint requests go to the product backlog.</td></tr>
+              <tr><td>S4 · Developer burnout</td><td><span class="sev high">12</span></td><td>Plan by historical velocity; move unfinished work to the backlog without penalty; listen to the team.</td></tr>
+              <tr><td>S2 · Unfamiliar with Scrum</td><td><span class="sev" style="background: var(--yellow-soft); color: var(--amber)">9</span></td><td>Introductory Scrum training before the switch; hold staff accountable to the process.</td></tr>
+            </tbody>
+          </table>
+          <p class="small muted" style="margin-top: 18px">Full register, including XP, Waterfall and Incremental risks, is on the project website.</p>
+        </section>
+
+        <!-- ============ Artifact 3: add slides here ============ -->
+
+        <!-- ============ Close ============ -->
+        <section class="slide dark" data-label="Thank you">
+          <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
+            <p class="eyebrow">Next up · Artifact 3</p>
+            <h1 style="font-size: 84px">Thank you</h1>
+            <p class="lead" style="margin-top: 16px">Questions? Next, we’ll estimate and schedule the Scrum delivery of Fursah.</p>
+          </div>
+          <p class="small" style="color: #8fc3a4">software-project-management.shoug-tech.com</p>
+        </section>
+      </div>
+    </main>
+
+    <nav class="controls" aria-label="Slide controls">
+      <a href="/" title="Back to the project website">Site</a>
+      <button type="button" id="prev" aria-label="Previous slide">←</button>
+      <span class="sr-only" id="status"></span>
+      <button type="button" id="next" aria-label="Next slide">→</button>
+      <button type="button" id="fs" aria-label="Toggle fullscreen">⛶</button>
+    </nav>
+
+    <script>
+      (function () {
+        var stage = document.getElementById('stage');
+        var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
+        var progress = document.getElementById('progress');
+        var status = document.getElementById('status');
+        var current = 0;
+
+        slides.forEach(function (s, i) {
+          var n = document.createElement('span');
+          n.className = 'num';
+          n.textContent = i + 1 + ' / ' + slides.length;
+          s.appendChild(n);
+          s.setAttribute('aria-roledescription', 'slide');
+          s.setAttribute('aria-label', i + 1 + ' of ' + slides.length);
+        });
+
+        function fit() {
+          var scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+          stage.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+        }
+
+        function go(i, push) {
+          current = Math.max(0, Math.min(slides.length - 1, i));
+          slides.forEach(function (s, k) {
+            var on = k === current;
+            s.classList.toggle('active', on);
+            s.setAttribute('aria-hidden', on ? 'false' : 'true');
+          });
+          progress.style.width = ((current + 1) / slides.length) * 100 + '%';
+          status.textContent = 'Slide ' + (current + 1) + ' of ' + slides.length;
+          if (push !== false) history.replaceState(null, '', '#' + (current + 1));
+        }
+
+        function fromHash() {
+          var n = parseInt(location.hash.slice(1), 10);
+          return isNaN(n) ? 0 : n - 1;
+        }
+
+        document.addEventListener('keydown', function (e) {
+          if (e.metaKey || e.ctrlKey || e.altKey) return;
+          var k = e.key;
+          if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'ArrowDown') { e.preventDefault(); go(current + 1); }
+          else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); go(current - 1); }
+          else if (k === 'Home') go(0);
+          else if (k === 'End') go(slides.length - 1);
+          else if (k === 'f' || k === 'F') toggleFs();
+        });
+
+        function toggleFs() {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+          else document.exitFullscreen && document.exitFullscreen();
+        }
+
+        document.getElementById('prev').addEventListener('click', function () { go(current - 1); });
+        document.getElementById('next').addEventListener('click', function () { go(current + 1); });
+        document.getElementById('fs').addEventListener('click', toggleFs);
+
+        // Click the right two-thirds of the screen to advance, the left third to go back.
+        document.getElementById('viewport').addEventListener('click', function (e) {
+          if (e.target.closest('a, button')) return;
+          go(e.clientX > window.innerWidth / 3 ? current + 1 : current - 1);
+        });
+
+        var touchX = null;
+        document.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+        document.addEventListener('touchend', function (e) {
+          if (touchX === null) return;
+          var dx = e.changedTouches[0].clientX - touchX;
+          if (Math.abs(dx) > 40) go(dx < 0 ? current + 1 : current - 1);
+          touchX = null;
+        });
+
+        window.addEventListener('resize', fit);
+        window.addEventListener('hashchange', function () { go(fromHash(), false); });
+        fit();
+        go(fromHash(), false);
+      })();
+    </script>
+  </body>
+</html>
