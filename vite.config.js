@@ -22,8 +22,33 @@ function normalizeBase(value) {
   return base;
 }
 
+/**
+ * Standalone HTML pages, served at clean URLs such as /presentation.
+ * GitHub Pages maps /presentation to presentation.html on its own; this plugin
+ * does the same for `npm run dev` and `npm run preview`.
+ */
+const STANDALONE_PAGES = ['presentation', 'project-task-distribution'];
+
+function cleanUrls() {
+  const rewrite = (req, _res, next) => {
+    const [path, query = ''] = req.url.split('?');
+    const page = path.replace(/^\/|\/$/g, '');
+    if (STANDALONE_PAGES.includes(page)) req.url = `/${page}.html${query ? `?${query}` : ''}`;
+    next();
+  };
+  return {
+    name: 'clean-urls',
+    configureServer(server) {
+      server.middlewares.use(rewrite);
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(rewrite);
+    },
+  };
+}
+
 export default defineConfig(({ command }) => ({
-  plugins: [react()],
+  plugins: [react(), cleanUrls()],
   // The dev server runs at "/", production builds use the GitHub Pages subpath.
   base: command === 'serve' ? '/' : normalizeBase(process.env.BASE_PATH),
   build: {

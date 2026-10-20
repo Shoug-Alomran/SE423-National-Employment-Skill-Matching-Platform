@@ -10,6 +10,13 @@ CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
   --window-size=1200,630 --virtual-time-budget=8000 \
   --screenshot="$PWD/public/og-image.png" "file://$PWD/brand/og-image.html"
 
+# Share banner for the presentation (/presentation), 1200x630.
+"$CHROME" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
+  --window-size=1200,630 --virtual-time-budget=8000 \
+  --screenshot=/tmp/nesmp-og-presentation.png "file://$PWD/brand/og-presentation.html"
+# JPEG keeps it well under WhatsApp's ~300 KB preview limit.
+magick /tmp/nesmp-og-presentation.png -strip -quality 86 -sampling-factor 4:2:0 public/og-presentation.jpg
+
 # Home-screen icon and legacy favicon.
 rsvg-convert -w 180 -h 180 brand/app-icon.svg -o public/apple-touch-icon.png
 rsvg-convert -w 16 -h 16 public/favicon.svg -o /tmp/nesmp-16.png

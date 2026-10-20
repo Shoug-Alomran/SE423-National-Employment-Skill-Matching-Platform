@@ -4,8 +4,30 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Fursah Presentation</title>
-    <meta name="description" content="SE423 presentation of the National Employment & Skill Matching Platform (Fursah): Artifacts 1 and 2." />
+    <meta name="description" content="SE423 project presentation of Fursah, the National Employment &amp; Skill Matching Platform: scope, organization, methodology decision and risk register (Artifacts 1 and 2)." />
+    <meta name="theme-color" content="#004D25" />
+    <link rel="canonical" href="https://software-project-management.shoug-tech.com/presentation" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Social share preview (WhatsApp, iMessage, X, LinkedIn, Slack...). Image source: brand/og-presentation.html -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NESMP" />
+    <meta property="og:url" content="https://software-project-management.shoug-tech.com/presentation" />
+    <meta property="og:title" content="Fursah: Project Presentation" />
+    <meta property="og:description" content="SE423 · National Employment &amp; Skill Matching Platform. Artifacts 1 &amp; 2: scope, organization, methodology decision and risk register." />
+    <meta property="og:image" content="https://software-project-management.shoug-tech.com/og-presentation.jpg" />
+    <meta property="og:image:secure_url" content="https://software-project-management.shoug-tech.com/og-presentation.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fursah project presentation: a fair chance at work" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fursah: Project Presentation" />
+    <meta name="twitter:description" content="SE423 · National Employment &amp; Skill Matching Platform. Artifacts 1 &amp; 2: scope, organization, methodology decision and risk register." />
+    <meta name="twitter:image" content="https://software-project-management.shoug-tech.com/og-presentation.jpg" />
+    <meta name="twitter:image:alt" content="Fursah project presentation: a fair chance at work" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -756,7 +778,7 @@
           stage.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
         }
 
-        function go(i, push) {
+        function go(i) {
           current = Math.max(0, Math.min(slides.length - 1, i));
           slides.forEach(function (s, k) {
             var on = k === current;
@@ -767,7 +789,8 @@
           countUp(slides[current]);
           progress.style.width = ((current + 1) / slides.length) * 100 + '%';
           status.textContent = 'Slide ' + (current + 1) + ' of ' + slides.length;
-          if (push !== false) history.replaceState(null, '', '#' + (current + 1));
+          // Keep the shared URL clean: drop any #N once it has been read.
+          if (location.hash) history.replaceState(null, '', location.pathname + location.search);
         }
 
         function fromHash() {
@@ -810,9 +833,9 @@
         });
 
         window.addEventListener('resize', fit);
-        window.addEventListener('hashchange', function () { go(fromHash(), false); });
+        window.addEventListener('hashchange', function () { go(fromHash()); });
         fit();
-        go(fromHash(), false);
+        go(fromHash());
       })();
     </script>
   </body>

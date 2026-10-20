@@ -18,5 +18,5 @@ export const navItems = [
   { to: '/stakeholders-metrics', label: 'Stakeholders & Metrics' },
   { to: '/team', label: 'Team' },
   { to: '/project-task-distribution.html', label: 'Task Distribution', external: true },
-  { to: '/presentation.html', label: 'Presentation', external: true },
+  { to: '/presentation', label: 'Presentation', external: true },
 ];
