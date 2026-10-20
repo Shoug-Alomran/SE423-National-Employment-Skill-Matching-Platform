@@ -74,11 +74,58 @@
         overflow: hidden;
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.35s ease, visibility 0.35s;
+        transform: translateX(80px) scale(0.98);
+        transition:
+          opacity 0.5s ease,
+          transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+          visibility 0.6s;
         border-radius: 6px;
       }
-      .slide.active { opacity: 1; visibility: visible; }
-      @media (prefers-reduced-motion: reduce) { .slide { transition: none; } }
+      /* Slides behind the current one leave to the left, slides ahead wait on the right. */
+      .slide.past { transform: translateX(-80px) scale(0.98); }
+      .slide.active { opacity: 1; visibility: visible; transform: none; }
+
+      /* ---------- Entrance animations ----------
+       * The script tags each slide's content with .anim and a --i stagger index.
+       * Animations restart every time a slide becomes active. */
+      @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+      @keyframes pop { 0% { opacity: 0; transform: scale(0.3); } 70% { opacity: 1; transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes growY { from { opacity: 1; transform: scaleY(0); } to { opacity: 1; transform: scaleY(1); } }
+      @keyframes slideIn { from { opacity: 0; transform: translateX(-60px); } to { opacity: 0.12; transform: none; } }
+      @keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(0, 108, 53, 0); } 50% { box-shadow: 0 0 0 10px rgba(0, 108, 53, 0.14); } }
+      @keyframes sweep { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+      @keyframes drift { 0%, 100% { background-position: 0% 0%, 0 0; } 50% { background-position: 100% 60%, 0 0; } }
+
+      .slide .anim { opacity: 0; }
+      .slide.active .anim {
+        animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: calc(0.12s + var(--i, 0) * 0.07s);
+      }
+      .slide.active .divider-num.anim { animation-name: slideIn; animation-duration: 0.9s; }
+      .slide.active .rm .cell.anim { animation-name: fadeIn; animation-duration: 0.4s; animation-delay: calc(0.25s + var(--i, 0) * 0.045s); }
+      .slide.active .rm .chip.anim,
+      .slide.active .sev.anim { animation-name: pop; animation-duration: 0.45s; animation-delay: calc(0.9s + var(--i, 0) * 0.06s); }
+      .slide.active .org .stem.anim { animation-name: growY; transform-origin: top; }
+      .slide.active .card.chosen.anim {
+        animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both, glow 2.4s ease-in-out 1.2s infinite;
+        animation-delay: calc(0.12s + var(--i, 0) * 0.07s), 1.2s;
+      }
+      .highlight {
+        background: linear-gradient(transparent 62%, rgba(143, 195, 164, 0.35) 62%) no-repeat;
+        background-size: 0% 100%;
+      }
+      .slide.active .highlight { animation: sweep 0.8s ease-out 0.9s both; }
+      .slide.dark { background-size: 200% 200%, 100% 100%; }
+      .slide.dark.active { animation: drift 18s ease-in-out infinite; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .slide, .slide.past { transition: opacity 0.2s; transform: none; }
+        .slide .anim { opacity: 1; }
+        .slide.active .anim, .slide.active .highlight, .slide.dark.active { animation: none !important; }
+        .slide.active .divider-num.anim { opacity: 0.12; }
+        .highlight { background-size: 100% 100%; }
+      }
 
       /* Slide chrome */
       .slide::after {
@@ -260,6 +307,10 @@
         .stage { position: static; transform: none !important; width: auto; height: auto; }
         .slide { position: relative; opacity: 1; visibility: visible; width: 1280px; height: 720px; break-after: page; border-radius: 0; }
         .controls, .progress { display: none; }
+        .slide, .slide * { animation: none !important; }
+        .slide .anim { opacity: 1; }
+        .slide .divider-num.anim { opacity: 0.12; }
+        .highlight { background-size: 100% 100%; }
         @page { size: 1280px 720px; margin: 0; }
       }
     </style>
@@ -552,7 +603,7 @@
 
         <section class="slide dark" data-label="Artifact 2 · Decision">
           <p class="eyebrow">Selected Process Methodology</p>
-          <h1 style="font-size: 76px; margin-bottom: 28px">We chose <span style="color: #8fc3a4">Scrum</span></h1>
+          <h1 style="font-size: 76px; margin-bottom: 28px">We chose <span class="highlight" style="color: #8fc3a4">Scrum</span></h1>
           <div class="grid g3">
             <div class="card" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15)">
               <h3 style="color: #fff">New, evolving product</h3>
@@ -647,6 +698,59 @@
           s.setAttribute('aria-label', i + 1 + ' of ' + slides.length);
         });
 
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Tag each slide's content for staggered entrance, in reading order.
+        var ANIM = '.eyebrow, h1, h2, .lead, .divider-num, .members li, .slide > p, .grow > p, .grid > *, .org > *, tbody tr, .legend p';
+        slides.forEach(function (s) {
+          var i = 0;
+          s.querySelectorAll(ANIM).forEach(function (el) {
+            if (el.classList.contains('anim')) return;
+            el.classList.add('anim');
+            el.style.setProperty('--i', Math.min(i++, 14));
+          });
+          // Risk matrix: cells wash in diagonally, then the risk chips pop in.
+          s.querySelectorAll('.rm').forEach(function (rm) {
+            rm.classList.remove('anim');
+            var cells = rm.querySelectorAll('.cell');
+            cells.forEach(function (c, k) {
+              c.classList.add('anim');
+              c.style.setProperty('--i', (4 - Math.floor(k / 5)) + (k % 5));
+            });
+            rm.querySelectorAll('.chip').forEach(function (c, k) {
+              c.classList.add('anim');
+              c.style.setProperty('--i', k);
+            });
+          });
+          s.querySelectorAll('.sev').forEach(function (c, k) {
+            c.classList.add('anim');
+            c.style.setProperty('--i', k);
+          });
+        });
+
+        // Count headline numbers up from zero when their slide opens.
+        function countUp(slide) {
+          slide.querySelectorAll('.stat').forEach(function (el, k) {
+            var target = el.dataset.value || (el.dataset.value = el.textContent);
+            var m = target.match(/^([\d.]+)(.*)$/);
+            if (!m || reduceMotion) { el.textContent = target; return; }
+            var end = parseFloat(m[1]);
+            var decimals = (m[1].split('.')[1] || '').length;
+            var start = null;
+            var delay = 350 + k * 150;
+            el.textContent = (0).toFixed(decimals) + m[2];
+            function step(t) {
+              if (start === null) start = t + delay;
+              var p = Math.min(1, Math.max(0, (t - start) / 1100));
+              var eased = 1 - Math.pow(1 - p, 3);
+              el.textContent = (end * eased).toFixed(decimals) + m[2];
+              if (p < 1 && slide.classList.contains('active')) requestAnimationFrame(step);
+              else el.textContent = target;
+            }
+            requestAnimationFrame(step);
+          });
+        }
+
         function fit() {
           var scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
           stage.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
@@ -657,8 +761,10 @@
           slides.forEach(function (s, k) {
             var on = k === current;
             s.classList.toggle('active', on);
+            s.classList.toggle('past', k < current);
             s.setAttribute('aria-hidden', on ? 'false' : 'true');
           });
+          countUp(slides[current]);
           progress.style.width = ((current + 1) / slides.length) * 100 + '%';
           status.textContent = 'Slide ' + (current + 1) + ' of ' + slides.length;
           if (push !== false) history.replaceState(null, '', '#' + (current + 1));
