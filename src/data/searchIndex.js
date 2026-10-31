@@ -3,7 +3,7 @@
 // When you add a section or page, add an entry here so it can be found.
 import { navItems } from '../config.js';
 import { methodologies, risks, selectedMethodology } from './methodologyRisk.js';
-import { milestones, planningFactors, wbs } from './planning.js';
+import { backlog, meetings, scrumElements, wbs } from './planning.js';
 import { communicationPlan, metrics, stakeholders } from './stakeholders.js';
 import { members } from './team.js';
 
@@ -20,7 +20,7 @@ const pages = [
   entry('Page', 'Home', '/', null, 'National Employment & Skill Matching Platform overview, challenge, solution, modules, impact, roadmap'),
   entry('Page', 'Project Overview', '/project', null, 'Artifact 01 Fursah vision objectives organization scope'),
   entry('Page', 'Methodology & Risk', '/methodology-risk', null, 'Artifact 02 development approaches risk management'),
-  entry('Page', 'Estimation & Scheduling', '/planning', null, 'Artifact 03 planning WBS estimation schedule'),
+  entry('Page', 'Estimation & Scheduling', '/planning', null, 'Artifact 03 planning WBS estimation schedule product backlog sprint PDF'),
   entry('Page', 'Stakeholders, Communication & Metrics', '/stakeholders-metrics', null, 'Artifact 04 stakeholder communication performance measurement'),
   entry('Page', 'Project Team', '/team', null, 'team members roles responsibilities collaboration'),
 ];
@@ -46,11 +46,14 @@ const sections = [
   entry('Section', 'Risk Register', '/methodology-risk', 'risk-register', 'probability impact exposure first indicator mitigation management strategies Excel workbook export CSV'),
   entry('Section', 'Risk Matrix Visualization', '/methodology-risk', 'risk-matrix', 'probability impact severity heat map'),
 
-  entry('Section', 'Work Breakdown Structure', '/planning', 'wbs', 'WBS deliverables hierarchy'),
-  entry('Section', 'Estimation Approach', '/planning', 'estimation', 'story points planning poker person-months effort'),
-  entry('Section', 'Planning Assumptions', '/planning', 'assumptions', 'assumptions constraints dependencies planning notes'),
-  entry('Section', 'Schedule & Delivery Model', '/planning', 'schedule', 'agile sprint backlog epics sprint 0 sprint 1 plan-driven gantt chart task breakdown resource allocation'),
-  entry('Section', 'Project Timeline Overview', '/planning', 'timeline', 'milestones inception elaboration construction transition go live'),
+  entry('Section', 'Work Breakdown Structure', '/planning', 'wbs', 'hybrid WBS phases project planning requirement analysis system design development testing integration delivery scope review'),
+  entry('Section', 'Release Plan & Product Backlog', '/planning', 'backlog', 'user stories epics story points Fibonacci priority 236 points 52 items sprint summary capacity releases'),
+  entry('Section', 'Scrum Process & Release 1 Schedule', '/planning', 'schedule', 'two-week sprints Sprint 0 timeline weeks deliverables release 1 14 weeks'),
+  entry('Section', 'Scrum Meetings', '/planning', 'ceremonies', 'sprint planning daily scrum sprint review retrospective backlog refinement'),
+  entry('Section', 'Additional Scrum Elements', '/planning', 'scrum-elements', 'Sprint 0 epics spikes definition of done PDPL'),
+  entry('Section', 'Velocity & Estimation', '/planning', 'estimation', 'planning poker Fibonacci reference stories team capacity forecasted velocity 22.5'),
+  entry('Section', 'Sprint 1: Platform Foundation', '/planning', 'sprint-1', 'sprint goal acceptance criteria registration login profiles role-based access Saudi hosting definition of done'),
+  entry('Section', 'Changes to Previous Artifacts', '/planning', 'changes', 'Artifact 1 Artifact 2 baseline refinements bilingual support spikes'),
 
   entry('Section', 'Stakeholder Analysis', '/stakeholders-metrics', 'stakeholder-analysis', 'power interest classification management strategy'),
   entry('Section', 'Power–Interest Matrix', '/stakeholders-metrics', 'power-interest', 'manage closely keep satisfied keep informed monitor'),
@@ -70,9 +73,10 @@ const content = [
   ...risks.map((r) =>
     entry('Risk', `${r.id} · ${r.name}`, '/methodology-risk', 'risk-register', `${r.description} ${r.prevention} ${r.indicator} ${r.mitigation}`),
   ),
-  ...wbs.branches.map((b) => entry('WBS', `${b.id}.0 ${b.title}`, '/planning', 'wbs', b.items.join(' '))),
-  ...planningFactors.map((f) => entry('Planning', f.title, '/planning', 'assumptions', f.items.join(' '))),
-  ...milestones.map((m) => entry('Milestone', `${m.phase} (${m.code})`, '/planning', 'timeline', `${m.when} ${m.text}`)),
+  ...wbs.phases.map((p) => entry('WBS', `${p.id} ${p.title}`, '/planning', 'wbs', p.text)),
+  ...backlog.map((b) => entry(b.points == null ? 'Spike' : 'User Story', `${b.id} · ${b.epic}`, '/planning', 'backlog', `${b.story} sprint ${b.sprint} ${b.priority}`)),
+  ...meetings.map((m) => entry('Scrum', m.name, '/planning', 'ceremonies', `${m.frequency} ${m.duration} ${m.purpose}`)),
+  ...scrumElements.map((e) => entry('Scrum', e.name, '/planning', 'scrum-elements', `${e.description} ${e.use}`)),
   ...stakeholders.map((s) =>
     entry('Stakeholder', s.name, '/stakeholders-metrics', 'stakeholder-analysis', `${s.classification} ${s.strategy} ${s.effect} ${s.communication}`),
   ),
