@@ -6,7 +6,6 @@ import {
   ChatsCircle,
   CheckCircle,
   Clock,
-  FilePdf,
   Flask,
   Gauge,
   GitDiff,
@@ -18,9 +17,8 @@ import {
   Target,
   TreeStructure,
 } from '@phosphor-icons/react';
-import { LevelBadge, PageHeader, SectionHeading } from '../components/ui.jsx';
+import { ArtifactDownload, LevelBadge, PageHeader, SectionHeading } from '../components/ui.jsx';
 import {
-  artifactPdf,
   backlog,
   backlogTotals,
   changesFromA1,
@@ -213,12 +211,7 @@ export default function Planning() {
       />
 
       <div className="container-page space-y-12 py-12 lg:py-16">
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 shadow-sm">
-          <p className="text-sm text-slate-600">Read the full submitted document, including every table, as a PDF.</p>
-          <a href={`${import.meta.env.BASE_URL}${artifactPdf}`} className="btn-secondary" target="_blank" rel="noopener">
-            <FilePdf size={18} /> Artifact 3 (PDF)
-          </a>
-        </div>
+        <ArtifactDownload artifact={3} />
 
         <section aria-labelledby="wbs" className="card p-5 sm:p-8">
           <SectionHeading id="wbs" icon={TreeStructure} title="Work Breakdown Structure" description="A hybrid WBS: seven phases from planning to scope review, delivered iteratively through Scrum sprints." />

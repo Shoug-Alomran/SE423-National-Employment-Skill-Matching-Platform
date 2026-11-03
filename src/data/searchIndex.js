@@ -2,6 +2,7 @@
 // Each entry links to a page and, optionally, a section id on that page.
 // When you add a section or page, add an entry here so it can be found.
 import { navItems } from '../config.js';
+import { documents } from './documents.js';
 import { methodologies, risks, selectedMethodology } from './methodologyRisk.js';
 import { backlog, meetings, scrumElements, wbs } from './planning.js';
 import { communicationPlan, metrics, stakeholders } from './stakeholders.js';
@@ -22,6 +23,7 @@ const pages = [
   entry('Page', 'Methodology & Risk', '/methodology-risk', null, 'Artifact 02 development approaches risk management'),
   entry('Page', 'Estimation & Scheduling', '/planning', null, 'Artifact 03 planning WBS estimation schedule product backlog sprint PDF'),
   entry('Page', 'Stakeholders, Communication & Metrics', '/stakeholders-metrics', null, 'Artifact 04 stakeholder communication performance measurement'),
+  entry('Page', 'Project Documents', '/documents', null, 'PDF download view read submitted documents artifact report files'),
   entry('Page', 'Project Team', '/team', null, 'team members roles responsibilities collaboration'),
 ];
 
@@ -87,7 +89,11 @@ const content = [
   ...members.map((m) => entry('Team', m.name, '/team', 'core-members', `${m.role} ${m.responsibilities.join(' ')} ${Object.values(m.contributions).join(' ')}`)),
 ];
 
-export const searchIndex = [...pages, ...sections, ...content];
+const documentEntries = documents.map((d) =>
+  entry('Document', d.title, '/documents', d.id, `Artifact ${d.artifact} ${d.format} download view read document ${d.description}`),
+);
+
+export const searchIndex = [...pages, ...sections, ...content, ...documentEntries];
 export const defaultResults = pages;
 
 export function searchSite(query, limit = 20) {

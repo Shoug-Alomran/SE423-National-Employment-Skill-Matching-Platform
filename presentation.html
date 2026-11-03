@@ -31,6 +31,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      // Apply the saved or system colour theme before the page paints, to avoid a flash.
+      // Shares its "theme" setting with the main site (see src/components/ThemeToggle.jsx).
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
     <style>
       /*
        * Slide deck for the SE423 project.
@@ -39,7 +50,13 @@
        * that scales to fit the window. To add Artifact 3, copy an artifact divider
        * slide and the content slides after it, then update the agenda slide.
        *
-       * Keys: → / Space / PageDown next · ← / PageUp back · Home / End · F fullscreen.
+       * Short version: slides with the data-short attribute. Switch with the
+       * "Short version" button or S, or open /presentation?short directly.
+       *
+       * Export PDF prints the version and theme on screen; the print styles lay
+       * out one slide per page.
+       *
+       * Keys: → / Space / PageDown next · ← / PageUp back · Home / End · F fullscreen · S short/full · D dark/light.
        */
       :root {
         --green: #006c35;
@@ -65,6 +82,39 @@
         --blue-soft: #dbeafe;
         --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       }
+      /* Dark theme. Title and divider slides (.slide.dark) keep their green background. */
+      html.dark {
+        --green: #5bc489;
+        --green-mid: #5bc489;
+        --green-soft: #15291f;
+        --green-line: #2f5a43;
+        --ink: #f1f5f3;
+        --text: #cbd5d0;
+        --muted: #9aa8a2;
+        --line: #2b3a32;
+        --paper: #0f1714;
+        --off: #18221d;
+        --amber: #fbbf24;
+        --amber-soft: #453c0f;
+        --rose: #fb7185;
+        --rose-soft: #4c1d27;
+        --orange-soft: #4a2a12;
+        --orange: #fb923c;
+        --yellow-soft: #453c0f;
+        --blue: #93c5fd;
+        --blue-soft: #1e3a5f;
+      }
+      html.dark .tag { background: #163a27; color: #a7e3c0; }
+      html.dark .tag.blue { background: var(--blue-soft); color: var(--blue); }
+      html.dark .tag.grey,
+      html.dark .matrix thead th { background: #27322d; color: var(--ink); }
+      html.dark .org .box { background: #27322d; }
+      html.dark .org .stem { background: #5d6d65; }
+      html.dark .matrix tbody th,
+      html.dark .phase-n { background: #006c35; }
+      html.dark .matrix td { border-color: #3f4f47; }
+      html.dark .rm .low { background: #14391f; }
+      html.dark .chip { background: #f1f5f3; color: #111827; }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { height: 100%; }
       body {
@@ -305,30 +355,36 @@
       .progress { position: fixed; left: 0; top: 0; height: 4px; background: #5baa7d; transition: width 0.3s ease; z-index: 10; }
       .controls {
         position: fixed; right: 16px; top: 14px; z-index: 10;
-        display: flex; gap: 6px; align-items: center;
-        opacity: 0.35; transition: opacity 0.2s;
+        display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; align-items: center;
+        max-width: calc(100vw - 32px);
+        opacity: 0.55; transition: opacity 0.2s;
       }
       .controls:hover, .controls:focus-within { opacity: 1; }
       .controls button, .controls a {
         font: 600 14px var(--font);
-        background: rgba(255, 255, 255, 0.12);
+        background: rgba(2, 44, 22, 0.82);
         color: #e6f0ea;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         border-radius: 8px;
         padding: 7px 12px;
         cursor: pointer;
         text-decoration: none;
       }
-      .controls button:hover, .controls a:hover { background: rgba(255, 255, 255, 0.22); }
+      .controls button:hover, .controls a:hover { background: #006c35; }
       .controls button:focus-visible, .controls a:focus-visible { outline: 2px solid #8fc3a4; outline-offset: 2px; }
       .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
       @media print {
+        * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        html, body { height: auto; }
         body { background: #fff; overflow: visible; }
-        .viewport { position: static; display: block; }
+        .viewport { position: static; display: block; overflow: visible; }
         .stage { position: static; transform: none !important; width: auto; height: auto; }
+        .slide, .slide.past, .slide.active { transform: none; transition: none; }
         .slide { position: relative; opacity: 1; visibility: visible; width: 1280px; height: 720px; break-after: page; border-radius: 0; }
+        .slide:last-child { break-after: auto; }
         .controls, .progress { display: none; }
+        .short-mode .slide:not([data-short]) { display: none; }
         .slide, .slide * { animation: none !important; }
         .slide .anim { opacity: 1; }
         .slide .divider-num.anim { opacity: 0.12; }
@@ -342,7 +398,7 @@
     <main class="viewport" id="viewport">
       <div class="stage" id="stage" aria-live="polite">
         <!-- ============ Title ============ -->
-        <section class="slide dark" data-label="SE423 · Scenario 11">
+        <section class="slide dark" data-label="SE423 · Scenario 11" data-short>
           <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
             <p class="eyebrow">SE423 Software Project Management</p>
             <h1 style="font-size: 92px">Fursah</h1>
@@ -399,7 +455,7 @@
           </div>
         </section>
 
-        <section class="slide" data-label="Artifact 1 · Problem &amp; Opportunity">
+        <section class="slide" data-label="Artifact 1 · Problem &amp; Opportunity" data-short>
           <p class="eyebrow">Problem &amp; Opportunity</p>
           <h2>Employment efforts are scattered — skills aren’t matched to jobs</h2>
           <div class="grid g2">
@@ -447,7 +503,7 @@
           </table>
         </section>
 
-        <section class="slide" data-label="Artifact 1 · Team &amp; Organization">
+        <section class="slide" data-label="Artifact 1 · Team &amp; Organization" data-short>
           <p class="eyebrow">Team &amp; Organizational Structure</p>
           <h2>A creative team inside a matrix organization</h2>
           <div class="grid g2 grow" style="grid-template-columns: 1fr 1.1fr; align-items: start">
@@ -479,7 +535,7 @@
           </div>
         </section>
 
-        <section class="slide" data-label="Artifact 1 · Scope">
+        <section class="slide" data-label="Artifact 1 · Scope" data-short>
           <p class="eyebrow">Detailed Scope</p>
           <h2>Delivered in three phases</h2>
           <div class="grid g3 grow" style="align-content: start">
@@ -574,7 +630,7 @@
           </div>
         </section>
 
-        <section class="slide" data-label="Artifact 2 · Methodologies">
+        <section class="slide" data-label="Artifact 2 · Methodologies" data-short>
           <p class="eyebrow">Methodology Analysis</p>
           <h2>Four methodologies, two families</h2>
           <div class="grid g4 grow" style="align-content: start">
@@ -623,7 +679,7 @@
           </table>
         </section>
 
-        <section class="slide dark" data-label="Artifact 2 · Decision">
+        <section class="slide dark" data-label="Artifact 2 · Decision" data-short>
           <p class="eyebrow">Selected Process Methodology</p>
           <h1 style="font-size: 76px; margin-bottom: 28px">We chose <span class="highlight" style="color: #8fc3a4">Scrum</span></h1>
           <div class="grid g3">
@@ -666,7 +722,7 @@
           </div>
         </section>
 
-        <section class="slide" data-label="Artifact 2 · Scrum Risks">
+        <section class="slide" data-label="Artifact 2 · Scrum Risks" data-short>
           <p class="eyebrow">Risks of the Chosen Methodology</p>
           <h2>How we’ll manage Scrum’s risks</h2>
           <table>
@@ -684,7 +740,7 @@
         <!-- ============ Artifact 3: add slides here ============ -->
 
         <!-- ============ Close ============ -->
-        <section class="slide dark" data-label="Thank you">
+        <section class="slide dark" data-label="Thank you" data-short>
           <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
             <p class="eyebrow">Next up · Artifact 3</p>
             <h1 style="font-size: 84px">Thank you</h1>
@@ -700,7 +756,9 @@
       <button type="button" id="prev" aria-label="Previous slide">←</button>
       <span class="sr-only" id="status"></span>
       <button type="button" id="next" aria-label="Next slide">→</button>
-      <button type="button" id="fs" aria-label="Toggle fullscreen">⛶</button>
+      <button type="button" id="mode"></button>
+      <button type="button" id="theme"></button>
+      <button type="button" id="pdf" title="Choose &quot;Save as PDF&quot; in the print dialog">Export PDF</button>
     </nav>
 
     <script>
@@ -709,16 +767,71 @@
         var slides = Array.prototype.slice.call(stage.querySelectorAll('.slide'));
         var progress = document.getElementById('progress');
         var status = document.getElementById('status');
-        var current = 0;
+        var root = document.documentElement;
+        var modeButton = document.getElementById('mode');
+        var themeButton = document.getElementById('theme');
+        var printing = false;
+        var isShort = new URLSearchParams(location.search).has('short');
+        var deck = slides; // The slides in the version being presented.
+        var current = 0; // Position in deck.
+        var shown = null;
 
-        slides.forEach(function (s, i) {
+        slides.forEach(function (s) {
           var n = document.createElement('span');
           n.className = 'num';
-          n.textContent = i + 1 + ' / ' + slides.length;
           s.appendChild(n);
           s.setAttribute('aria-roledescription', 'slide');
-          s.setAttribute('aria-label', i + 1 + ' of ' + slides.length);
         });
+
+        function buildDeck() {
+          deck = isShort ? slides.filter(function (s) { return s.hasAttribute('data-short'); }) : slides;
+          deck.forEach(function (s, i) {
+            s.querySelector('.num').textContent = i + 1 + ' / ' + deck.length;
+            s.setAttribute('aria-label', i + 1 + ' of ' + deck.length);
+          });
+          document.body.classList.toggle('short-mode', isShort);
+          modeButton.textContent = isShort ? 'Full version' : 'Short version';
+          modeButton.title = 'Switch to the ' + (isShort ? 'full' : 'short') + ' version (S)';
+        }
+
+        function syncTheme() {
+          var dark = root.classList.contains('dark');
+          themeButton.textContent = dark ? 'Light mode' : 'Dark mode';
+          themeButton.title = 'Switch to ' + (dark ? 'light' : 'dark') + ' mode (D)';
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#0f1714' : '#004D25');
+        }
+
+        function toggleTheme() {
+          var dark = !root.classList.contains('dark');
+          try {
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+          } catch (e) {
+            // Storage unavailable (e.g. private mode); the choice lasts for this visit only.
+          }
+          root.classList.toggle('dark', dark);
+          syncTheme();
+        }
+
+        // Follow the system setting until a theme has been chosen.
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+          var stored = null;
+          try { stored = localStorage.getItem('theme'); } catch (err) {}
+          if (stored) return;
+          root.classList.toggle('dark', e.matches);
+          syncTheme();
+        });
+
+        // Keeps your place: a slide in both versions stays on screen, and a slide
+        // the short version cuts moves forward to the next one it keeps.
+        function toggleShort() {
+          var here = slides.indexOf(deck[current]);
+          isShort = !isShort;
+          buildDeck();
+          var target = 0;
+          while (target < deck.length - 1 && slides.indexOf(deck[target]) < here) target++;
+          history.replaceState(null, '', location.pathname + (isShort ? '?short' : ''));
+          go(target);
+        }
 
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -766,7 +879,7 @@
               var p = Math.min(1, Math.max(0, (t - start) / 1100));
               var eased = 1 - Math.pow(1 - p, 3);
               el.textContent = (end * eased).toFixed(decimals) + m[2];
-              if (p < 1 && slide.classList.contains('active')) requestAnimationFrame(step);
+              if (p < 1 && !printing && slide.classList.contains('active')) requestAnimationFrame(step);
               else el.textContent = target;
             }
             requestAnimationFrame(step);
@@ -779,16 +892,19 @@
         }
 
         function go(i) {
-          current = Math.max(0, Math.min(slides.length - 1, i));
+          current = Math.max(0, Math.min(deck.length - 1, i));
+          var activeSlide = deck[current];
+          var activeIndex = slides.indexOf(activeSlide);
           slides.forEach(function (s, k) {
-            var on = k === current;
+            var on = k === activeIndex;
             s.classList.toggle('active', on);
-            s.classList.toggle('past', k < current);
+            s.classList.toggle('past', k < activeIndex);
             s.setAttribute('aria-hidden', on ? 'false' : 'true');
           });
-          countUp(slides[current]);
-          progress.style.width = ((current + 1) / slides.length) * 100 + '%';
-          status.textContent = 'Slide ' + (current + 1) + ' of ' + slides.length;
+          if (activeSlide !== shown) countUp(activeSlide);
+          shown = activeSlide;
+          progress.style.width = ((current + 1) / deck.length) * 100 + '%';
+          status.textContent = 'Slide ' + (current + 1) + ' of ' + deck.length;
           // Keep the shared URL clean: drop any #N once it has been read.
           if (location.hash) history.replaceState(null, '', location.pathname + location.search);
         }
@@ -804,8 +920,10 @@
           if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'ArrowDown') { e.preventDefault(); go(current + 1); }
           else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); go(current - 1); }
           else if (k === 'Home') go(0);
-          else if (k === 'End') go(slides.length - 1);
+          else if (k === 'End') go(deck.length - 1);
           else if (k === 'f' || k === 'F') toggleFs();
+          else if (k === 's' || k === 'S') toggleShort();
+          else if (k === 'd' || k === 'D') toggleTheme();
         });
 
         function toggleFs() {
@@ -815,7 +933,31 @@
 
         document.getElementById('prev').addEventListener('click', function () { go(current - 1); });
         document.getElementById('next').addEventListener('click', function () { go(current + 1); });
-        document.getElementById('fs').addEventListener('click', toggleFs);
+        modeButton.addEventListener('click', toggleShort);
+        themeButton.addEventListener('click', toggleTheme);
+        document.getElementById('pdf').addEventListener('click', function () { window.print(); });
+
+        // After a mouse click, drop focus so Space advances instead of pressing the button again.
+        document.querySelector('.controls').addEventListener('click', function (e) {
+          var button = e.target.closest('button');
+          if (button && e.detail) button.blur();
+        });
+
+        // The PDF needs final numbers, not a count-up in progress. The title becomes the file name.
+        var pageTitle = document.title;
+        window.addEventListener('beforeprint', function () {
+          printing = true;
+          slides.forEach(function (s) {
+            s.querySelectorAll('.stat').forEach(function (el) {
+              if (el.dataset.value) el.textContent = el.dataset.value;
+            });
+          });
+          document.title = pageTitle + (isShort ? ' (Short)' : '');
+        });
+        window.addEventListener('afterprint', function () {
+          printing = false;
+          document.title = pageTitle;
+        });
 
         // Click the right two-thirds of the screen to advance, the left third to go back.
         document.getElementById('viewport').addEventListener('click', function (e) {
@@ -835,6 +977,8 @@
         window.addEventListener('resize', fit);
         window.addEventListener('hashchange', function () { go(fromHash()); });
         fit();
+        buildDeck();
+        syncTheme();
         go(fromHash());
       })();
     </script>

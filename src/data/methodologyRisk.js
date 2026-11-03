@@ -216,7 +216,7 @@ export const selectedMethodology = {
 export const probabilityLabels = ['Rare', 'Unlikely', 'Possible', 'Likely', 'Almost Certain'];
 export const impactLabels = ['Negligible', 'Minor', 'Moderate', 'Major', 'Extreme'];
 
-// Risk register groups, one per analyzed methodology (see public/artifact-2-risk-register.xlsx).
+// Risk register groups, one per analyzed methodology (see public/artifacts/artifact-2-risk-register.xlsx).
 export const riskGroups = [
   { key: 'scrum', label: 'Agile 1 · Scrum', family: 'agile' },
   { key: 'xp', label: 'Agile 2 · Extreme Programming (XP)', family: 'agile' },

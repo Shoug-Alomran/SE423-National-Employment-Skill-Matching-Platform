@@ -59,7 +59,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <ul className="hidden items-center gap-0.5 lg:flex">
+          <ul className="hidden items-center gap-0.5 xl:flex">
             {navItems.map((item) => (
               <li key={item.to}>
                 {item.external ? (
@@ -111,7 +111,7 @@ export default function Navbar() {
             <ThemeToggle />
             <button
               type="button"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 hover:text-charcoal lg:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 hover:text-charcoal xl:hidden"
               aria-controls="mobile-menu"
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
@@ -124,7 +124,7 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="border-t border-slate-200 bg-white lg:hidden">
+        <div id="mobile-menu" className="border-t border-slate-200 bg-white xl:hidden">
           <ul className="container-page space-y-1 py-3">
             {navItems.map((item) => (
               <li key={item.to}>

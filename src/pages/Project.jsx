@@ -22,7 +22,7 @@ import {
   X,
   XCircle,
 } from '@phosphor-icons/react';
-import { PageHeader, SectionHeading } from '../components/ui.jsx';
+import { ArtifactDownload, PageHeader, SectionHeading } from '../components/ui.jsx';
 
 const nationalTargets = [
   { value: '7%', label: 'Unemployment target by 2030 under Saudi Vision 2030' },
@@ -253,6 +253,8 @@ export default function Project() {
       />
 
       <div className="container-page space-y-20 py-16 lg:space-y-28 lg:py-20">
+        <ArtifactDownload artifact={1} />
+
         {/* 1. Problem & Opportunity */}
         <section aria-labelledby="problem">
           <SectionHeading id="problem" number={1} title="Problem & Opportunity" />

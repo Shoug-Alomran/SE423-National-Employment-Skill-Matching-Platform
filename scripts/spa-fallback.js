@@ -10,7 +10,7 @@
 import { copyFileSync, existsSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const ROUTES = ['project', 'methodology-risk', 'planning', 'stakeholders-metrics', 'team'];
+const ROUTES = ['project', 'methodology-risk', 'planning', 'stakeholders-metrics', 'team', 'documents'];
 
 const dist = resolve(process.cwd(), 'dist');
 const index = resolve(dist, 'index.html');

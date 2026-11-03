@@ -15,7 +15,7 @@ import {
   Table,
   Target,
 } from '@phosphor-icons/react';
-import { PageHeader, SectionHeading } from '../components/ui.jsx';
+import { ArtifactDownload, PageHeader, SectionHeading } from '../components/ui.jsx';
 import {
   exposure,
   impactLabels,
@@ -205,6 +205,8 @@ export default function MethodologyRisk() {
       />
 
       <div className="container-page space-y-16 py-12 lg:py-16">
+        <ArtifactDownload artifact={2} />
+
         {/* Methodology analysis */}
         <section aria-labelledby="methodology-analysis">
           <SectionHeading id="methodology-analysis" icon={GitMerge} title="Methodology Analysis" />
@@ -300,7 +302,7 @@ export default function MethodologyRisk() {
             action={
               <div className="flex flex-wrap gap-2 self-start sm:self-auto">
                 <a
-                  href={`${import.meta.env.BASE_URL}artifact-2-risk-register.xlsx`}
+                  href={`${import.meta.env.BASE_URL}artifacts/artifact-2-risk-register.xlsx`}
                   download
                   className="inline-flex items-center gap-1.5 rounded border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50"
                 >

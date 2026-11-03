@@ -43,7 +43,25 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://software-project-management.shoug-tech.com/artifact-3-estimation-and-scheduling.pdf</loc>
+    <loc>https://software-project-management.shoug-tech.com/documents</loc>
+    <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://software-project-management.shoug-tech.com/artifacts/artifact-1-overview-and-scope.pdf</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://software-project-management.shoug-tech.com/artifacts/artifact-2-methodology-and-risk.pdf</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://software-project-management.shoug-tech.com/artifacts/artifact-3-estimation-and-scheduling.pdf</loc>
     <lastmod>2026-10-31</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

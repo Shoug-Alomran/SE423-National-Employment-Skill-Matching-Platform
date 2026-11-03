@@ -16,7 +16,8 @@ This repository contains the project website: a static React + Vite site deploye
 | `/planning` | Estimation & Scheduling (Artifact 03) |
 | `/stakeholders-metrics` | Stakeholders, Communication & Metrics (Artifact 04) |
 | `/team` | Team |
-| `/presentation` | Slide deck (standalone `presentation.html`; add Artifact 3 slides at the `Artifact 3: add slides here` marker). Share banner: `public/og-presentation.jpg`, made from `brand/og-presentation.html` |
+| `/documents` | Project Documents: view or download every submitted artifact |
+| `/presentation` | Slide deck (standalone `presentation.html`; add Artifact 3 slides at the `Artifact 3: add slides here` marker). The **Short version** button or <kbd>S</kbd> switches to the slides marked `data-short`; `/presentation?short` opens that version directly. **Dark mode** or <kbd>D</kbd> switches theme, sharing the site's saved setting. **Export PDF** opens the print dialog for the version and theme on screen; choose **Save as PDF**. Share banner: `public/og-presentation.jpg`, made from `brand/og-presentation.html` |
 
 ## Tech stack
 
@@ -121,6 +122,7 @@ Page content is kept in data files, separate from the layout:
 | [src/data/methodologyRisk.js](src/data/methodologyRisk.js) | Methodology comparison, selected methodology, risk register. The risk counts and the risk matrix are calculated from this file. |
 | [src/data/planning.js](src/data/planning.js) | WBS, estimates, assumptions, sprints, Gantt rows, milestones |
 | [src/data/stakeholders.js](src/data/stakeholders.js) | Stakeholder analysis, power–interest matrix, communication plan, metrics |
+| [src/data/documents.js](src/data/documents.js) | Files listed on the Documents page. Put new files in `public/artifacts/`. |
 | [src/data/team.js](src/data/team.js) | Team members, roles, GitHub/LinkedIn links (use `''` to hide an icon), tools |
 
 Home and Project page text lives directly in [src/pages/Home.jsx](src/pages/Home.jsx) and [src/pages/Project.jsx](src/pages/Project.jsx).
@@ -130,7 +132,7 @@ Home and Project page text lives directly in [src/pages/Home.jsx](src/pages/Home
 The sun/moon button in the navbar switches themes. The site follows the visitor's system setting until they choose a theme; the choice is saved in `localStorage`.
 
 - [index.html](index.html) contains a small inline script that applies the theme before the page paints, so there is no flash of the wrong theme.
-- [src/dark.css](src/dark.css) maps the light colour utilities used on the site to dark equivalents while `<html>` has the `dark` class. If you use a new colour class, for example `bg-teal-50`, add its dark mapping there. Tailwind `dark:` variants also work (`darkMode: 'class'`).
+- [src/styles/dark.css](src/styles/dark.css) maps the light colour utilities used on the site to dark equivalents while `<html>` has the `dark` class. If you use a new colour class, for example `bg-teal-50`, add its dark mapping there. Tailwind `dark:` variants also work (`darkMode: 'class'`).
 
 ## Search
 
@@ -142,17 +144,24 @@ The index is built in [src/data/searchIndex.js](src/data/searchIndex.js) from th
 
 ```
 .github/workflows/deploy.yml   GitHub Pages build and deploy
+brand/                         Sources for the share banners and icons (render.sh writes them to public/)
+docs/design-mockups/           Original page mockups, one per route (not deployed)
 public/                        Static files copied as-is (favicon, CNAME, robots.txt, sitemap.xml)
+  artifacts/                   Downloadable artifact PDFs and the risk register workbook
 scripts/spa-fallback.js        Creates 404.html for deep-link support
 src/
   components/                  Layout, Navbar, Footer, ThemeToggle, SearchDialog, shared UI
   data/                        Editable page content and the search index
-  dark.css                     Dark theme colour mappings
   pages/                       One component per route
+  styles/                      Tailwind entry (index.css) and dark theme colour mappings (dark.css)
   config.js                    Site-wide settings
   App.jsx                      Routes
   main.jsx                     Entry point (router basename)
-index.html
+index.html                     React app entry
+presentation.html              Standalone slide deck, served at /presentation
+project-task-distribution.html Standalone team plan, served at /project-task-distribution
 vite.config.js                 Base path configuration
 tailwind.config.js             Design tokens (Saudi green, charcoal)
 ```
+
+The three HTML files stay in the repository root because Vite keeps their paths in the build output, so moving them would change their public URLs.

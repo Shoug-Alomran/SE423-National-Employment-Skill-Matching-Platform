@@ -7,6 +7,7 @@ import {
   ClipboardText,
   Clock,
   Cpu,
+  FilePdf,
   GraduationCap,
   Lightning,
   MagnifyingGlass,
@@ -112,28 +113,38 @@ const roadmap = [
 function HeroIllustration() {
   return (
     <svg className="hero-illustration h-full w-full p-6 sm:p-8" viewBox="0 0 400 400" fill="none" role="img" aria-label="Diagram of job seekers and employers connected through a central matching engine">
-      <path d="M100 150 C 150 150, 200 200, 250 150" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
-      <path d="M150 250 C 200 250, 250 200, 300 250" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
+      <path d="M100 150 C 150 150, 200 200, 250 150" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" className="hero-flow" />
+      <path d="M150 250 C 200 250, 250 200, 300 250" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" className="hero-flow hero-flow-reverse" />
       <path d="M80 200 C 180 200, 220 200, 320 200" stroke="#006C35" strokeWidth="3" strokeLinecap="round" className="animate-pulse-slow" />
-      <path d="M120 100 C 200 100, 200 200, 280 100" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
-      <path d="M120 300 C 200 300, 200 200, 280 300" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" />
+      <path d="M120 100 C 200 100, 200 200, 280 100" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" className="hero-flow hero-flow-slow" />
+      <path d="M120 300 C 200 300, 200 200, 280 300" stroke="#E5E7EB" strokeWidth="2" strokeDasharray="4 4" className="hero-flow hero-flow-slow hero-flow-reverse" />
+
+      {/* Signals travelling along the lines. The main one runs seeker → engine → employer. */}
+      <path d="M100 150 C 150 150, 200 200, 250 150" pathLength="100" stroke="#006C35" strokeWidth="2.5" strokeLinecap="round" className="hero-signal" style={{ '--signal-duration': '5s', '--signal-delay': '-1s' }} />
+      <path d="M150 250 C 200 250, 250 200, 300 250" pathLength="100" stroke="#006C35" strokeWidth="2.5" strokeLinecap="round" className="hero-signal" style={{ '--signal-duration': '6s', '--signal-delay': '-3.5s' }} />
+      <path d="M120 100 C 200 100, 200 200, 280 100" pathLength="100" stroke="#006C35" strokeWidth="2" strokeLinecap="round" className="hero-signal" style={{ '--signal-duration': '7s', '--signal-delay': '-5s' }} />
+      <path d="M120 300 C 200 300, 200 200, 280 300" pathLength="100" stroke="#006C35" strokeWidth="2" strokeLinecap="round" className="hero-signal" style={{ '--signal-duration': '7.5s', '--signal-delay': '-2s' }} />
+      <path d="M80 200 C 180 200, 220 200, 320 200" pathLength="100" stroke="#E9B949" strokeWidth="5" strokeLinecap="round" className="hero-signal hero-signal-main" />
 
       <g transform="translate(80, 200)">
+        <circle r="24" stroke="#006C35" strokeWidth="2" className="hero-ping hero-ping-seeker" />
         <circle r="24" fill="white" stroke="#006C35" strokeWidth="2" />
         <path d="M-8 4C-8 1.8 -6.2 0 -4 0H4C6.2 0 8 1.8 8 4V8C8 10.2 6.2 12 4 12H-4C-6.2 12 -8 10.2 -8 8V4Z" fill="#006C35" />
         <circle cy="-6" r="4" fill="#006C35" />
       </g>
 
-      <circle cx="100" cy="150" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" />
-      <circle cx="120" cy="100" r="8" fill="#E5E7EB" />
-      <circle cx="150" cy="250" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" />
-      <circle cx="120" cy="300" r="8" fill="#E5E7EB" />
+      <circle cx="100" cy="150" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" className="hero-node" style={{ animationDelay: '0s' }} />
+      <circle cx="120" cy="100" r="8" fill="#E5E7EB" className="hero-node" style={{ animationDelay: '0.4s' }} />
+      <circle cx="150" cy="250" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" className="hero-node" style={{ animationDelay: '1.2s' }} />
+      <circle cx="120" cy="300" r="8" fill="#E5E7EB" className="hero-node" style={{ animationDelay: '1.4s' }} />
 
       <g transform="translate(200, 200)">
+        <circle r="40" stroke="#006C35" strokeWidth="2" className="hero-ping hero-ping-engine" />
+        <circle r="48" stroke="#006C35" strokeWidth="1.5" strokeDasharray="5 9" strokeLinecap="round" className="hero-orbit" />
         <circle r="40" fill="#006C35" className="animate-pulse-slow" />
         <circle r="32" fill="white" stroke="#006C35" strokeWidth="2" />
         <path d="M-10 -10 H10 V10 H-10 Z" stroke="#006C35" strokeWidth="2" strokeLinejoin="round" />
-        <path d="M-4 -4 H4 V4 H-4 Z" fill="#006C35" />
+        <path d="M-4 -4 H4 V4 H-4 Z" fill="#006C35" className="hero-chip" />
         <g stroke="#006C35" strokeWidth="2">
           <line x1="-10" y1="-5" x2="-14" y2="-5" />
           <line x1="-10" y1="5" x2="-14" y2="5" />
@@ -147,16 +158,17 @@ function HeroIllustration() {
       </g>
 
       <g transform="translate(320, 200)">
+        <circle r="24" stroke="#006C35" strokeWidth="2" className="hero-ping hero-ping-employer" />
         <circle r="24" fill="white" stroke="#006C35" strokeWidth="2" />
         <path d="M-8 -6 H8 V12 H-8 Z" stroke="#006C35" strokeWidth="2" strokeLinejoin="round" />
         <path d="M-4 -6 V-10 H4 V-6" stroke="#006C35" strokeWidth="2" strokeLinejoin="round" />
         <line x1="-8" y1="0" x2="8" y2="0" stroke="#006C35" strokeWidth="2" />
       </g>
 
-      <circle cx="250" cy="150" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" />
-      <circle cx="280" cy="100" r="8" fill="#E5E7EB" />
-      <circle cx="300" cy="250" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" />
-      <circle cx="280" cy="300" r="8" fill="#E5E7EB" />
+      <circle cx="250" cy="150" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" className="hero-node" style={{ animationDelay: '0.6s' }} />
+      <circle cx="280" cy="100" r="8" fill="#E5E7EB" className="hero-node" style={{ animationDelay: '0.9s' }} />
+      <circle cx="300" cy="250" r="12" fill="white" stroke="#9CA3AF" strokeWidth="2" className="hero-node" style={{ animationDelay: '1.8s' }} />
+      <circle cx="280" cy="300" r="8" fill="#E5E7EB" className="hero-node" style={{ animationDelay: '1.9s' }} />
     </svg>
   );
 }
@@ -216,6 +228,10 @@ export default function Home() {
                 </Link>
                 <Link to="/methodology-risk" className="btn-secondary px-8 py-4">
                   Read the Proposal
+                </Link>
+                <Link to="/documents" className="btn-secondary px-8 py-4">
+                  <FilePdf size={18} />
+                  View the PDFs
                 </Link>
               </div>
             </div>

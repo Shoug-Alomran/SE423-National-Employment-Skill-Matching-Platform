@@ -1,4 +1,6 @@
 // Small shared building blocks used across pages.
+import { DownloadSimple, Eye } from '@phosphor-icons/react';
+import { documents, documentUrl } from '../data/documents.js';
 
 export function PageHeader({ badge, badgeIcon: BadgeIcon, title, description }) {
   return (
@@ -18,6 +20,35 @@ export function PageHeader({ badge, badgeIcon: BadgeIcon, title, description }) 
         </div>
       </div>
     </header>
+  );
+}
+
+// View and download buttons for a document. Only PDFs can open in the browser.
+export function DocumentActions({ doc }) {
+  const url = documentUrl(doc);
+  const canView = doc.format === 'PDF';
+  return (
+    <div className="flex flex-wrap gap-2">
+      {canView && (
+        <a href={url} target="_blank" rel="noopener" className="btn-primary px-4 py-2 text-sm" aria-label={`View ${doc.title} PDF`}>
+          <Eye size={18} /> View PDF
+        </a>
+      )}
+      <a href={url} download className="btn-secondary px-4 py-2 text-sm" aria-label={`Download ${doc.title}`}>
+        <DownloadSimple size={18} /> Download
+      </a>
+    </div>
+  );
+}
+
+// Bar at the top of an artifact's page, linking to its submitted PDF.
+export function ArtifactDownload({ artifact }) {
+  const doc = documents.find((d) => d.artifact === artifact && d.format === 'PDF');
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 shadow-sm">
+      <p className="text-sm text-slate-600">Read the full submitted Artifact {artifact} document, including every table, as a PDF.</p>
+      <DocumentActions doc={doc} />
+    </div>
   );
 }
 

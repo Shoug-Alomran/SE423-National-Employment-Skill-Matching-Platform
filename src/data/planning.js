@@ -1,6 +1,4 @@
-// Content for Artifact 03 — Estimation & Scheduling (see public/artifact-3-estimation-and-scheduling.pdf).
-
-export const artifactPdf = 'artifact-3-estimation-and-scheduling.pdf';
+// Content for Artifact 03 — Estimation & Scheduling (see public/artifacts/artifact-3-estimation-and-scheduling.pdf).
 
 // 1. Hybrid WBS — seven phases.
 export const wbs = {
