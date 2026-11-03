@@ -229,11 +229,12 @@ export default function Home() {
                 <Link to="/methodology-risk" className="btn-secondary px-8 py-4">
                   Read the Proposal
                 </Link>
-                <Link to="/documents" className="btn-secondary px-8 py-4">
-                  <FilePdf size={18} />
-                  View the PDFs
-                </Link>
               </div>
+              <Link to="/documents" className="mt-6 inline-flex items-center gap-2 font-medium text-saudi hover:underline">
+                <FilePdf size={20} />
+                View or download the project documents
+                <ArrowRight size={14} />
+              </Link>
             </div>
 
             <div

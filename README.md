@@ -17,7 +17,7 @@ This repository contains the project website: a static React + Vite site deploye
 | `/stakeholders-metrics` | Stakeholders, Communication & Metrics (Artifact 04) |
 | `/team` | Team |
 | `/documents` | Project Documents: view or download every submitted artifact |
-| `/presentation` | Slide deck (standalone `presentation.html`; add Artifact 3 slides at the `Artifact 3: add slides here` marker). The **Short version** button or <kbd>S</kbd> switches to the slides marked `data-short`; `/presentation?short` opens that version directly. **Dark mode** or <kbd>D</kbd> switches theme, sharing the site's saved setting. **Export PDF** opens the print dialog for the version and theme on screen; choose **Save as PDF**. Share banner: `public/og-presentation.jpg`, made from `brand/og-presentation.html` |
+| `/presentation` | Slide deck (standalone `presentation.html`; add Artifact 4 slides at the `Artifact 4: add slides here` marker). The **Short version** button or <kbd>S</kbd> switches to the slides marked `data-short`; `/presentation?short` opens that version directly. **Dark mode** or <kbd>D</kbd> switches theme, sharing the site's saved setting. **Export PDF** opens the print dialog for the version and theme on screen; choose **Save as PDF**. Share banner: `public/og-presentation.jpg`, made from `brand/og-presentation.html` |
 
 ## Tech stack
 

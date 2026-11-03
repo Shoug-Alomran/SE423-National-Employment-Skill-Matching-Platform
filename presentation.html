@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Fursah Presentation</title>
-    <meta name="description" content="SE423 project presentation of Fursah, the National Employment &amp; Skill Matching Platform: scope, organization, methodology decision and risk register (Artifacts 1 and 2)." />
+    <meta name="description" content="SE423 project presentation of Fursah, the National Employment &amp; Skill Matching Platform: scope, methodology decision, risk register and the Scrum schedule (Artifacts 1 to 3)." />
     <meta name="theme-color" content="#004D25" />
     <link rel="canonical" href="https://software-project-management.shoug-tech.com/presentation" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -16,7 +16,7 @@
     <meta property="og:site_name" content="NESMP" />
     <meta property="og:url" content="https://software-project-management.shoug-tech.com/presentation" />
     <meta property="og:title" content="Fursah: Project Presentation" />
-    <meta property="og:description" content="SE423 · National Employment &amp; Skill Matching Platform. Artifacts 1 &amp; 2: scope, organization, methodology decision and risk register." />
+    <meta property="og:description" content="SE423 · National Employment &amp; Skill Matching Platform. Artifacts 1–3: scope, methodology decision, risk register and the Scrum schedule." />
     <meta property="og:image" content="https://software-project-management.shoug-tech.com/og-presentation.jpg" />
     <meta property="og:image:secure_url" content="https://software-project-management.shoug-tech.com/og-presentation.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
@@ -25,7 +25,7 @@
     <meta property="og:image:alt" content="Fursah project presentation: a fair chance at work" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Fursah: Project Presentation" />
-    <meta name="twitter:description" content="SE423 · National Employment &amp; Skill Matching Platform. Artifacts 1 &amp; 2: scope, organization, methodology decision and risk register." />
+    <meta name="twitter:description" content="SE423 · National Employment &amp; Skill Matching Platform. Artifacts 1–3: scope, methodology decision, risk register and the Scrum schedule." />
     <meta name="twitter:image" content="https://software-project-management.shoug-tech.com/og-presentation.jpg" />
     <meta name="twitter:image:alt" content="Fursah project presentation: a fair chance at work" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,7 +47,7 @@
        * Slide deck for the SE423 project.
        *
        * Every slide is a <section class="slide"> drawn on a fixed 1280×720 stage
-       * that scales to fit the window. To add Artifact 3, copy an artifact divider
+       * that scales to fit the window. To add an artifact, copy an artifact divider
        * slide and the content slides after it, then update the agenda slide.
        *
        * Short version: slides with the data-short attribute. Switch with the
@@ -164,7 +164,7 @@
       @keyframes pop { 0% { opacity: 0; transform: scale(0.3); } 70% { opacity: 1; transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
       @keyframes growY { from { opacity: 1; transform: scaleY(0); } to { opacity: 1; transform: scaleY(1); } }
-      @keyframes slideIn { from { opacity: 0; transform: translateX(-60px); } to { opacity: 0.12; transform: none; } }
+      @keyframes slideIn { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: none; } }
       @keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(0, 108, 53, 0); } 50% { box-shadow: 0 0 0 10px rgba(0, 108, 53, 0.14); } }
       @keyframes sweep { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
       @keyframes drift { 0%, 100% { background-position: 0% 0%, 0 0; } 50% { background-position: 100% 60%, 0 0; } }
@@ -195,7 +195,7 @@
         .slide, .slide.past { transition: opacity 0.2s; transform: none; }
         .slide .anim { opacity: 1; }
         .slide.active .anim, .slide.active .highlight, .slide.dark.active { animation: none !important; }
-        .slide.active .divider-num.anim { opacity: 0.12; }
+        .slide.active .divider-num.anim { opacity: 1; }
         .highlight { background-size: 100% 100%; }
       }
 
@@ -337,6 +337,23 @@
       .con::before { content: "−"; color: var(--rose); }
       .chosen { outline: 3px solid var(--green); outline-offset: -1px; background: var(--green-soft); border-color: var(--green-line); }
 
+      /* Sprint load chart. Bar height = points / 28 of the plot; the band marks the 20–25 SP capacity. */
+      .chart { position: relative; display: flex; align-items: flex-end; gap: 14px; height: 300px; border-bottom: 2px solid var(--line); }
+      .chart .band {
+        position: absolute; left: 0; right: 0;
+        bottom: calc(20 / 28 * 100%); height: calc(5 / 28 * 100%);
+        background: var(--green-soft); border-block: 1.5px dashed var(--green-line);
+      }
+      .chart .band b { position: absolute; right: 0; top: -22px; font-size: 13px; color: var(--muted); font-weight: 600; }
+      .chart .col { position: relative; flex: 1; height: calc(var(--sp) / 28 * 100%); }
+      .chart .sbar { position: absolute; inset: 0; border-radius: 6px 6px 0 0; background: var(--bar); }
+      .chart .col span { position: absolute; left: 0; right: 0; top: -24px; text-align: center; font-size: 15px; font-weight: 800; color: var(--ink); }
+      .chart-x { display: flex; gap: 14px; margin-top: 8px; }
+      .chart-x span { flex: 1; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); }
+      .slide.active .sbar.anim { animation-name: growY; transform-origin: bottom; animation-duration: 0.7s; }
+      .key { display: inline-block; width: 14px; height: 14px; border-radius: 3px; vertical-align: -1px; margin-right: 8px; }
+      .wbs-id { font-size: 14px; font-weight: 800; color: var(--green); letter-spacing: 0.04em; }
+
       /* Risk matrix */
       .rm { display: grid; grid-template-columns: 110px repeat(5, 1fr); grid-template-rows: repeat(5, 1fr) 30px; gap: 5px; height: 100%; }
       .rm .ylab { font-size: 13px; font-weight: 600; color: var(--muted); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; text-align: right; }
@@ -387,7 +404,7 @@
         .short-mode .slide:not([data-short]) { display: none; }
         .slide, .slide * { animation: none !important; }
         .slide .anim { opacity: 1; }
-        .slide .divider-num.anim { opacity: 0.12; }
+        .slide .divider-num.anim { opacity: 1; }
         .highlight { background-size: 100% 100%; }
         @page { size: 1280px 720px; margin: 0; }
       }
@@ -433,10 +450,10 @@
               <h3 style="margin-top: 12px">Methodology, Risks &amp; Decision</h3>
               <p class="muted">Scrum, XP, Waterfall and Incremental compared; risk register; final choice.</p>
             </div>
-            <div class="card" style="border-style: dashed">
-              <span class="tag grey">Artifact 3 · Coming soon</span>
-              <h3 style="margin-top: 12px; color: var(--muted)">Estimation &amp; Scheduling</h3>
-              <p class="muted">WBS, estimates and the delivery schedule.</p>
+            <div class="card accent">
+              <span class="tag">Artifact 3</span>
+              <h3 style="margin-top: 12px">Estimation &amp; Scheduling</h3>
+              <p class="muted">WBS, product backlog, story points, sprint schedule and the Sprint 1 plan.</p>
             </div>
             <div class="card" style="border-style: dashed">
               <span class="tag grey">Artifact 4 · Later</span>
@@ -737,14 +754,185 @@
           <p class="small muted" style="margin-top: 18px">Full register, including XP, Waterfall and Incremental risks, is on the project website.</p>
         </section>
 
-        <!-- ============ Artifact 3: add slides here ============ -->
+        <!-- ============ Artifact 3 ============ -->
+        <section class="slide dark" data-label="Artifact 3">
+          <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
+            <div class="divider-num">03</div>
+            <p class="eyebrow" style="margin-top: 16px">Artifact 3</p>
+            <h1>Estimation &amp;<br />Scheduling</h1>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · WBS">
+          <p class="eyebrow">Work Breakdown Structure</p>
+          <h2>A hybrid WBS with seven phases</h2>
+          <div class="grid g4 grow" style="align-content: start">
+            <div class="card" style="background: var(--green); border-color: var(--green)"><h3 style="color: #fff">Fursah Platform</h3><p style="color: #e6f0ea">The whole project, from first plan to final scope check.</p></div>
+            <div class="card"><span class="wbs-id">1.1</span><h3>Project Planning</h3><p class="small">Objectives, scope, team, schedule, resources and initial risks.</p></div>
+            <div class="card"><span class="wbs-id">1.2</span><h3>Requirement Analysis</h3><p class="small">Portals, matching engine, guidance, analytics, security and language needs.</p></div>
+            <div class="card"><span class="wbs-id">1.3</span><h3>System Design</h3><p class="small">Architecture, data structure, interfaces and the NLP workflow.</p></div>
+            <div class="card"><span class="wbs-id">1.4</span><h3>System Development</h3><p class="small">Build the portals, matching engine, guidance, analytics and networking.</p></div>
+            <div class="card"><span class="wbs-id">1.5</span><h3>System Testing</h3><p class="small">Module, matching, security, performance, usability and language tests.</p></div>
+            <div class="card"><span class="wbs-id">1.6</span><h3>Integration &amp; Delivery</h3><p class="small">Connect modules and authorized government services; prepare deployment.</p></div>
+            <div class="card"><span class="wbs-id">1.7</span><h3>Scope Review</h3><p class="small">Confirm agreed scope and acceptance criteria were met.</p></div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · Product Backlog" data-short>
+          <p class="eyebrow">Product Backlog</p>
+          <h2>The scope, broken down and estimated</h2>
+          <div class="grid g4">
+            <div><div class="stat">52</div><p class="small muted" style="margin-top: 6px">Backlog items: 49 user stories and 3 research spikes</p></div>
+            <div><div class="stat">236</div><p class="small muted" style="margin-top: 6px">Story points in total</p></div>
+            <div><div class="stat">11</div><p class="small muted" style="margin-top: 6px">Two-week sprints, plus Sprint 0, across 3 releases</p></div>
+            <div><div class="stat">20–25</div><p class="small muted" style="margin-top: 6px">Story points of planned capacity per sprint</p></div>
+          </div>
+          <div class="grid g2" style="margin-top: 32px">
+            <div class="card accent">
+              <h3>Story point scale</h3>
+              <p class="small"><strong>1</strong> very small · <strong>2</strong> small and clear · <strong>3</strong> needs some design and testing · <strong>5</strong> several parts or connections · <strong>8</strong> very large, complex or uncertain</p>
+            </div>
+            <div class="card accent">
+              <h3>Priority levels</h3>
+              <p class="small"><strong>High</strong> required for the main job-search and hiring process · <strong>Medium</strong> improves the experience · <strong>Low</strong> can wait until the main features are delivered</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · Sprint Load" data-short>
+          <p class="eyebrow">Backlog by Sprint</p>
+          <h2>Every sprint fits capacity, and Sprint 6 is light on purpose</h2>
+          <div class="chart" role="img" aria-label="Story points per sprint: Sprints 1 to 3 have 22 each, Sprint 4 has 24, Sprint 5 has 23, Sprint 6 has 13, Sprint 7 has 23, Sprint 8 has 24, and Sprints 9 to 11 have 21 each. All except Sprint 6 sit in the 20 to 25 point capacity band.">
+            <div class="band"><b>Capacity 20–25 SP</b></div>
+              <div class="col" style="--sp: 22; --bar: var(--green)"><span>22</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 22; --bar: var(--green)"><span>22</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 22; --bar: var(--green)"><span>22</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 24; --bar: var(--green)"><span>24</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 23; --bar: var(--green)"><span>23</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 13; --bar: var(--green)"><span>13</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 23; --bar: var(--amber)"><span>23</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 24; --bar: var(--amber)"><span>24</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 21; --bar: var(--amber)"><span>21</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 21; --bar: var(--blue)"><span>21</span><div class="sbar"></div></div>
+              <div class="col" style="--sp: 21; --bar: var(--blue)"><span>21</span><div class="sbar"></div></div>
+          </div>
+          <div class="chart-x" aria-hidden="true"><span>S1</span><span>S2</span><span>S3</span><span>S4</span><span>S5</span><span>S6</span><span>S7</span><span>S8</span><span>S9</span><span>S10</span><span>S11</span></div>
+          <div class="grid g3" style="margin-top: 16px">
+            <p class="small"><i class="key" style="background: var(--green)"></i><strong>Release 1</strong> · Sprints 1–6 · 126 SP<br /><span class="muted">Core platform and matching</span></p>
+            <p class="small"><i class="key" style="background: var(--amber)"></i><strong>Release 2</strong> · Sprints 7–9 · 68 SP<br /><span class="muted">Guidance, analytics, networking</span></p>
+            <p class="small"><i class="key" style="background: var(--blue)"></i><strong>Release 3</strong> · Sprints 10–11 · 42 SP<br /><span class="muted">Government integration, rollout</span></p>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · Release 1 Schedule">
+          <p class="eyebrow">Release 1 Schedule</p>
+          <h2>Fourteen weeks, from preparation to final review</h2>
+          <table>
+            <thead><tr><th>Sprint</th><th>Weeks</th><th>Theme</th><th>Main work</th></tr></thead>
+            <tbody>
+              <tr><td>Sprint 0</td><td>1–2</td><td>Preparation</td><td>Development environment and initial Product Backlog</td></tr>
+              <tr><td>Sprint 1</td><td>3–4</td><td>Platform Foundation</td><td>Registration, login, roles, profiles, Saudi hosting</td></tr>
+              <tr><td>Sprint 2</td><td>5–6</td><td>Job Postings &amp; Search</td><td>Manage postings; search jobs; upload resumes</td></tr>
+              <tr><td>Sprint 3</td><td>7–8</td><td>Applications &amp; Hiring</td><td>Apply and track; review applicants; schedule interviews</td></tr>
+              <tr><td>Sprint 4</td><td>9–10</td><td>Resume &amp; Job Analysis</td><td>NLP spike, then resume and job description analysis</td></tr>
+              <tr><td>Sprint 5</td><td>11–12</td><td>Recommendations</td><td>Match scores, suggestions, screening, Arabic and English</td></tr>
+              <tr><td>Sprint 6</td><td>13–14</td><td>Security &amp; Final Review</td><td>Secure storage, admin tools, logging, full testing</td></tr>
+            </tbody>
+          </table>
+          <p class="small muted" style="margin-top: 14px">Releases 2 and 3 (Sprints 7–11) stay high level, and are detailed as they approach using Release 1 feedback.</p>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · Scrum Process">
+          <p class="eyebrow">Scrum Process</p>
+          <h2>The meetings that keep each sprint on track</h2>
+          <table>
+            <thead><tr><th>Meeting</th><th>When</th><th>Length</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td>Sprint Planning</td><td>Start of each sprint</td><td>Up to 4 hours</td><td>Set the sprint goal and select the stories</td></tr>
+              <tr><td>Daily Scrum</td><td>Each working day</td><td>15 minutes</td><td>Share progress, plan the day, raise problems</td></tr>
+              <tr><td>Sprint Review</td><td>End of each sprint</td><td>Up to 2 hours</td><td>Show features to employers, job seekers and HRSD</td></tr>
+              <tr><td>Retrospective</td><td>After the review</td><td>Up to 1.5 hours</td><td>Agree improvements for the next sprint</td></tr>
+              <tr><td>Backlog Refinement</td><td>Once each sprint</td><td>1–2 hours</td><td>Review, split and estimate upcoming stories</td></tr>
+            </tbody>
+          </table>
+          <p class="small" style="margin-top: 20px"><strong>Also in the plan:</strong> Sprint 0 for preparation, epics to group stories, timeboxed research spikes (SP-01 to SP-03) and a shared Definition of Done.</p>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · Velocity &amp; Estimation">
+          <p class="eyebrow">Velocity &amp; Estimation</p>
+          <h2>From Planning Poker to a first forecast</h2>
+          <div class="grid g3 grow" style="align-content: start">
+            <div class="card accent">
+              <h3>Planning Poker</h3>
+              <p>Team members pick an estimate independently, reveal together, and discuss differences. Scale: 1, 2, 3, 5, 8.</p>
+              <p class="small muted" style="margin-top: 10px">Points measure relative effort, complexity and uncertainty, not hours.</p>
+            </div>
+            <div class="card accent">
+              <h3>Reference stories</h3>
+              <p><strong>3 SP</strong> · US-01 register as a job seeker or employer</p>
+              <p style="margin-top: 8px"><strong>5 SP</strong> · US-03 job seeker profile</p>
+              <p style="margin-top: 8px"><strong>8 SP</strong> · US-19 analyze a resume, skills and experience</p>
+            </div>
+            <div class="card accent">
+              <h3>Forecast</h3>
+              <p>(20 + 25) ÷ 2 = 22.5, so about <strong>22–23 SP per sprint</strong>.</p>
+              <p class="small muted" style="margin-top: 10px">This is a starting estimate, not measured velocity. It’s updated from actual results, and only stories meeting the Definition of Done count.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · Sprint 1" data-short>
+          <p class="eyebrow">Sprint 1 · Weeks 3–4 · 22 of 20–25 SP capacity</p>
+          <h2>A secure foundation for everything after it</h2>
+          <div class="grid g2 grow" style="grid-template-columns: 1fr 1.25fr; align-items: start">
+            <div style="display: flex; flex-direction: column; gap: 16px">
+              <div class="card accent">
+                <h3>Sprint goal</h3>
+                <p>Let job seekers and employers register, access their accounts and create profiles, with correct role permissions and data hosted in Saudi Arabia.</p>
+              </div>
+              <div class="card">
+                <h3>Definition of Done</h3>
+                <p>Reviewed by another developer, required tests pass, acceptance criteria met, approved by the Product Owner.</p>
+              </div>
+            </div>
+            <table>
+              <thead><tr><th>Story</th><th>What it delivers</th><th>SP</th></tr></thead>
+              <tbody>
+                <tr><td>US-01</td><td>Register as a job seeker or employer</td><td>3</td></tr>
+                <tr><td>US-02</td><td>Secure login and logout</td><td>3</td></tr>
+                <tr><td>US-03</td><td>Job seeker profile</td><td>5</td></tr>
+                <tr><td>US-04</td><td>Employer profile</td><td>5</td></tr>
+                <tr><td>US-05</td><td>Role-based access permissions</td><td>3</td></tr>
+                <tr><td>US-06</td><td>Hosting within Saudi Arabia</td><td>3</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="slide" data-label="Artifact 3 · Changes">
+          <p class="eyebrow">Changes to Previous Artifacts</p>
+          <h2>How the plan sharpened earlier decisions</h2>
+          <table>
+            <thead><tr><th>Area</th><th>Before</th><th>Now</th></tr></thead>
+            <tbody>
+              <tr><td>Scope</td><td>Broad feature lists</td><td>52-item backlog totaling 236 story points</td></tr>
+              <tr><td>Roadmap</td><td>Static three-phase rollout</td><td>Sprint 0 plus 11 sprints across 3 releases</td></tr>
+              <tr><td>Technical risks</td><td>Treated as standard deliverables</td><td>Timeboxed research spikes before development</td></tr>
+              <tr><td>Quality</td><td>End-of-phase acceptance</td><td>Lighter Sprint 6 for testing and review</td></tr>
+              <tr><td>Bilingual support</td><td>Listed under National Rollout</td><td>Moved to Release 1 (Sprint 5) to avoid rework</td></tr>
+            </tbody>
+          </table>
+          <p class="small" style="margin-top: 20px"><strong>Artifact 2:</strong> the Scrum decision stands. Artifact 3 turns it into a detailed implementation and scheduling plan.</p>
+        </section>
+
+        <!-- ============ Artifact 4: add slides here ============ -->
 
         <!-- ============ Close ============ -->
         <section class="slide dark" data-label="Thank you" data-short>
           <div class="grow" style="display: flex; flex-direction: column; justify-content: center">
-            <p class="eyebrow">Next up · Artifact 3</p>
+            <p class="eyebrow">Next up · Artifact 4</p>
             <h1 style="font-size: 84px">Thank you</h1>
-            <p class="lead" style="margin-top: 16px">Questions? Next, we’ll estimate and schedule the Scrum delivery of Fursah.</p>
+            <p class="lead" style="margin-top: 16px">Questions? Next, we’ll plan stakeholder management, communication and project metrics.</p>
           </div>
           <p class="small" style="color: #8fc3a4">software-project-management.shoug-tech.com</p>
         </section>
@@ -836,7 +1024,7 @@
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // Tag each slide's content for staggered entrance, in reading order.
-        var ANIM = '.eyebrow, h1, h2, .lead, .divider-num, .members li, .slide > p, .grow > p, .grid > *, .org > *, tbody tr, .legend p';
+        var ANIM = '.eyebrow, h1, h2, .lead, .divider-num, .members li, .slide > p, .grow > p, .grid > *, .org > *, tbody tr, .legend p, .sbar';
         slides.forEach(function (s) {
           var i = 0;
           s.querySelectorAll(ANIM).forEach(function (el) {
