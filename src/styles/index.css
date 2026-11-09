@@ -55,14 +55,30 @@
 }
 
 /* Risk matrix severity colours */
-.matrix-cell-low { background-color: #dcfce7; border: 1px solid #bbf7d0; }
-.matrix-cell-med { background-color: #fef3c7; border: 1px solid #fde68a; }
-.matrix-cell-high { background-color: #ffedd5; border: 1px solid #fed7aa; }
-.matrix-cell-extreme { background-color: #ffe4e6; border: 1px solid #fecdd3; }
+.matrix-cell-low {
+  background-color: #dcfce7;
+  border: 1px solid #bbf7d0;
+}
+.matrix-cell-med {
+  background-color: #fef3c7;
+  border: 1px solid #fde68a;
+}
+.matrix-cell-high {
+  background-color: #ffedd5;
+  border: 1px solid #fed7aa;
+}
+.matrix-cell-extreme {
+  background-color: #ffe4e6;
+  border: 1px solid #fecdd3;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -89,7 +105,8 @@
 .hero-signal {
   stroke-dasharray: 10 200;
   stroke-dashoffset: 10;
-  animation: hero-signal var(--signal-duration, 6s) ease-in-out var(--signal-delay, 0s) infinite;
+  animation: hero-signal var(--signal-duration, 6s) ease-in-out
+    var(--signal-delay, 0s) infinite;
 }
 .hero-signal-main {
   stroke-dasharray: 9 200;
@@ -124,40 +141,93 @@
   animation: hero-node 3s ease-in-out infinite;
 }
 @keyframes hero-flow {
-  to { stroke-dashoffset: -16; }
+  to {
+    stroke-dashoffset: -16;
+  }
 }
 @keyframes hero-signal {
-  0% { stroke-dashoffset: 10; }
-  70%, 100% { stroke-dashoffset: -100; }
+  0% {
+    stroke-dashoffset: 10;
+  }
+  70%,
+  100% {
+    stroke-dashoffset: -100;
+  }
 }
 @keyframes hero-signal-main {
-  from { stroke-dashoffset: 9; }
-  to { stroke-dashoffset: -100; }
+  from {
+    stroke-dashoffset: 9;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
 }
 @keyframes hero-ping-seeker {
-  0% { opacity: 0.7; transform: scale(1); }
-  28%, 100% { opacity: 0; transform: scale(1.7); }
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  28%,
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
 }
 @keyframes hero-ping-engine {
-  0%, 30% { opacity: 0; transform: scale(1); }
-  31% { opacity: 0.7; transform: scale(1); }
-  62%, 100% { opacity: 0; transform: scale(1.65); }
+  0%,
+  30% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  31% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  62%,
+  100% {
+    opacity: 0;
+    transform: scale(1.65);
+  }
 }
 @keyframes hero-ping-employer {
-  0%, 80% { opacity: 0; transform: scale(1); }
-  81% { opacity: 0.7; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.7); }
+  0%,
+  80% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  81% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
 }
 @keyframes hero-chip {
-  0%, 30%, 60%, 100% { transform: scale(1); }
-  40% { transform: scale(1.5); }
+  0%,
+  30%,
+  60%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.5);
+  }
 }
 @keyframes hero-orbit {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 @keyframes hero-node {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.14); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.14);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-illustration * {

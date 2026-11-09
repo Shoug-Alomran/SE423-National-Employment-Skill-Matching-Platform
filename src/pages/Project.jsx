@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   Bank,
   Briefcase,
@@ -21,172 +21,189 @@ import {
   Warning,
   X,
   XCircle,
-} from '@phosphor-icons/react';
-import { ArtifactDownload, PageHeader, SectionHeading } from '../components/ui.jsx';
+} from "@phosphor-icons/react";
+import {
+  ArtifactDownload,
+  PageHeader,
+  SectionHeading,
+} from "../components/ui.jsx";
 
 const nationalTargets = [
-  { value: '7%', label: 'Unemployment target by 2030 under Saudi Vision 2030' },
-  { value: '10.3%', label: 'Female unemployment in 2025, down on rising participation' },
-  { value: '15%', label: 'Target employment share for people with disabilities by 2030' },
+  { value: "7%", label: "Unemployment target by 2030 under Saudi Vision 2030" },
+  {
+    value: "10.3%",
+    label: "Female unemployment in 2025, down on rising participation",
+  },
+  {
+    value: "15%",
+    label: "Target employment share for people with disabilities by 2030",
+  },
 ];
 
 const goals = [
   {
     icon: Flag,
-    title: 'One National Platform',
-    text: 'Build a unified national employment and skill matching platform that refines the connection between employers and applicants, replacing traditional job searching.',
+    title: "One National Platform",
+    text: "Build a unified national employment and skill matching platform that refines the connection between employers and applicants, replacing traditional job searching.",
   },
   {
     icon: MagnifyingGlass,
-    title: 'Skill-Based Matching',
+    title: "Skill-Based Matching",
     text: "Use applicants' skills and experience to propose well-suited opportunities, and help employers find applicants who match the skills and requirements they seek.",
   },
   {
     icon: Student,
-    title: 'Close Skill Gaps',
-    text: 'Go beyond job openings: recommend learning programs based on qualifications and interests so users can spot gaps in their skill sets and advance.',
+    title: "Close Skill Gaps",
+    text: "Go beyond job openings: recommend learning programs based on qualifications and interests so users can spot gaps in their skill sets and advance.",
   },
   {
     icon: TrendUp,
-    title: 'Faster, Better Hiring',
-    text: 'Reduce the time and effort applicants and employers spend finding matches, improve recruitment, and create better career opportunities.',
+    title: "Faster, Better Hiring",
+    text: "Reduce the time and effort applicants and employers spend finding matches, improve recruitment, and create better career opportunities.",
   },
 ];
 
 const stakeholders = [
   {
     icon: Flag,
-    name: 'Ministry of Human Resources and Social Development (HRSD)',
-    classification: 'Internal – Sponsor',
-    stake: 'Sponsors and oversees the project to support employment, improve labor market efficiency and reduce skill mismatch.',
+    name: "Ministry of Human Resources and Social Development (HRSD)",
+    classification: "Internal – Sponsor",
+    stake:
+      "Sponsors and oversees the project to support employment, improve labor market efficiency and reduce skill mismatch.",
     primary: true,
   },
   {
     icon: User,
-    name: 'Job Seekers',
-    classification: 'External',
-    stake: 'Use the platform to create profiles, discover suitable employment opportunities, apply for positions and track applications.',
+    name: "Job Seekers",
+    classification: "External",
+    stake:
+      "Use the platform to create profiles, discover suitable employment opportunities, apply for positions and track applications.",
   },
   {
     icon: GraduationCap,
-    name: 'Students',
-    classification: 'External',
-    stake: 'Use the platform to explore career and employment opportunities aligned with their skills and qualifications.',
+    name: "Students",
+    classification: "External",
+    stake:
+      "Use the platform to explore career and employment opportunities aligned with their skills and qualifications.",
   },
   {
     icon: Briefcase,
-    name: 'Employers – Large Firms and SMEs',
-    classification: 'External',
-    stake: 'Use the platform to publish job opportunities, receive and manage applications, screen candidates and schedule interviews.',
+    name: "Employers – Large Firms and SMEs",
+    classification: "External",
+    stake:
+      "Use the platform to publish job opportunities, receive and manage applications, screen candidates and schedule interviews.",
   },
   {
     icon: Bank,
-    name: 'Universities and Training Providers',
-    classification: 'External',
-    stake: 'Support workforce development by providing education and training that help users build skills relevant to labor-market needs.',
+    name: "Universities and Training Providers",
+    classification: "External",
+    stake:
+      "Support workforce development by providing education and training that help users build skills relevant to labor-market needs.",
   },
   {
     icon: Code,
-    name: 'Technology Firms',
-    classification: 'External',
-    stake: 'Provide the technical expertise, technologies or implementation support needed to develop and operate the platform.',
+    name: "Technology Firms",
+    classification: "External",
+    stake:
+      "Provide the technical expertise, technologies or implementation support needed to develop and operate the platform.",
   },
   {
     icon: Buildings,
-    name: 'Other Government Agencies',
-    classification: 'External',
-    stake: 'Provide government services or information that may be integrated with the platform in later phases.',
+    name: "Other Government Agencies",
+    classification: "External",
+    stake:
+      "Provide government services or information that may be integrated with the platform in later phases.",
   },
 ];
 
 const departments = [
-  { title: 'Product & Design', roles: ['UX/UI Lead', 'Product Owner'] },
-  { title: 'Engineering', roles: ['Technical Lead', 'Data Scientists'] },
-  { title: 'Policy & Strategy', roles: ['Labor Experts', 'Compliance'] },
+  { title: "Product & Design", roles: ["UX/UI Lead", "Product Owner"] },
+  { title: "Engineering", roles: ["Technical Lead", "Data Scientists"] },
+  { title: "Policy & Strategy", roles: ["Labor Experts", "Compliance"] },
 ];
 
 const scopePhases = [
   {
-    title: 'Core Matching Engine & Basic Portals',
+    title: "Core Matching Engine & Basic Portals",
     features: [
       {
-        name: 'Job Seeker Portal',
+        name: "Job Seeker Portal",
         items: [
-          'Build and maintain a personal profile of skills, qualifications and experience.',
-          'Upload resumes and other professional details.',
-          'Find and browse available employment opportunities.',
-          'Apply for jobs and track application status.',
+          "Build and maintain a personal profile of skills, qualifications and experience.",
+          "Upload resumes and other professional details.",
+          "Find and browse available employment opportunities.",
+          "Apply for jobs and track application status.",
           "See opportunities relevant to the job seeker's profile.",
         ],
       },
       {
-        name: 'Smart Matching Engine',
+        name: "Smart Matching Engine",
         items: [
           "Analyze the job seeker's resume, qualifications, skills and experience.",
-          'Analyze employer job descriptions and requirements using Natural Language Processing (NLP).',
-          'Compare candidate profiles with job requirements to find suitable matches.',
-          'Suggest suitable opportunities to job seekers and suitable candidates to employers.',
+          "Analyze employer job descriptions and requirements using Natural Language Processing (NLP).",
+          "Compare candidate profiles with job requirements to find suitable matches.",
+          "Suggest suitable opportunities to job seekers and suitable candidates to employers.",
         ],
       },
       {
-        name: 'Employer Portal',
+        name: "Employer Portal",
         items: [
-          'Build and maintain an employer profile and job postings.',
-          'Specify the skills, qualifications and other requirements for each opening.',
-          'Receive and review job applications.',
-          'Screen suitable candidates against the job requirements.',
+          "Build and maintain an employer profile and job postings.",
+          "Specify the skills, qualifications and other requirements for each opening.",
+          "Receive and review job applications.",
+          "Screen suitable candidates against the job requirements.",
         ],
       },
     ],
   },
   {
-    title: 'Career Guidance, Training & Platform Expansion',
+    title: "Career Guidance, Training & Platform Expansion",
     features: [
       {
-        name: 'Career Guidance and Training',
+        name: "Career Guidance and Training",
         items: [
           "Evaluate users' skills and interests to offer tailored career advice.",
-          'Identify the gap between user skills and those required by career paths.',
-          'Suggest training programs and courses to fill the gap, and show how each one helps.',
+          "Identify the gap between user skills and those required by career paths.",
+          "Suggest training programs and courses to fill the gap, and show how each one helps.",
         ],
       },
       {
-        name: 'Analytics Dashboard',
+        name: "Analytics Dashboard",
         items: [
-          'Provide labor-market analytics for the Ministry of Human Resources and Social Development.',
-          'Monitor labor-market trends from data gathered through the platform.',
-          'Identify skill gaps between the workforce and employer needs.',
-          'Support data-driven decisions on labor and education policy.',
+          "Provide labor-market analytics for the Ministry of Human Resources and Social Development.",
+          "Monitor labor-market trends from data gathered through the platform.",
+          "Identify skill gaps between the workforce and employer needs.",
+          "Support data-driven decisions on labor and education policy.",
         ],
       },
       {
-        name: 'Professional Networking',
+        name: "Professional Networking",
         items: [
-          'Let job seekers and professionals create professional links with other users.',
-          'Let users share career insights.',
-          'Offer industry forums for professional discussion.',
+          "Let job seekers and professionals create professional links with other users.",
+          "Let users share career insights.",
+          "Offer industry forums for professional discussion.",
         ],
       },
     ],
   },
   {
-    title: 'National Rollout & Government Integration',
+    title: "National Rollout & Government Integration",
     features: [
       {
-        name: 'Government Service Integration',
+        name: "Government Service Integration",
         items: [
-          'Integrate the platform with relevant existing government services.',
-          'Support the information exchange required for approved integrations.',
-          'Let platform services use information made available through authorized integrations.',
+          "Integrate the platform with relevant existing government services.",
+          "Support the information exchange required for approved integrations.",
+          "Let platform services use information made available through authorized integrations.",
         ],
       },
       {
-        name: 'National Rollout',
+        name: "National Rollout",
         items: [
-          'Expand the platform for nationwide use across Saudi Arabia.',
-          'Expand coverage to a wider range of industries.',
-          'Run public-awareness activities to support adoption.',
-          'Support Arabic and English for the national user base.',
+          "Expand the platform for nationwide use across Saudi Arabia.",
+          "Expand coverage to a wider range of industries.",
+          "Run public-awareness activities to support adoption.",
+          "Support Arabic and English for the national user base.",
         ],
       },
     ],
@@ -194,50 +211,89 @@ const scopePhases = [
 ];
 
 const outOfScope = [
-  ['Training Course Delivery', 'Fursah recommends training programs and courses but will not create, teach or deliver them.'],
-  ['Payroll Processing', 'Fursah will not calculate salaries, process payroll or manage employee compensation.'],
-  ['Background Checks', 'These remain the responsibility of employers and relevant authorized entities.'],
-  ['Final Hiring Decisions', 'Fursah provides matching, recommendations and recruitment support; employers make the final decision.'],
-  ['Employment Contracts', 'Fursah will not negotiate, issue or execute contracts on behalf of employers or job seekers.'],
+  [
+    "Training Course Delivery",
+    "Fursah recommends training programs and courses but will not create, teach or deliver them.",
+  ],
+  [
+    "Payroll Processing",
+    "Fursah will not calculate salaries, process payroll or manage employee compensation.",
+  ],
+  [
+    "Background Checks",
+    "These remain the responsibility of employers and relevant authorized entities.",
+  ],
+  [
+    "Final Hiring Decisions",
+    "Fursah provides matching, recommendations and recruitment support; employers make the final decision.",
+  ],
+  [
+    "Employment Contracts",
+    "Fursah will not negotiate, issue or execute contracts on behalf of employers or job seekers.",
+  ],
 ];
 
 const assumptions = [
-  'Relevant government agencies will provide the necessary authorization and interfaces for approved government service integrations.',
-  'Job seekers and employers will provide accurate and sufficiently complete information for matching and recommendations.',
-  'Government agencies, employers, educational institutions and technology partners will provide the cooperation and information required throughout the project.',
-  'Suitable external training programs and courses will be available to recommend to users.',
+  "Relevant government agencies will provide the necessary authorization and interfaces for approved government service integrations.",
+  "Job seekers and employers will provide accurate and sufficiently complete information for matching and recommendations.",
+  "Government agencies, employers, educational institutions and technology partners will provide the cooperation and information required throughout the project.",
+  "Suitable external training programs and courses will be available to recommend to users.",
 ];
 
 const constraints = [
-  'The platform must support both Arabic and English for its national user base.',
-  'Personal and employment data must be handled in line with applicable Saudi data-protection requirements.',
-  'Platform data and infrastructure must be hosted within Saudi Arabia.',
-  'Implementation must follow the defined phased rollout rather than deploying all capabilities at once.',
-  'Government integrations depend on the availability, authorization and technical interfaces of participating agencies.',
+  "The platform must support both Arabic and English for its national user base.",
+  "Personal and employment data must be handled in line with applicable Saudi data-protection requirements.",
+  "Platform data and infrastructure must be hosted within Saudi Arabia.",
+  "Implementation must follow the defined phased rollout rather than deploying all capabilities at once.",
+  "Government integrations depend on the availability, authorization and technical interfaces of participating agencies.",
 ];
 
 const deliverables = [
   {
-    phase: 'Core Platform',
+    phase: "Core Platform",
     items: [
-      ['Job Seeker Portal', 'Job seekers can create and manage profiles, provide their skills and qualifications, search and view job opportunities, submit applications, and track application status.'],
-      ['Smart Matching Engine', 'The platform analyzes candidate profiles and job descriptions and recommends relevant jobs to job seekers and candidates to employers based on skills and requirements.'],
-      ['Employer Portal', 'Employers can create job postings, define requirements, receive and review applications, screen candidates, track the hiring process, and schedule interviews.'],
+      [
+        "Job Seeker Portal",
+        "Job seekers can create and manage profiles, provide their skills and qualifications, search and view job opportunities, submit applications, and track application status.",
+      ],
+      [
+        "Smart Matching Engine",
+        "The platform analyzes candidate profiles and job descriptions and recommends relevant jobs to job seekers and candidates to employers based on skills and requirements.",
+      ],
+      [
+        "Employer Portal",
+        "Employers can create job postings, define requirements, receive and review applications, screen candidates, track the hiring process, and schedule interviews.",
+      ],
     ],
   },
   {
-    phase: 'Platform Expansion',
+    phase: "Platform Expansion",
     items: [
-      ['Career Guidance and Training Module', 'Users receive career recommendations based on their skills and interests, see relevant skill gaps, and get training or course recommendations for those gaps.'],
-      ['Data Analytics Dashboard', 'Authorized Ministry users can access labor-market trends and skill-gap information that supports data-driven policy decisions.'],
-      ['Professional Networking', 'Users can establish professional connections, share career insights, and take part in industry forums.'],
+      [
+        "Career Guidance and Training Module",
+        "Users receive career recommendations based on their skills and interests, see relevant skill gaps, and get training or course recommendations for those gaps.",
+      ],
+      [
+        "Data Analytics Dashboard",
+        "Authorized Ministry users can access labor-market trends and skill-gap information that supports data-driven policy decisions.",
+      ],
+      [
+        "Professional Networking",
+        "Users can establish professional connections, share career insights, and take part in industry forums.",
+      ],
     ],
   },
   {
-    phase: 'National Rollout & Integration',
+    phase: "National Rollout & Integration",
     items: [
-      ['Government Service Integration', 'The platform exchanges required information with approved government services through authorized integrations.'],
-      ['National Rollout', 'The platform is available nationwide, covers the planned range of industries, supports Arabic and English, and is backed by public-awareness activities.'],
+      [
+        "Government Service Integration",
+        "The platform exchanges required information with approved government services through authorized integrations.",
+      ],
+      [
+        "National Rollout",
+        "The platform is available nationwide, covers the planned range of industries, supports Arabic and English, and is backed by public-awareness activities.",
+      ],
     ],
   },
 ];
@@ -257,7 +313,11 @@ export default function Project() {
 
         {/* 1. Problem & Opportunity */}
         <section aria-labelledby="problem">
-          <SectionHeading id="problem" number={1} title="Problem & Opportunity" />
+          <SectionHeading
+            id="problem"
+            number={1}
+            title="Problem & Opportunity"
+          />
           <div className="grid gap-6 md:grid-cols-2 md:gap-8">
             <article className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="absolute left-0 top-0 h-full w-2 bg-amber-500" />
@@ -266,11 +326,15 @@ export default function Project() {
                   <Warning size={24} />
                 </div>
                 <div>
-                  <h3 className="mb-3 text-xl font-bold text-charcoal">The Problem</h3>
+                  <h3 className="mb-3 text-xl font-bold text-charcoal">
+                    The Problem
+                  </h3>
                   <p className="leading-relaxed text-gray-600">
-                    The nation's efforts to increase employment are helping, but they are spread across different
-                    platforms, which causes confusion. Manual procedures make finding suitable candidates a challenge,
-                    and current methods don't accurately reveal whether an individual's skill set matches the job.
+                    The nation's efforts to increase employment are helping, but
+                    they are spread across different platforms, which causes
+                    confusion. Manual procedures make finding suitable
+                    candidates a challenge, and current methods don't accurately
+                    reveal whether an individual's skill set matches the job.
                   </p>
                 </div>
               </div>
@@ -282,11 +346,15 @@ export default function Project() {
                   <Lightning size={24} />
                 </div>
                 <div>
-                  <h3 className="mb-3 text-xl font-bold text-charcoal">The Opportunity</h3>
+                  <h3 className="mb-3 text-xl font-bold text-charcoal">
+                    The Opportunity
+                  </h3>
                   <p className="leading-relaxed text-gray-600">
-                    In a digital era, a platform like Fursah can reach audiences across the nation and beyond. Fursah
-                    will give people across Saudi Arabia, including people with disabilities, the opportunity to find
-                    jobs within their skill set, supporting the Labor Market Strategy and the Human Capability
+                    In a digital era, a platform like Fursah can reach audiences
+                    across the nation and beyond. Fursah will give people across
+                    Saudi Arabia, including people with disabilities, the
+                    opportunity to find jobs within their skill set, supporting
+                    the Labor Market Strategy and the Human Capability
                     Development Program.
                   </p>
                 </div>
@@ -295,7 +363,10 @@ export default function Project() {
           </div>
           <dl className="mt-6 grid gap-4 sm:grid-cols-3">
             {nationalTargets.map((t) => (
-              <div key={t.value} className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+              <div
+                key={t.value}
+                className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+              >
                 <dd className="text-3xl font-bold text-saudi">{t.value}</dd>
                 <dt className="mt-1 text-sm text-gray-500">{t.label}</dt>
               </div>
@@ -305,14 +376,23 @@ export default function Project() {
 
         {/* 2. Goals */}
         <section aria-labelledby="goals">
-          <SectionHeading id="goals" number={2} title="Project Goals & Benefits" />
+          <SectionHeading
+            id="goals"
+            number={2}
+            title="Project Goals & Benefits"
+          />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {goals.map(({ icon: Icon, title, text }) => (
-              <div key={title} className="flex h-full flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
+              <div
+                key={title}
+                className="flex h-full flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              >
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg border border-gray-100 bg-gray-50 text-saudi">
                   <Icon size={24} />
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-charcoal">{title}</h3>
+                <h3 className="mb-2 text-lg font-bold text-charcoal">
+                  {title}
+                </h3>
                 <p className="text-sm text-gray-500">{text}</p>
               </div>
             ))}
@@ -326,42 +406,62 @@ export default function Project() {
             number={3}
             title="Initial Stakeholders"
             action={
-              <Link to="/stakeholders-metrics" className="text-sm font-medium text-saudi hover:underline">
+              <Link
+                to="/stakeholders-metrics"
+                className="text-sm font-medium text-saudi hover:underline"
+              >
                 Full stakeholder analysis →
               </Link>
             }
           />
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {stakeholders.map(({ icon: Icon, name, classification, stake, primary }) => (
-              <article key={name} className={`flex gap-4 rounded-xl border bg-white p-5 shadow-sm ${primary ? 'border-saudi/30 md:col-span-2' : 'border-gray-200'}`}>
-                <div
-                  className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border ${
-                    primary ? 'border-saudi/20 bg-saudi-50 text-saudi' : 'border-gray-200 bg-gray-50 text-gray-600'
-                  }`}
+            {stakeholders.map(
+              ({ icon: Icon, name, classification, stake, primary }) => (
+                <article
+                  key={name}
+                  className={`flex gap-4 rounded-xl border bg-white p-5 shadow-sm ${primary ? "border-saudi/30 md:col-span-2" : "border-gray-200"}`}
                 >
-                  <Icon size={24} />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-sm font-bold text-charcoal">{name}</h3>
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                        primary ? 'bg-saudi-50 text-saudi' : 'bg-gray-100 text-gray-600'
-                      }`}
-                    >
-                      {classification}
-                    </span>
+                  <div
+                    className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border ${
+                      primary
+                        ? "border-saudi/20 bg-saudi-50 text-saudi"
+                        : "border-gray-200 bg-gray-50 text-gray-600"
+                    }`}
+                  >
+                    <Icon size={24} />
                   </div>
-                  <p className="mt-1.5 text-sm leading-relaxed text-gray-500">{stake}</p>
-                </div>
-              </article>
-            ))}
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="text-sm font-bold text-charcoal">
+                        {name}
+                      </h3>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                          primary
+                            ? "bg-saudi-50 text-saudi"
+                            : "bg-gray-100 text-gray-600"
+                        }`}
+                      >
+                        {classification}
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
+                      {stake}
+                    </p>
+                  </div>
+                </article>
+              ),
+            )}
           </div>
         </section>
 
         {/* 4. Team & org structure */}
         <section aria-labelledby="org-structure">
-          <SectionHeading id="org-structure" number={4} title="Team & Organizational Structure" />
+          <SectionHeading
+            id="org-structure"
+            number={4}
+            title="Team & Organizational Structure"
+          />
           <div className="grid gap-6 md:grid-cols-2 md:gap-8">
             <article className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="mb-4 flex items-center gap-3">
@@ -370,14 +470,18 @@ export default function Project() {
                 </div>
                 <div>
                   <p className="eyebrow text-gray-400">Team structure</p>
-                  <h3 className="text-xl font-bold text-charcoal">Creativity objective</h3>
+                  <h3 className="text-xl font-bold text-charcoal">
+                    Creativity objective
+                  </h3>
                 </div>
               </div>
               <p className="leading-relaxed text-gray-600">
-                Fursah is a new concept that needs quick adaptation and out-of-the-box ideas, so the team is structured
-                around the creativity objective. Such teams tolerate ambiguity and iteration, are willing to experiment,
-                and encourage divergent thinking — backed by a diverse skill set and a culture that supports sharing
-                ideas and taking risks.
+                Fursah is a new concept that needs quick adaptation and
+                out-of-the-box ideas, so the team is structured around the
+                creativity objective. Such teams tolerate ambiguity and
+                iteration, are willing to experiment, and encourage divergent
+                thinking — backed by a diverse skill set and a culture that
+                supports sharing ideas and taking risks.
               </p>
             </article>
             <article className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -386,16 +490,22 @@ export default function Project() {
                   <TreeStructure size={24} />
                 </div>
                 <div>
-                  <p className="eyebrow text-gray-400">Organizational structure</p>
-                  <h3 className="text-xl font-bold text-charcoal">Matrix organization</h3>
+                  <p className="eyebrow text-gray-400">
+                    Organizational structure
+                  </p>
+                  <h3 className="text-xl font-bold text-charcoal">
+                    Matrix organization
+                  </h3>
                 </div>
               </div>
               <p className="leading-relaxed text-gray-600">
-                A matrix structure combines the project structure's rapid response to market opportunities with the
-                functional structure's loyalty to the firm — needed for a fast-changing job market. It gives equal
-                weight to functional efficiency and project management, coordinates functional units that share
-                limited resources, supports effective decision-making as the market grows, and suits a dynamic
-                environment.
+                A matrix structure combines the project structure's rapid
+                response to market opportunities with the functional structure's
+                loyalty to the firm — needed for a fast-changing job market. It
+                gives equal weight to functional efficiency and project
+                management, coordinates functional units that share limited
+                resources, supports effective decision-making as the market
+                grows, and suits a dynamic environment.
               </p>
             </article>
           </div>
@@ -418,8 +528,14 @@ export default function Project() {
                     <tr>
                       <th scope="col" className="w-1/4" />
                       {departments.map((d) => (
-                        <th key={d.title} scope="col" className="rounded-lg bg-gray-100 p-3 font-bold text-charcoal">
-                          <span className="block text-[10px] font-medium uppercase tracking-wider text-gray-400">VP</span>
+                        <th
+                          key={d.title}
+                          scope="col"
+                          className="rounded-lg bg-gray-100 p-3 font-bold text-charcoal"
+                        >
+                          <span className="block text-[10px] font-medium uppercase tracking-wider text-gray-400">
+                            VP
+                          </span>
                           {d.title}
                         </th>
                       ))}
@@ -427,13 +543,21 @@ export default function Project() {
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row" className="rounded-lg bg-saudi p-3 font-bold text-white">
-                        <span className="block text-[10px] font-medium uppercase tracking-wider text-saudi-100">VP of Projects</span>
+                      <th
+                        scope="row"
+                        className="rounded-lg bg-saudi p-3 font-bold text-white"
+                      >
+                        <span className="block text-[10px] font-medium uppercase tracking-wider text-saudi-100">
+                          VP of Projects
+                        </span>
                         Fursah Project
                       </th>
                       {departments.map((d) => (
-                        <td key={d.title} className="rounded-lg border border-dashed border-gray-300 bg-offwhite p-2 text-gray-500">
-                          {d.roles.join(' · ')}
+                        <td
+                          key={d.title}
+                          className="rounded-lg border border-dashed border-gray-300 bg-offwhite p-2 text-gray-500"
+                        >
+                          {d.roles.join(" · ")}
                         </td>
                       ))}
                     </tr>
@@ -441,8 +565,8 @@ export default function Project() {
                 </table>
               </div>
               <p className="mt-4 max-w-xl text-center text-xs text-gray-500">
-                Staff report to both their functional VP and the VP of Projects; teams are grouped by department and by
-                project.
+                Staff report to both their functional VP and the VP of Projects;
+                teams are grouped by department and by project.
               </p>
             </div>
           </div>
@@ -450,12 +574,22 @@ export default function Project() {
 
         {/* 5. Scope */}
         <section aria-labelledby="scope">
-          <SectionHeading id="scope" number={5} title="Detailed Scope Statement" description="In-scope features, delivered in three phases." />
+          <SectionHeading
+            id="scope"
+            number={5}
+            title="Detailed Scope Statement"
+            description="In-scope features, delivered in three phases."
+          />
           <ol className="grid gap-6 lg:grid-cols-3">
             {scopePhases.map((p, i) => (
-              <li key={p.title} className="flex flex-col rounded-2xl border border-gray-200 bg-white shadow-sm">
+              <li
+                key={p.title}
+                className="flex flex-col rounded-2xl border border-gray-200 bg-white shadow-sm"
+              >
                 <div className="flex items-center gap-3 border-b border-gray-100 p-5">
-                  <span className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border-4 bg-white text-sm font-bold ${i === 0 ? 'border-saudi text-saudi' : 'border-gray-300 text-gray-500'}`}>
+                  <span
+                    className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border-4 bg-white text-sm font-bold ${i === 0 ? "border-saudi text-saudi" : "border-gray-300 text-gray-500"}`}
+                  >
                     {i + 1}
                   </span>
                   <div>
@@ -465,9 +599,16 @@ export default function Project() {
                 </div>
                 <div className="space-y-4 p-5">
                   {p.features.map((f) => (
-                    <div key={f.name} className="rounded-lg border border-gray-100 bg-offwhite p-4">
+                    <div
+                      key={f.name}
+                      className="rounded-lg border border-gray-100 bg-offwhite p-4"
+                    >
                       <h4 className="mb-2 flex items-center text-sm font-semibold text-charcoal-light">
-                        <CheckCircle size={16} weight="fill" className="mr-2 text-saudi" />
+                        <CheckCircle
+                          size={16}
+                          weight="fill"
+                          className="mr-2 text-saudi"
+                        />
                         {f.name}
                       </h4>
                       <ul className="ml-6 list-disc space-y-1.5 pl-2 text-sm text-gray-600 marker:text-gray-300">
@@ -492,22 +633,38 @@ export default function Project() {
             <ul className="grid gap-4 md:grid-cols-2">
               {outOfScope.map(([title, text]) => (
                 <li key={title} className="flex items-start">
-                  <XCircle size={20} className="mr-3 mt-0.5 flex-shrink-0 text-gray-400" />
+                  <XCircle
+                    size={20}
+                    className="mr-3 mt-0.5 flex-shrink-0 text-gray-400"
+                  />
                   <span className="text-sm text-gray-500">
-                    <strong className="font-semibold text-gray-700">{title}:</strong> {text}
+                    <strong className="font-semibold text-gray-700">
+                      {title}:
+                    </strong>{" "}
+                    {text}
                   </span>
                 </li>
               ))}
             </ul>
             <div className="mt-8 flex items-start rounded-lg border border-blue-100 bg-blue-50/50 p-4">
-              <Info size={20} className="mr-3 mt-0.5 flex-shrink-0 text-blue-500" />
+              <Info
+                size={20}
+                className="mr-3 mt-0.5 flex-shrink-0 text-blue-500"
+              />
               <p className="text-xs leading-relaxed text-blue-800">
-                Note: The detailed work breakdown structure and delivery schedule are documented in{' '}
-                <Link to="/planning" className="font-semibold underline underline-offset-2 hover:text-blue-950">
+                Note: The detailed work breakdown structure and delivery
+                schedule are documented in{" "}
+                <Link
+                  to="/planning"
+                  className="font-semibold underline underline-offset-2 hover:text-blue-950"
+                >
                   Artifact 03 (Planning)
                 </Link>
-                , and project risks in{' '}
-                <Link to="/methodology-risk#risk-register" className="font-semibold underline underline-offset-2 hover:text-blue-950">
+                , and project risks in{" "}
+                <Link
+                  to="/methodology-risk#risk-register"
+                  className="font-semibold underline underline-offset-2 hover:text-blue-950"
+                >
                   Artifact 02 (Methodology &amp; Risk)
                 </Link>
                 .
@@ -518,13 +675,30 @@ export default function Project() {
 
         {/* 6. Assumptions & constraints */}
         <section aria-labelledby="assumptions">
-          <SectionHeading id="assumptions" number={6} title="Assumptions & Constraints" />
+          <SectionHeading
+            id="assumptions"
+            number={6}
+            title="Assumptions & Constraints"
+          />
           <div className="grid gap-6 md:grid-cols-2 md:gap-8">
             {[
-              { icon: Lightbulb, title: 'Assumptions', items: assumptions, tone: 'bg-blue-50 text-blue-500' },
-              { icon: Warning, title: 'Constraints', items: constraints, tone: 'bg-amber-50 text-amber-600' },
+              {
+                icon: Lightbulb,
+                title: "Assumptions",
+                items: assumptions,
+                tone: "bg-blue-50 text-blue-500",
+              },
+              {
+                icon: Warning,
+                title: "Constraints",
+                items: constraints,
+                tone: "bg-amber-50 text-amber-600",
+              },
             ].map(({ icon: Icon, title, items, tone }) => (
-              <article key={title} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+              <article
+                key={title}
+                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8"
+              >
                 <div className="mb-5 flex items-center gap-3">
                   <div className={`rounded-xl p-3 ${tone}`}>
                     <Icon size={22} />
@@ -543,7 +717,11 @@ export default function Project() {
 
         {/* 7. Deliverables */}
         <section aria-labelledby="deliverables">
-          <SectionHeading id="deliverables" number={7} title="Phase Deliverables & Acceptance Criteria" />
+          <SectionHeading
+            id="deliverables"
+            number={7}
+            title="Phase Deliverables & Acceptance Criteria"
+          />
           <div className="space-y-8">
             {deliverables.map((group, i) => (
               <div key={group.phase}>
@@ -552,13 +730,19 @@ export default function Project() {
                 </h3>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {group.items.map(([name, criteria]) => (
-                    <article key={name} className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <article
+                      key={name}
+                      className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+                    >
                       <p className="eyebrow text-gray-400">Deliverable</p>
                       <h4 className="mb-3 font-bold text-charcoal">{name}</h4>
                       <p className="eyebrow mb-1 flex items-center gap-1.5 text-gray-400">
-                        <SealCheck size={14} className="text-saudi" /> Acceptance criteria
+                        <SealCheck size={14} className="text-saudi" />{" "}
+                        Acceptance criteria
                       </p>
-                      <p className="text-sm leading-relaxed text-gray-600">{criteria}</p>
+                      <p className="text-sm leading-relaxed text-gray-600">
+                        {criteria}
+                      </p>
                     </article>
                   ))}
                 </div>

@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import Navbar from './Navbar.jsx';
-import Footer from './Footer.jsx';
+import { useEffect, useRef } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import Navbar from "./Navbar.jsx";
+import Footer from "./Footer.jsx";
 
 const titles = {
-  '/': 'National Employment & Skill Matching Platform',
-  '/project': 'Project Overview',
-  '/methodology-risk': 'Methodology & Risk',
-  '/planning': 'Planning',
-  '/stakeholders-metrics': 'Stakeholders & Metrics',
-  '/team': 'Team',
+  "/": "National Employment & Skill Matching Platform",
+  "/project": "Project Overview",
+  "/methodology-risk": "Methodology & Risk",
+  "/planning": "Planning",
+  "/stakeholders-metrics": "Stakeholders & Metrics",
+  "/team": "Team",
 };
 
 // Scrolls to the top on page change, or to the #section when a hash is present.
@@ -18,7 +18,10 @@ function useScrollManagement() {
 
   useEffect(() => {
     const page = titles[pathname];
-    document.title = page && pathname !== '/' ? `${page} · NESMP` : page ?? 'Page Not Found · NESMP';
+    document.title =
+      page && pathname !== "/"
+        ? `${page} · NESMP`
+        : (page ?? "Page Not Found · NESMP");
   }, [pathname]);
 
   const previousPath = useRef(null);
@@ -29,11 +32,16 @@ function useScrollManagement() {
     previousPath.current = pathname;
 
     const frame = requestAnimationFrame(() => {
-      const el = hash ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+      const el = hash
+        ? document.getElementById(decodeURIComponent(hash.slice(1)))
+        : null;
       if (el) {
-        el.scrollIntoView({ behavior: samePage ? 'smooth' : 'instant', block: 'start' });
+        el.scrollIntoView({
+          behavior: samePage ? "smooth" : "instant",
+          block: "start",
+        });
       } else if (!samePage) {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
       }
     });
     return () => cancelAnimationFrame(frame);

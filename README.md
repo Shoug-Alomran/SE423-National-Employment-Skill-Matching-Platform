@@ -8,16 +8,16 @@ This repository contains the project website: a static React + Vite site deploye
 
 ## Pages
 
-| Route | Page |
-| --- | --- |
-| `/` | Home |
-| `/project` | Project Overview (Artifact 01) |
-| `/methodology-risk` | Methodology & Risk (Artifact 02) |
-| `/planning` | Estimation & Scheduling (Artifact 03) |
-| `/stakeholders-metrics` | Stakeholders, Communication & Metrics (Artifact 04) |
-| `/team` | Team |
-| `/documents` | Project Documents: view or download every submitted artifact |
-| `/presentation` | Slide deck (standalone `presentation.html`; add Artifact 4 slides at the `Artifact 4: add slides here` marker). The **Short version** button or <kbd>S</kbd> switches to the slides marked `data-short`; `/presentation?short` opens that version directly. **Dark mode** or <kbd>D</kbd> switches theme, sharing the site's saved setting. **Export PDF** opens the print dialog for the version and theme on screen; choose **Save as PDF**. Share banner: `public/og-presentation.jpg`, made from `brand/og-presentation.html` |
+| Route                   | Page                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                     | Home                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `/project`              | Project Overview (Artifact 01)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `/methodology-risk`     | Methodology & Risk (Artifact 02)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `/planning`             | Estimation & Scheduling (Artifact 03)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `/stakeholders-metrics` | Stakeholders, Communication & Metrics (Artifact 04)                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `/team`                 | Team                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `/documents`            | Project Documents: view or download every submitted artifact                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `/presentation`         | Slide deck (standalone `presentation.html`; add Artifact 4 slides at the `Artifact 4: add slides here` marker). The **Short version** button or <kbd>S</kbd> switches to the slides marked `data-short`; `/presentation?short` opens that version directly. **Dark mode** or <kbd>D</kbd> switches theme, sharing the site's saved setting. **Export PDF** opens the print dialog for the version and theme on screen; choose **Save as PDF**. Share banner: `public/og-presentation.jpg`, made from `brand/og-presentation.html` |
 
 ## Tech stack
 
@@ -116,14 +116,14 @@ The site is served from the root (`/`) of the custom domain, so renaming the rep
 
 Page content is kept in data files, separate from the layout:
 
-| File | Content |
-| --- | --- |
-| [src/config.js](src/config.js) | Site name, course, repository URL, navigation |
+| File                                                       | Content                                                                                                                         |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| [src/config.js](src/config.js)                             | Site name, course, repository URL, navigation                                                                                   |
 | [src/data/methodologyRisk.js](src/data/methodologyRisk.js) | Methodology comparison, selected methodology, risk register. The risk counts and the risk matrix are calculated from this file. |
-| [src/data/planning.js](src/data/planning.js) | WBS, estimates, assumptions, sprints, Gantt rows, milestones |
-| [src/data/stakeholders.js](src/data/stakeholders.js) | Stakeholder analysis, power–interest matrix, communication plan, metrics |
-| [src/data/documents.js](src/data/documents.js) | Files listed on the Documents page. Put new files in `public/artifacts/`. |
-| [src/data/team.js](src/data/team.js) | Team members, roles, GitHub/LinkedIn links (use `''` to hide an icon), tools |
+| [src/data/planning.js](src/data/planning.js)               | WBS, estimates, assumptions, sprints, Gantt rows, milestones                                                                    |
+| [src/data/stakeholders.js](src/data/stakeholders.js)       | Stakeholder analysis, power–interest matrix, communication plan, metrics                                                        |
+| [src/data/documents.js](src/data/documents.js)             | Files listed on the Documents page. Put new files in `public/artifacts/`.                                                       |
+| [src/data/team.js](src/data/team.js)                       | Team members, roles, GitHub/LinkedIn links (use `''` to hide an icon), tools                                                    |
 
 Home and Project page text lives directly in [src/pages/Home.jsx](src/pages/Home.jsx) and [src/pages/Project.jsx](src/pages/Project.jsx).
 

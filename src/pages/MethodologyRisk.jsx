@@ -14,8 +14,12 @@ import {
   SquaresFour,
   Table,
   Target,
-} from '@phosphor-icons/react';
-import { ArtifactDownload, PageHeader, SectionHeading } from '../components/ui.jsx';
+} from "@phosphor-icons/react";
+import {
+  ArtifactDownload,
+  PageHeader,
+  SectionHeading,
+} from "../components/ui.jsx";
 import {
   exposure,
   impactLabels,
@@ -26,30 +30,34 @@ import {
   selectedMethodology,
   severity,
   severityLabels,
-} from '../data/methodologyRisk.js';
+} from "../data/methodologyRisk.js";
 
 const severityBadge = {
-  extreme: 'bg-rose-100 text-rose-800 border-rose-200',
-  high: 'bg-orange-100 text-orange-800 border-orange-200',
-  med: 'bg-amber-100 text-amber-800 border-amber-200',
-  low: 'bg-green-100 text-green-800 border-green-200',
+  extreme: "bg-rose-100 text-rose-800 border-rose-200",
+  high: "bg-orange-100 text-orange-800 border-orange-200",
+  med: "bg-amber-100 text-amber-800 border-amber-200",
+  low: "bg-green-100 text-green-800 border-green-200",
 };
 
 const fitLabels = {
-  project: 'Project Fit',
-  team: 'Team Fit',
-  organization: 'Organizational Structure Fit',
-  stakeholder: 'Stakeholder Fit',
-  overall: 'Overall Suitability',
+  project: "Project Fit",
+  team: "Team Fit",
+  organization: "Organizational Structure Fit",
+  stakeholder: "Stakeholder Fit",
+  overall: "Overall Suitability",
 };
 
 function MethodPoints({ value }) {
-  if (!Array.isArray(value)) return <p className="text-sm leading-relaxed text-slate-700">{value}</p>;
+  if (!Array.isArray(value))
+    return <p className="text-sm leading-relaxed text-slate-700">{value}</p>;
   return (
     <ul className="space-y-2">
       {value.map((p) => (
         <li key={p.title} className="text-sm leading-relaxed text-slate-700">
-          <strong className="font-semibold text-charcoal-dark">{p.title}:</strong> {p.text}
+          <strong className="font-semibold text-charcoal-dark">
+            {p.title}:
+          </strong>{" "}
+          {p.text}
         </li>
       ))}
     </ul>
@@ -60,20 +68,34 @@ function MethodCard({ method }) {
   return (
     <article className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md">
       <div className="border-b border-slate-100 bg-slate-50 px-6 py-4">
-        <h4 className="text-lg font-semibold text-charcoal-dark">{method.name}</h4>
-        {method.subtitle && <p className="text-xs text-slate-500">{method.subtitle}</p>}
+        <h4 className="text-lg font-semibold text-charcoal-dark">
+          {method.name}
+        </h4>
+        {method.subtitle && (
+          <p className="text-xs text-slate-500">{method.subtitle}</p>
+        )}
       </div>
       <div className="space-y-5 p-6">
-        {method.overview && <p className="text-sm leading-relaxed text-slate-700">{method.overview}</p>}
+        {method.overview && (
+          <p className="text-sm leading-relaxed text-slate-700">
+            {method.overview}
+          </p>
+        )}
         {method.increments && (
           <ol className="space-y-2">
             {method.increments.map((text, i) => (
-              <li key={text} className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-3 text-sm text-slate-700">
+              <li
+                key={text}
+                className="flex gap-3 rounded-lg border border-slate-100 bg-slate-50 p-3 text-sm text-slate-700"
+              >
                 <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-saudi text-xs font-bold text-white">
                   {i + 1}
                 </span>
                 <span>
-                  <strong className="font-semibold text-charcoal-dark">Increment {i + 1}:</strong> {text}
+                  <strong className="font-semibold text-charcoal-dark">
+                    Increment {i + 1}:
+                  </strong>{" "}
+                  {text}
                 </span>
               </li>
             ))}
@@ -94,8 +116,12 @@ function MethodCard({ method }) {
         <dl className="grid grid-cols-1 gap-4 border-t border-slate-100 pt-4">
           {Object.entries(method.fit).map(([key, value]) => (
             <div key={key}>
-              <dt className="eyebrow mb-1 text-slate-400">{fitLabels[key] ?? key}</dt>
-              <dd className="text-sm leading-relaxed text-slate-700">{value}</dd>
+              <dt className="eyebrow mb-1 text-slate-400">
+                {fitLabels[key] ?? key}
+              </dt>
+              <dd className="text-sm leading-relaxed text-slate-700">
+                {value}
+              </dd>
             </div>
           ))}
         </dl>
@@ -107,7 +133,9 @@ function MethodCard({ method }) {
 function SeverityBadge({ score }) {
   const s = severity(score);
   return (
-    <span className={`inline-flex items-center rounded border px-2 py-0.5 text-xs font-semibold ${severityBadge[s]}`}>
+    <span
+      className={`inline-flex items-center rounded border px-2 py-0.5 text-xs font-semibold ${severityBadge[s]}`}
+    >
       {score} · {severityLabels[s]}
     </span>
   );
@@ -122,8 +150,22 @@ function ScaleBadge({ value, labels }) {
 }
 
 function downloadRiskRegister() {
-  const header = ['ID', 'Name', 'Methodology', 'Description', 'Risk Mitigation', 'Probability', 'Impact', 'Exposure', 'Severity', 'First Indicator', 'Mitigation / Management Strategies'];
-  const groupLabel = Object.fromEntries(riskGroups.map((g) => [g.key, g.label]));
+  const header = [
+    "ID",
+    "Name",
+    "Methodology",
+    "Description",
+    "Risk Mitigation",
+    "Probability",
+    "Impact",
+    "Exposure",
+    "Severity",
+    "First Indicator",
+    "Mitigation / Management Strategies",
+  ];
+  const groupLabel = Object.fromEntries(
+    riskGroups.map((g) => [g.key, g.label]),
+  );
   const escape = (v) => `"${String(v).replace(/"/g, '""')}"`;
   const rows = risks.map((r) => {
     const score = exposure(r);
@@ -141,11 +183,15 @@ function downloadRiskRegister() {
       r.mitigation,
     ];
   });
-  const csv = [header, ...rows].map((row) => row.map(escape).join(',')).join('\r\n');
-  const url = URL.createObjectURL(new Blob([`﻿${csv}`], { type: 'text/csv;charset=utf-8' }));
-  const a = document.createElement('a');
+  const csv = [header, ...rows]
+    .map((row) => row.map(escape).join(","))
+    .join("\r\n");
+  const url = URL.createObjectURL(
+    new Blob([`﻿${csv}`], { type: "text/csv;charset=utf-8" }),
+  );
+  const a = document.createElement("a");
   a.href = url;
-  a.download = 'nesmp-risk-register.csv';
+  a.download = "nesmp-risk-register.csv";
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -153,8 +199,8 @@ function downloadRiskRegister() {
 }
 
 const familyStyle = {
-  agile: { icon: ArrowsClockwise, tone: 'text-saudi-800 bg-saudi-50/60' },
-  planDriven: { icon: Kanban, tone: 'text-blue-800 bg-blue-50/60' },
+  agile: { icon: ArrowsClockwise, tone: "text-saudi-800 bg-saudi-50/60" },
+  planDriven: { icon: Kanban, tone: "text-blue-800 bg-blue-50/60" },
 };
 const groups = riskGroups.map((g) => ({ ...g, ...familyStyle[g.family] }));
 
@@ -176,22 +222,48 @@ function RiskStrategies({ risk }) {
 export default function MethodologyRisk() {
   // Occupied matrix cells, highest exposure first, for the phone-sized list under the matrix.
   const matrixCells = [5, 4, 3, 2, 1]
-    .flatMap((p) => [5, 4, 3, 2, 1].map((i) => ({ p, i, ids: risks.filter((r) => r.probability === p && r.impact === i).map((r) => r.id) })))
+    .flatMap((p) =>
+      [5, 4, 3, 2, 1].map((i) => ({
+        p,
+        i,
+        ids: risks
+          .filter((r) => r.probability === p && r.impact === i)
+          .map((r) => r.id),
+      })),
+    )
     .filter((c) => c.ids.length > 0)
     .sort((a, b) => b.p * b.i - a.p * a.i);
 
-  const countBySeverity = (level) => risks.filter((r) => severity(exposure(r)) === level).length;
-  const selectedKey = riskGroups.find((g) => g.label.includes(selectedMethodology.name))?.key;
+  const countBySeverity = (level) =>
+    risks.filter((r) => severity(exposure(r)) === level).length;
+  const selectedKey = riskGroups.find((g) =>
+    g.label.includes(selectedMethodology.name),
+  )?.key;
 
   const stats = [
-    { label: 'Total Risks Identified', value: risks.length, bar: 'bg-slate-400', note: `Four per methodology, across ${riskGroups.length}` },
-    { label: 'Extreme Risks', value: countBySeverity('extreme'), bar: 'bg-rose-500', note: 'Exposure 16–25' },
-    { label: 'High Risks', value: countBySeverity('high'), bar: 'bg-orange-500', note: 'Exposure 10–15' },
+    {
+      label: "Total Risks Identified",
+      value: risks.length,
+      bar: "bg-slate-400",
+      note: `Four per methodology, across ${riskGroups.length}`,
+    },
+    {
+      label: "Extreme Risks",
+      value: countBySeverity("extreme"),
+      bar: "bg-rose-500",
+      note: "Exposure 16–25",
+    },
+    {
+      label: "High Risks",
+      value: countBySeverity("high"),
+      bar: "bg-orange-500",
+      note: "Exposure 10–15",
+    },
     {
       label: `${selectedMethodology.name} Risks (Selected)`,
       value: risks.filter((r) => r.category === selectedKey).length,
-      bar: 'bg-saudi-500',
-      note: 'Risks of the chosen methodology',
+      bar: "bg-saudi-500",
+      note: "Risks of the chosen methodology",
     },
   ];
 
@@ -209,7 +281,11 @@ export default function MethodologyRisk() {
 
         {/* Methodology analysis */}
         <section aria-labelledby="methodology-analysis">
-          <SectionHeading id="methodology-analysis" icon={GitMerge} title="Methodology Analysis" />
+          <SectionHeading
+            id="methodology-analysis"
+            icon={GitMerge}
+            title="Methodology Analysis"
+          />
           <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
             <div className="space-y-6">
               <div className="rounded-lg border border-slate-200 bg-slate-200/50 px-4 py-2">
@@ -237,9 +313,23 @@ export default function MethodologyRisk() {
         {/* Selected methodology */}
         <section aria-labelledby="selected-methodology">
           <div className="relative overflow-hidden rounded-2xl border border-saudi-900 bg-saudi-800 shadow-xl">
-            <svg className="pointer-events-none absolute right-0 top-0 -mr-16 -mt-16 text-white opacity-10" width="404" height="404" fill="none" viewBox="0 0 404 404" aria-hidden="true">
+            <svg
+              className="pointer-events-none absolute right-0 top-0 -mr-16 -mt-16 text-white opacity-10"
+              width="404"
+              height="404"
+              fill="none"
+              viewBox="0 0 404 404"
+              aria-hidden="true"
+            >
               <defs>
-                <pattern id="dots-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <pattern
+                  id="dots-pattern"
+                  x="0"
+                  y="0"
+                  width="20"
+                  height="20"
+                  patternUnits="userSpaceOnUse"
+                >
                   <rect width="4" height="4" fill="currentColor" />
                 </pattern>
               </defs>
@@ -248,28 +338,57 @@ export default function MethodologyRisk() {
             <div className="relative p-6 sm:p-8 lg:p-10">
               <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
                 <div>
-                  <span className="mb-2 block text-sm font-semibold uppercase tracking-wider text-saudi-300">Final Recommendation</span>
-                  <h2 id="selected-methodology" className="text-3xl font-bold text-white lg:text-4xl">
-                    Selected: <span className="text-saudi-200">{selectedMethodology.name}</span>
+                  <span className="mb-2 block text-sm font-semibold uppercase tracking-wider text-saudi-300">
+                    Final Recommendation
+                  </span>
+                  <h2
+                    id="selected-methodology"
+                    className="text-3xl font-bold text-white lg:text-4xl"
+                  >
+                    Selected:{" "}
+                    <span className="text-saudi-200">
+                      {selectedMethodology.name}
+                    </span>
                   </h2>
-                  <p className="mt-1 text-saudi-100">{selectedMethodology.qualifier}</p>
+                  <p className="mt-1 text-saudi-100">
+                    {selectedMethodology.qualifier}
+                  </p>
                 </div>
                 <div className="inline-flex items-center gap-2 self-start rounded-lg border border-saudi-600 bg-saudi-950/40 px-4 py-2 md:self-auto">
                   <CheckCircle size={20} className="text-saudi-300" />
-                  <span className="text-sm font-medium text-white">Approved Approach</span>
+                  <span className="text-sm font-medium text-white">
+                    Approved Approach
+                  </span>
                 </div>
               </div>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
                 {[
-                  { icon: Target, title: 'Why it was selected', text: selectedMethodology.why },
-                  { icon: PuzzlePiece, title: 'Why it fits this project', text: selectedMethodology.fit },
-                  { icon: Scales, title: 'Why preferred over others', text: selectedMethodology.preferred },
+                  {
+                    icon: Target,
+                    title: "Why it was selected",
+                    text: selectedMethodology.why,
+                  },
+                  {
+                    icon: PuzzlePiece,
+                    title: "Why it fits this project",
+                    text: selectedMethodology.fit,
+                  },
+                  {
+                    icon: Scales,
+                    title: "Why preferred over others",
+                    text: selectedMethodology.preferred,
+                  },
                 ].map(({ icon: Icon, title, text }) => (
-                  <div key={title} className="rounded-xl border border-saudi-600/60 bg-saudi-950/25 p-6">
+                  <div
+                    key={title}
+                    className="rounded-xl border border-saudi-600/60 bg-saudi-950/25 p-6"
+                  >
                     <h3 className="mb-3 flex items-center gap-2 text-lg font-semibold text-white">
                       <Icon size={20} className="text-saudi-300" /> {title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-saudi-50">{text}</p>
+                    <p className="text-sm leading-relaxed text-saudi-50">
+                      {text}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -279,14 +398,29 @@ export default function MethodologyRisk() {
 
         {/* Risk overview */}
         <section aria-labelledby="risk-overview">
-          <SectionHeading id="risk-overview" icon={ChartPieSlice} title="Risk Overview" />
+          <SectionHeading
+            id="risk-overview"
+            icon={ChartPieSlice}
+            title="Risk Overview"
+          />
           <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((s) => (
-              <div key={s.label} className="relative flex flex-col justify-center overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-                <div className={`absolute bottom-0 left-0 top-0 w-1.5 ${s.bar}`} />
-                <dt className="mb-1 text-sm font-medium text-slate-500">{s.label}</dt>
-                <dd className="text-3xl font-bold text-charcoal-dark">{s.value}</dd>
-                {s.note && <dd className="mt-1 text-xs text-slate-400">{s.note}</dd>}
+              <div
+                key={s.label}
+                className="relative flex flex-col justify-center overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+              >
+                <div
+                  className={`absolute bottom-0 left-0 top-0 w-1.5 ${s.bar}`}
+                />
+                <dt className="mb-1 text-sm font-medium text-slate-500">
+                  {s.label}
+                </dt>
+                <dd className="text-3xl font-bold text-charcoal-dark">
+                  {s.value}
+                </dd>
+                {s.note && (
+                  <dd className="mt-1 text-xs text-slate-400">{s.note}</dd>
+                )}
               </div>
             ))}
           </dl>
@@ -325,39 +459,75 @@ export default function MethodologyRisk() {
               <table className="min-w-full divide-y divide-slate-200 text-sm">
                 <thead className="bg-slate-50">
                   <tr>
-                    {['ID / Name', 'Description', 'Probability', 'Impact', 'Exposure', 'First Indicator', 'Mitigation / Management'].map((h) => (
-                      <th key={h} scope="col" className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-700">
+                    {[
+                      "ID / Name",
+                      "Description",
+                      "Probability",
+                      "Impact",
+                      "Exposure",
+                      "First Indicator",
+                      "Mitigation / Management",
+                    ].map((h) => (
+                      <th
+                        key={h}
+                        scope="col"
+                        className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-slate-700"
+                      >
                         {h}
                       </th>
                     ))}
                   </tr>
                 </thead>
                 {groups.map((g) => (
-                  <tbody key={g.key} className="divide-y divide-slate-200 bg-white">
+                  <tbody
+                    key={g.key}
+                    className="divide-y divide-slate-200 bg-white"
+                  >
                     <tr>
-                      <th colSpan={7} scope="colgroup" className={`px-4 py-2 text-left text-xs font-bold uppercase tracking-wider ${g.tone}`}>
+                      <th
+                        colSpan={7}
+                        scope="colgroup"
+                        className={`px-4 py-2 text-left text-xs font-bold uppercase tracking-wider ${g.tone}`}
+                      >
                         <g.icon size={14} className="mr-1 inline" /> {g.label}
                       </th>
                     </tr>
                     {risks
                       .filter((r) => r.category === g.key)
                       .map((r) => (
-                        <tr key={r.id} className="transition-colors hover:bg-slate-50">
+                        <tr
+                          key={r.id}
+                          className="transition-colors hover:bg-slate-50"
+                        >
                           <td className="px-4 py-4 align-top">
-                            <div className="font-bold text-slate-900">{r.id}</div>
-                            <div className="mt-0.5 min-w-[130px] text-xs text-slate-600">{r.name}</div>
+                            <div className="font-bold text-slate-900">
+                              {r.id}
+                            </div>
+                            <div className="mt-0.5 min-w-[130px] text-xs text-slate-600">
+                              {r.name}
+                            </div>
                           </td>
-                          <td className="min-w-[220px] px-4 py-4 align-top text-slate-600">{r.description}</td>
-                          <td className="px-4 py-4 align-top">
-                            <ScaleBadge value={r.probability} labels={probabilityLabels} />
+                          <td className="min-w-[220px] px-4 py-4 align-top text-slate-600">
+                            {r.description}
                           </td>
                           <td className="px-4 py-4 align-top">
-                            <ScaleBadge value={r.impact} labels={impactLabels} />
+                            <ScaleBadge
+                              value={r.probability}
+                              labels={probabilityLabels}
+                            />
+                          </td>
+                          <td className="px-4 py-4 align-top">
+                            <ScaleBadge
+                              value={r.impact}
+                              labels={impactLabels}
+                            />
                           </td>
                           <td className="whitespace-nowrap px-4 py-4 align-top">
                             <SeverityBadge score={exposure(r)} />
                           </td>
-                          <td className="min-w-[170px] px-4 py-4 align-top text-xs text-slate-600">{r.indicator}</td>
+                          <td className="min-w-[170px] px-4 py-4 align-top text-xs text-slate-600">
+                            {r.indicator}
+                          </td>
                           <td className="min-w-[260px] px-4 py-4 align-top text-xs text-slate-600">
                             <RiskStrategies risk={r} />
                           </td>
@@ -373,7 +543,9 @@ export default function MethodologyRisk() {
           <div className="space-y-8 lg:hidden">
             {groups.map((g) => (
               <div key={g.key}>
-                <h3 className={`mb-3 rounded-md px-3 py-2 text-xs font-bold uppercase tracking-wider ${g.tone}`}>
+                <h3
+                  className={`mb-3 rounded-md px-3 py-2 text-xs font-bold uppercase tracking-wider ${g.tone}`}
+                >
                   <g.icon size={14} className="mr-1 inline" /> {g.label}
                 </h3>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -383,32 +555,58 @@ export default function MethodologyRisk() {
                       <article key={r.id} className="card p-5">
                         <div className="mb-2 flex items-start justify-between gap-3">
                           <div>
-                            <span className="font-bold text-slate-900">{r.id}</span>
-                            <h4 className="text-sm font-medium text-slate-700">{r.name}</h4>
+                            <span className="font-bold text-slate-900">
+                              {r.id}
+                            </span>
+                            <h4 className="text-sm font-medium text-slate-700">
+                              {r.name}
+                            </h4>
                           </div>
                           <SeverityBadge score={exposure(r)} />
                         </div>
-                        <p className="mb-3 text-sm text-slate-600">{r.description}</p>
+                        <p className="mb-3 text-sm text-slate-600">
+                          {r.description}
+                        </p>
                         <div className="mb-3 flex flex-wrap gap-2 text-xs text-slate-500">
                           <span>
-                            P: <ScaleBadge value={r.probability} labels={probabilityLabels} />
+                            P:{" "}
+                            <ScaleBadge
+                              value={r.probability}
+                              labels={probabilityLabels}
+                            />
                           </span>
                           <span>
-                            I: <ScaleBadge value={r.impact} labels={impactLabels} />
+                            I:{" "}
+                            <ScaleBadge
+                              value={r.impact}
+                              labels={impactLabels}
+                            />
                           </span>
                         </div>
                         <dl className="space-y-2 border-t border-slate-100 pt-3 text-xs">
                           <div>
-                            <dt className="eyebrow text-slate-400">First Indicator</dt>
-                            <dd className="mt-0.5 text-slate-600">{r.indicator}</dd>
+                            <dt className="eyebrow text-slate-400">
+                              First Indicator
+                            </dt>
+                            <dd className="mt-0.5 text-slate-600">
+                              {r.indicator}
+                            </dd>
                           </div>
                           <div>
-                            <dt className="eyebrow text-slate-400">Mitigation</dt>
-                            <dd className="mt-0.5 text-slate-600">{r.prevention}</dd>
+                            <dt className="eyebrow text-slate-400">
+                              Mitigation
+                            </dt>
+                            <dd className="mt-0.5 text-slate-600">
+                              {r.prevention}
+                            </dd>
                           </div>
                           <div>
-                            <dt className="eyebrow text-slate-400">Management</dt>
-                            <dd className="mt-0.5 text-slate-600">{r.mitigation}</dd>
+                            <dt className="eyebrow text-slate-400">
+                              Management
+                            </dt>
+                            <dd className="mt-0.5 text-slate-600">
+                              {r.mitigation}
+                            </dd>
                           </div>
                         </dl>
                       </article>
@@ -421,11 +619,21 @@ export default function MethodologyRisk() {
 
         {/* Risk matrix */}
         <section aria-labelledby="risk-matrix" className="pb-4">
-          <SectionHeading id="risk-matrix" icon={SquaresFour} title="Risk Matrix Visualization" />
+          <SectionHeading
+            id="risk-matrix"
+            icon={SquaresFour}
+            title="Risk Matrix Visualization"
+          />
           <div className="flex flex-col items-center justify-center gap-8 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-8 md:flex-row lg:gap-16">
             <div className="flex w-full max-w-[520px] items-stretch">
               <div className="mr-2 flex items-center sm:mr-3">
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+                <span
+                  className="text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm"
+                  style={{
+                    writingMode: "vertical-rl",
+                    transform: "rotate(180deg)",
+                  }}
+                >
                   Probability
                 </span>
               </div>
@@ -433,7 +641,10 @@ export default function MethodologyRisk() {
                 <div className="flex">
                   <div className="mr-2 flex w-14 flex-col text-right text-[10px] font-medium leading-tight text-slate-500 sm:w-20 sm:text-xs">
                     {[...probabilityLabels].reverse().map((l) => (
-                      <span key={l} className="flex flex-1 items-center justify-end">
+                      <span
+                        key={l}
+                        className="flex flex-1 items-center justify-end"
+                      >
                         {l}
                       </span>
                     ))}
@@ -441,7 +652,9 @@ export default function MethodologyRisk() {
                   <div className="grid aspect-square flex-1 grid-cols-5 grid-rows-5 gap-1">
                     {[5, 4, 3, 2, 1].map((p) =>
                       [1, 2, 3, 4, 5].map((i) => {
-                        const cellRisks = risks.filter((r) => r.probability === p && r.impact === i);
+                        const cellRisks = risks.filter(
+                          (r) => r.probability === p && r.impact === i,
+                        );
                         return (
                           <div
                             key={`${p}-${i}`}
@@ -451,10 +664,12 @@ export default function MethodologyRisk() {
                             {/* Phones: crowded cells show a count; the list below names the risks. */}
                             {cellRisks.length > 0 && (
                               <span
-                                title={cellRisks.map((r) => r.id).join(', ')}
+                                title={cellRisks.map((r) => r.id).join(", ")}
                                 className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-slate-800 shadow-sm sm:hidden"
                               >
-                                {cellRisks.length === 1 ? cellRisks[0].id : cellRisks.length}
+                                {cellRisks.length === 1
+                                  ? cellRisks[0].id
+                                  : cellRisks.length}
                               </span>
                             )}
                             {cellRisks.map((r) => (
@@ -474,23 +689,30 @@ export default function MethodologyRisk() {
                 </div>
                 <div className="ml-16 mt-2 flex sm:ml-[5.5rem]">
                   {impactLabels.map((l) => (
-                    <div key={l} className="w-1/5 text-center text-[10px] font-medium text-slate-500 sm:text-xs">
+                    <div
+                      key={l}
+                      className="w-1/5 text-center text-[10px] font-medium text-slate-500 sm:text-xs"
+                    >
                       {l}
                     </div>
                   ))}
                 </div>
                 <div className="ml-16 mt-3 text-center sm:ml-[5.5rem]">
-                  <span className="text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm">Impact</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-600 sm:text-sm">
+                    Impact
+                  </span>
                 </div>
                 <ul className="mt-5 space-y-1.5 text-xs text-slate-600 sm:hidden">
                   {matrixCells.map(({ p, i, ids }) => (
                     <li key={`${p}-${i}`} className="flex gap-2">
-                      <span className={`mt-0.5 h-3 w-3 flex-shrink-0 rounded-sm matrix-cell-${severity(p * i)}`} />
+                      <span
+                        className={`mt-0.5 h-3 w-3 flex-shrink-0 rounded-sm matrix-cell-${severity(p * i)}`}
+                      />
                       <span>
                         <strong className="font-semibold text-slate-800">
                           {probabilityLabels[p - 1]} × {impactLabels[i - 1]}:
-                        </strong>{' '}
-                        {ids.join(', ')}
+                        </strong>{" "}
+                        {ids.join(", ")}
                       </span>
                     </li>
                   ))}
@@ -499,21 +721,26 @@ export default function MethodologyRisk() {
             </div>
 
             <div className="flex w-full flex-col gap-3 rounded-lg border border-slate-200 bg-slate-50 p-5 md:w-auto md:min-w-[220px]">
-              <h3 className="mb-1 border-b border-slate-200 pb-2 text-sm font-bold text-slate-800">Severity Legend</h3>
+              <h3 className="mb-1 border-b border-slate-200 pb-2 text-sm font-bold text-slate-800">
+                Severity Legend
+              </h3>
               {[
-                ['extreme', 'Extreme Risk', '16–25'],
-                ['high', 'High Risk', '10–15'],
-                ['med', 'Medium Risk', '5–9'],
-                ['low', 'Low Risk', '1–4'],
+                ["extreme", "Extreme Risk", "16–25"],
+                ["high", "High Risk", "10–15"],
+                ["med", "Medium Risk", "5–9"],
+                ["low", "Low Risk", "1–4"],
               ].map(([key, label, range]) => (
                 <div key={key} className="flex items-center gap-3">
                   <div className={`h-4 w-4 rounded-sm matrix-cell-${key}`} />
                   <span className="text-sm text-slate-700">{label}</span>
-                  <span className="ml-auto text-xs text-slate-400">{range}</span>
+                  <span className="ml-auto text-xs text-slate-400">
+                    {range}
+                  </span>
                 </div>
               ))}
               <p className="mt-2 border-t border-slate-200 pt-3 text-xs italic text-slate-500">
-                Placement is based on the probability and impact scores in the risk register.
+                Placement is based on the probability and impact scores in the
+                risk register.
               </p>
             </div>
           </div>

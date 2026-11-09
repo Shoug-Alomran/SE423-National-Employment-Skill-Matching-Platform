@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Buildings, GithubLogo } from '@phosphor-icons/react';
-import { navItems, site } from '../config.js';
+import { Link } from "react-router-dom";
+import { Buildings, GithubLogo } from "@phosphor-icons/react";
+import { navItems, site } from "../config.js";
 
 export default function Footer() {
   return (
@@ -15,8 +15,9 @@ export default function Footer() {
               <span className="text-lg font-bold text-white">{site.name}</span>
             </div>
             <p className="mb-6 max-w-md text-sm leading-relaxed text-slate-400">
-              A proposed national digital initiative, planned as part of {site.course}. This site documents the
-              project's scope, methodology, risks, schedule, stakeholders and team.
+              A proposed national digital initiative, planned as part of{" "}
+              {site.course}. This site documents the project's scope,
+              methodology, risks, schedule, stakeholders and team.
             </p>
             <a
               href={site.repoUrl}
@@ -30,11 +31,16 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Pages</h2>
+            <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">
+              Pages
+            </h2>
             <ul className="space-y-3 text-sm">
               {navItems.map((item) => (
                 <li key={item.to}>
-                  <Link to={item.to} className="transition-colors hover:text-white">
+                  <Link
+                    to={item.to}
+                    className="transition-colors hover:text-white"
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -43,13 +49,18 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">Academic Context</h2>
+            <h2 className="mb-4 text-sm font-bold uppercase tracking-wider text-white">
+              Academic Context
+            </h2>
             <ul className="space-y-3 text-sm">
               <li>Course: {site.courseCode}</li>
               <li>Software Project Management</li>
               <li>Assignment: {site.scenario}</li>
               <li>
-                <Link to="/methodology-risk#risk-register" className="text-saudi-400 transition-colors hover:text-saudi-300">
+                <Link
+                  to="/methodology-risk#risk-register"
+                  className="text-saudi-400 transition-colors hover:text-saudi-300"
+                >
                   Risk Register
                 </Link>
               </li>
@@ -58,9 +69,12 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-slate-800 pt-8 text-sm text-slate-500 md:flex-row">
-          <p>© {new Date().getFullYear()} {site.courseCode} Project Team. For academic purposes only.</p>
           <p>
-            Made by{' '}
+            © {new Date().getFullYear()} {site.courseCode} Project Team. For
+            academic purposes only.
+          </p>
+          <p>
+            Made by{" "}
             <a
               href="https://blueprint.shoug-tech.com/"
               target="_blank"

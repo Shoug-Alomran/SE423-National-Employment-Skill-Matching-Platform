@@ -7,23 +7,32 @@
 //    which then shows the "Page not found" view.
 //
 // Keep ROUTES in sync with src/App.jsx and public/sitemap.xml.
-import { copyFileSync, existsSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { copyFileSync, existsSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 
-const ROUTES = ['project', 'methodology-risk', 'planning', 'stakeholders-metrics', 'team', 'documents'];
+const ROUTES = [
+  "project",
+  "methodology-risk",
+  "planning",
+  "stakeholders-metrics",
+  "team",
+  "documents",
+];
 
-const dist = resolve(process.cwd(), 'dist');
-const index = resolve(dist, 'index.html');
+const dist = resolve(process.cwd(), "dist");
+const index = resolve(dist, "index.html");
 
 if (!existsSync(index)) {
-  console.error('spa-fallback: dist/index.html not found. Did the build fail?');
+  console.error("spa-fallback: dist/index.html not found. Did the build fail?");
   process.exit(1);
 }
 
 for (const route of ROUTES) {
   copyFileSync(index, resolve(dist, `${route}.html`));
 }
-copyFileSync(index, resolve(dist, '404.html'));
+copyFileSync(index, resolve(dist, "404.html"));
 // Disable Jekyll processing on GitHub Pages.
-writeFileSync(resolve(dist, '.nojekyll'), '');
-console.log(`spa-fallback: created ${ROUTES.length} route pages, 404.html and .nojekyll`);
+writeFileSync(resolve(dist, ".nojekyll"), "");
+console.log(
+  `spa-fallback: created ${ROUTES.length} route pages, 404.html and .nojekyll`,
+);
