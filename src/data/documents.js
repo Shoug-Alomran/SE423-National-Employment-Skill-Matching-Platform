@@ -44,6 +44,16 @@ export const documents = [
     pages: 22,
     path: "/planning",
   },
+  {
+    id: "artifact-4",
+    artifact: 4,
+    title: "Stakeholders, Communication & Metrics",
+    description:
+      "The stakeholder register, stakeholder analysis, communication plan and the project metrics used to track schedule, quality, matching accuracy and satisfaction.",
+    file: "artifacts/artifact-4.pdf",
+    format: "PDF",
+    path: "/stakeholders-metrics",
+  },
 ];
 
 export const documentUrl = (doc) => `${import.meta.env.BASE_URL}${doc.file}`;
