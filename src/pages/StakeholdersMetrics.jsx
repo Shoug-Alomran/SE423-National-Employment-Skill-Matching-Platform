@@ -391,11 +391,14 @@ export default function StakeholdersMetrics() {
               Management Strategies by Group
             </h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {["Manage Closely", "Keep Satisfied", "Keep Informed", "Monitor"].map(
-                (title) => (
-                  <PlaceholderCard key={title} title={title} />
-                ),
-              )}
+              {[
+                "Manage Closely",
+                "Keep Satisfied",
+                "Keep Informed",
+                "Monitor",
+              ].map((title) => (
+                <PlaceholderCard key={title} title={title} />
+              ))}
             </div>
           </div>
         </section>
@@ -408,10 +411,7 @@ export default function StakeholdersMetrics() {
             title="3. Communications Plan"
             action={<StatusBadge done={false} />}
           />
-          <PlaceholderCard
-            id="3.1"
-            title="Communication Categories Overview"
-          />
+          <PlaceholderCard id="3.1" title="Communication Categories Overview" />
           <div>
             <h3 className="mb-1 font-bold text-charcoal">
               <span className="mr-2 text-gray-400">3.2</span>

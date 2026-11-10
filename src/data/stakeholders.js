@@ -6,8 +6,16 @@
 
 // 1. Stakeholder Register — placeholder.
 export const registerSubsections = [
-  { id: "1.1", title: "Stakeholder Identification", note: "Expanded from Artifact 1" },
-  { id: "1.2", title: "Classification Scheme", note: "For example Internal, External, Government or End Users" },
+  {
+    id: "1.1",
+    title: "Stakeholder Identification",
+    note: "Expanded from Artifact 1",
+  },
+  {
+    id: "1.2",
+    title: "Classification Scheme",
+    note: "For example Internal, External, Government or End Users",
+  },
 ];
 
 export const registerColumns = [
@@ -73,7 +81,8 @@ export const metrics = [
       {
         name: "Release progress",
         text: "Completed story points compared with the total planned for the release. The expected amounts are 126 SP in Release 1 (Sprints 1–6), 68 SP in Release 2 (Sprints 7–9) and 42 SP in Release 3 (Sprints 10–11), for a total of 236 SP.",
-        formula: "Release Progress (%) = Completed Story Points ÷ Planned Release Story Points × 100",
+        formula:
+          "Release Progress (%) = Completed Story Points ÷ Planned Release Story Points × 100",
       },
     ],
     when: "The burndown is reviewed daily after the Daily Scrum. Velocity and release progress are calculated at the end of every sprint.",
@@ -256,31 +265,74 @@ export const metricsMapping = [
   {
     metric: "Schedule Progress",
     rows: [
-      { audience: "Development Team, Scrum Master", frequency: "Daily", format: "Sprint burndown chart on the task board" },
-      { audience: "Product Owner, HRSD", frequency: "End of each sprint", format: "Velocity and release progress report at the Sprint Review" },
-      { audience: "Other Government Agencies, Technology Firms", frequency: "End of each release", format: "Release progress summary, mainly for integration timing" },
+      {
+        audience: "Development Team, Scrum Master",
+        frequency: "Daily",
+        format: "Sprint burndown chart on the task board",
+      },
+      {
+        audience: "Product Owner, HRSD",
+        frequency: "End of each sprint",
+        format: "Velocity and release progress report at the Sprint Review",
+      },
+      {
+        audience: "Other Government Agencies, Technology Firms",
+        frequency: "End of each release",
+        format: "Release progress summary, mainly for integration timing",
+      },
     ],
   },
   {
     metric: "Defect Rate / Quality",
     rows: [
-      { audience: "Development Team, Scrum Master, Product Owner", frequency: "End of each sprint", format: "Defect report by severity at the Sprint Review and Retrospective" },
-      { audience: "HRSD", frequency: "End of each release", format: "Quality and PDPL compliance summary at the release review" },
+      {
+        audience: "Development Team, Scrum Master, Product Owner",
+        frequency: "End of each sprint",
+        format:
+          "Defect report by severity at the Sprint Review and Retrospective",
+      },
+      {
+        audience: "HRSD",
+        frequency: "End of each release",
+        format: "Quality and PDPL compliance summary at the release review",
+      },
     ],
   },
   {
     metric: "Smart Matching Accuracy",
     rows: [
-      { audience: "Development Team, Product Owner", frequency: "End of each sprint from Sprint 4", format: "Accuracy results by language" },
-      { audience: "HRSD, Employers, Job Seekers", frequency: "End of each release", format: "Summary of matching performance and real-use indicators" },
+      {
+        audience: "Development Team, Product Owner",
+        frequency: "End of each sprint from Sprint 4",
+        format: "Accuracy results by language",
+      },
+      {
+        audience: "HRSD, Employers, Job Seekers",
+        frequency: "End of each release",
+        format: "Summary of matching performance and real-use indicators",
+      },
     ],
   },
   {
     metric: "Stakeholder Satisfaction",
     rows: [
-      { audience: "Product Owner, Scrum Team", frequency: "End of each sprint", format: "Sprint Review rating summary, used in Backlog Refinement and Retrospective" },
-      { audience: "HRSD", frequency: "End of each release", format: "Satisfaction results by stakeholder group, with release acceptance" },
-      { audience: "Job Seekers, Employers, Universities and Training Providers", frequency: "After each release", format: "Survey (they provide the input)" },
+      {
+        audience: "Product Owner, Scrum Team",
+        frequency: "End of each sprint",
+        format:
+          "Sprint Review rating summary, used in Backlog Refinement and Retrospective",
+      },
+      {
+        audience: "HRSD",
+        frequency: "End of each release",
+        format:
+          "Satisfaction results by stakeholder group, with release acceptance",
+      },
+      {
+        audience: "Job Seekers, Employers, Universities and Training Providers",
+        frequency: "After each release",
+        format: "Survey (they provide the input)",
+      },
     ],
   },
 ];
